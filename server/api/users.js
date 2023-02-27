@@ -2,6 +2,8 @@ const router = require('express').Router()
 const { models: { User }} = require('../db')
 module.exports = router
 
+// "/users" will already be mounted on this router so "/" here will really be "/users"
+
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
