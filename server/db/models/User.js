@@ -4,7 +4,13 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
 require('dotenv').config()
 
-const SALT_ROUNDS = 5;
+const SALT_ROUNDS = 10;
+
+
+
+
+
+
 
 
 
@@ -13,7 +19,7 @@ const SALT_ROUNDS = 5;
  * instanceMethods
  */
 // User.prototype.correctPassword = function(candidatePwd) {
-//   //we need to compare the plain version to an encrypted version of the password
+  //we need to compare the plain version to an encrypted version of the password
 //   return bcrypt.compare(candidatePwd, this.password);
 // }
 
@@ -35,30 +41,6 @@ const SALT_ROUNDS = 5;
 // };
 
 
-// const authenticate = async (req, res, next) => {
-//   const user = await User.findOne({
-//     where: {
-//       username // has to be defined as unique in db in order for this to work properly
-//     }
-//   })
-//   if (!user){
-//     res.sendStatus(409);
-//   }
-//   try {
-//     const decodedToken = jwt.verify(token, process.env.JWT);
-//     const verifiedPassword = bcrypt.compare(password, user.password)
-//     if(verifiedPassword && decodedToken){
-//       res.status(200).json({})
-//       next();
-//       return
-//     } else {
-//       res.sendStatus(409); // 409 = unauthorized
-//     }
-//   } catch(e){
-//     console.log(e);
-//   }
-// }
-
 
 // User.findByToken = async function(token) {
 //   try {
@@ -79,7 +61,7 @@ const SALT_ROUNDS = 5;
  * hooks
  */
 // const hashPassword = async(user) => {
-//   //in case the password has been changed, we want to encrypt it with bcrypt
+  //in case the password has been changed, we want to encrypt it with bcrypt
 //   if (user.changed('password')) {
 //     user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
 //   }
