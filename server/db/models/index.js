@@ -48,4 +48,4 @@ module.exports = {
   Products,
   Reviews,
   Orders
-
+}
