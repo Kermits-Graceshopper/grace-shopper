@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom'
 import {selectProducts, fetchProductsAsync} from //!redux slice
 import Navbar from '../navbar/Navbar'
 import Footer from '../footer/Footer'
-import Product from '../product/Product'
+import Product from './product'
 
 const AllProducts = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -17,7 +18,17 @@ const AllProducts = () => {
 
   return (
     <div className="allProducts">
-      <Navbar />
+      <div>
+        <Navbar />
+        <div className='cartButton'>
+          <Link to={`/api/cart`}>Cart</Link>
+        </div>
+        <div className=''additionalLinks>
+          <Link to={`/api/wishlist`}>Wishlist</Link>
+          <Link to={`/api/featured`}>Featured</Link>
+          {/* MAKE A FEATURED PAGE? CHECK TO MAKE SURE ROUTES ARE CORRECT */}
+        </div>
+      </div>
       <div className='categoryFilters'>
         <ul>
           <li onClick={() => setSelectedCategory('Nintendo')}>Nintendo</li>
@@ -26,9 +37,9 @@ const AllProducts = () => {
         </ul>
       </div>
       <div className="productCardParent">
-        {products.filter(product => !selectedCategory || product.categories.category === selectedCategory).map((product, i) => (
+        {selectedCategory? products.filter(product => product.categories.category === selectedCategory).map((product, i) => (
         <Product product={product} key={i} />
-    ))}
+    )) : products.map((product, i) => (<Product product={product} key={i} />))}
       </div>
       <Footer />
     </div>

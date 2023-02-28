@@ -6,14 +6,15 @@ const Product = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { name, description, price, id, imageUrl } = props.product;
+  const { name, price, id, imageUrl } = props.product;
   return (
     <div className="productCard">
       <h1>
-        <Link to={`api/products/${id}`}>Campus: {name}</Link>
+        <Link to={`/api/products/${id}`}>Campus: {name}</Link>
         //! Link may be subject to change depending on route
       </h1>
       <img className="productImg" src={`${imageUrl}`}></img>
+      <h3>Price: {price}</h3>
     </div>
   );
 };
