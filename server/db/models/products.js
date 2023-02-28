@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
-const db = require('../db')
+const db = require('../db');
+const Categories = require('./categories');
 
 const Products = db.define('product', {
   name: {
@@ -10,7 +11,7 @@ const Products = db.define('product', {
       notEmpty: true
     }
   },
-  desciption: {
+  description: {
     type: Sequelize.TEXT,
     allowNull: false,
     validate: {
@@ -28,9 +29,9 @@ const Products = db.define('product', {
     type: Sequelize.ENUM({
       values: ['xbox', 'ps5', 'nintendo']
     }),
-    allowNull: false,
-    validate: {
-      notEmpty: true
+    references: {
+      model: Categories,
+      key: 'id'
     }
   },
   imageUrl: {
