@@ -32,7 +32,7 @@ const AllProducts = () => {
       <div className='categoryFilters'>
         <ul>
           <li onClick={() => setSelectedCategory('Nintendo')}>Nintendo</li>
-          <li onClick={() => setSelectedCategory('Playstation')}>Playstation</li>
+          <li onClick={() => setSelectedCategory('Microsoft')}>Playstation</li>
           <li onClick={() => setSelectedCategory('Xbox')}>Xbox</li>
         </ul>
       </div>
