@@ -18,8 +18,8 @@ Orders.hasMany(Products);
 Products.belongsTo(Orders);
 
 module.exports = {
-    Users,
-    Products,
-    Reviews,
-    Orders
-}
+  Users,
+  Products,
+  Reviews,
+  Orders
+};
