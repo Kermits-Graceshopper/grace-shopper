@@ -4,9 +4,7 @@ const Products = require("./products");
 
 const Categories = db.define('category', {
     category: {
-        type: Sequelize.ENUM({
-            values: ['xbox', 'ps5', 'nintendo']
-        }),
+        type: Sequelize.STRING,
         allowNull: false,
         validate: {
             notEmpty: true
