@@ -3,8 +3,12 @@ const db = require('../db');
 const Users = require('./users');
 const Products = require('./products');
 
-const CartItems = db.define('cartItem', {
-  
+const Cart = db.define('cartItem', {
+
+    qty: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+    },
     userId: {
         type: Sequelize.INTEGER,
         references: {
@@ -21,4 +25,4 @@ const CartItems = db.define('cartItem', {
     }
 });
 
-module.exports = CartItems
+module.exports = Cart
