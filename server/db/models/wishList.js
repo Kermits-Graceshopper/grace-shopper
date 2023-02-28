@@ -22,5 +22,3 @@ const WishLists = db.define('wishlist', {
     }
   }
 });
-
-module.exports = WishLists;

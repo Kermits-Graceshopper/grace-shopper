@@ -4,4 +4,3 @@ const Users = require('./users');
 
 const UserPaymentDetails = db.define('userPaymentDetail', {});
 
-module.exports = UserPaymentDetails;
