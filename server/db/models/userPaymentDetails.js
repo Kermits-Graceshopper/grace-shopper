@@ -1,7 +1,7 @@
-const db = require("../db");
+const db = require('../db');
 const Sequelize = require('sequelize');
-const Users = require("./users");
+const Users = require('./users');
 
-const UserPayments = db.define('userPayments', {
-    
-})
+const UserPaymentDetails = db.define('userPaymentDetail', {});
+
+module.exports = UserPaymentDetails;
