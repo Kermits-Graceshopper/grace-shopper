@@ -2,6 +2,12 @@ const db = require('../db')
 const Sequelize = require('sequelize');
 
 const Users = db.define('user', {
+    // id: {
+    //     type: Sequelize.INTEGER,
+    //     primaryKey: true,
+    //     autoIncrement: true,
+    //     allowNull: false,
+    //   },
     fname: {
         type: Sequelize.STRING,
         allowNull: false,
