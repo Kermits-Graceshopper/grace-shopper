@@ -13,7 +13,7 @@ const UserPayments = require('./userPaymentDetails');
 // define relationships here
 
 
-Categories.hasMany(Products, { foreignKey: ${categoryName} })
+Categories.hasMany(Products)
 Categories.hasMany(Users)
 
 Products.belongsTo(Categories)
