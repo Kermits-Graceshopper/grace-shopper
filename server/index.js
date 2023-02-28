@@ -19,4 +19,16 @@ const seed = require('../script/seed');
 // }
 
 // init()
+
+
+const syncDb = async () => {
+    try {
+      await db.sync({ force: true})
+      console.log('SUCCESS, db has been synced');
+    } catch(e){
+      console.log("ERROR IN CATCH OF syncDb FUNCTION: ", e);
+    }
+  }
+  syncDb();
+
  app.listen(PORT, () => console.log(`LISTENING ON PORT ${PORT}`))

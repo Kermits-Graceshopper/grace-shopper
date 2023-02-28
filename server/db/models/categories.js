@@ -19,5 +19,6 @@ const Categories = db.define('category', {
             key: 'id'
         }
     }
-})
+});
+
 module.exports = Categories
