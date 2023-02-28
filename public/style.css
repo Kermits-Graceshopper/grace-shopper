@@ -29,3 +29,21 @@ form div {
   color: white;
   text-align: center;
 }
+
+.login{
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  width: 200px;
+  text-decoration: none;
+}
+
+.navbar{
+  background-color: black;
+  color: white;
+}
+
+.search{
+  position: relative;
+  right: 10px;
+}

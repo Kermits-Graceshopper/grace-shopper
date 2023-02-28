@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Box = styled.div`
-  padding: 80px 60px;
+  padding: 50px 50px;
   background: black;
   position: absolute;
   bottom: 0;
@@ -18,7 +18,7 @@ export const Container = styled.div`
   justify-content: center;
   max-width: 1000px;
   margin: 0 auto;
-  /* background: red; */
+  max-height: 300px;
 `;
 
 export const Column = styled.div`
