@@ -14,7 +14,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <h1>The Game Chair</h1>
+      <h1>Game Share</h1>
       <nav>
         {isLoggedIn ? (
           <div>
