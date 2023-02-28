@@ -5,6 +5,7 @@ const Orders = require('./orders');
 // import all models
 
 // define relationships here
+
 Users.hasMany(Orders);
 Orders.belongsTo(Users);
 
