@@ -19,3 +19,31 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+  color: white;
+  text-align: center;
+}
+
+.login{
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  width: 200px;
+  text-decoration: none;
+}
+
+.navbar{
+  background-color: black;
+  color: white;
+}
+
+.search{
+  position: relative;
+  right: 10px;
+}
