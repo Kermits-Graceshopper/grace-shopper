@@ -13,7 +13,7 @@ app.use(express.json())
 // app.use('/auth', require('./auth'))
 app.use('/api/users', require('./api/users'))
 app.use('/api', require('./api/login'))
-app.use('/api', require('./api/signup'))
+app.use('/api', require('./api/signUp'))
 app.use('/api/products', require('./api/products'))
 
 app.get('/', (req, res)=> res.sendFile(path.join(__dirname, '..', 'public/index.html')));

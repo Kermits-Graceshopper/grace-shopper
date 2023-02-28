@@ -47,5 +47,10 @@ module.exports = {
   Users,
   Products,
   Reviews,
-  Orders
+  Orders,
+  Categories,
+  WishLists,
+  UserAddresses,
+  Cart,
+  UserPayments
 }
