@@ -1,5 +1,5 @@
 const db = require("./db");
-const { Users, Products, Orders, Reviews, Categories, WishLists, UserAddresses, Cart, UserPayments } = require("./models");
+const { Users, Products, Orders, Reviews, Categories, WishLists, UserAddresses, Cart, UserPayments, CartItems, OrderItems } = require("./models");
 
 const syncDb = async () => {
   try {
@@ -22,5 +22,7 @@ module.exports = {
     UserAddresses,
     Cart,
     UserPayments,
+    CartItems,
+    OrderItems
  
 };
