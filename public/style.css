@@ -19,3 +19,35 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.login{
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  width: 200px;
+  text-decoration: none;
+  z-index: 1;
+}
+
+.navbar{
+  background-color: #181823;
+  color: white;
+}
+
+.search{
+  position: relative;
+  right: 10px;
+  z-index: 1;
+}
+
+.specializedNavbar{
+  color: white;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #537FE7
+}
+
+.specItem{
+  color: white;
+  text-decoration: none;
+}

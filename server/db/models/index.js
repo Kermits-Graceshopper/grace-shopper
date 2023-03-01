@@ -11,6 +11,7 @@ const UserPayments = require('./userPaymentDetails');
 // const OrderItems = require('./orderItems')
 // const ProductReviews = require('./productReviews')
 
+
 // import all models
 
 // define relationships here
@@ -35,16 +36,17 @@ Users.hasMany(Orders)
 Users.hasOne(UserAddresses);
 Users.belongsToMany(Reviews, { through: ProductReviews })
 
+
 // associations for UserAddresses
 UserAddresses.belongsTo(Users);
 
 // associations for Cart
 Cart.belongsTo(Users)
-Cart.belongsToMany(Products, { through: CartItems } )
+// Cart.belongsToMany(Products, { through: CartItems } )
 
 // associations for Orders
 Orders.belongsTo(Users)
-Orders.belongsToMany(Products, { through: OrderItems })
+// Orders.belongsToMany(Products, { through: OrderItems })
 
 // associations for Reviews
 Reviews.belongsTo(Users)
