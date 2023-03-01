@@ -11,6 +11,7 @@ app.use(express.json());
 
 // auth and api routes
 // app.use('/auth', require('./auth'))
+
 app.use('/api/users', require('./api/users'));
 app.use('/api', require('./api/login'));
 app.use('/api', require('./api/signUp'));

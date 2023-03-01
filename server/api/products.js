@@ -3,9 +3,8 @@ const router = require('express').Router();
 const Categories = require('../db/models/categories');
 
 // all "/products" routes go here
-// "/products" will already be mounted on this router so "/" here will really be "/products"
 
-//* GET /api/products
+
 router.get('/', async (req, res) => {
   try {
     const allProducts = await Products.findAll({
@@ -16,6 +15,7 @@ router.get('/', async (req, res) => {
     console.log(e);
   }
 });
+
 
 router.get('/:productId', (req, res) => {
   try {
