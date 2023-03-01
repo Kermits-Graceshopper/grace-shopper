@@ -18,11 +18,7 @@ module.exports = {
     Orders,
     Reviews,
     Categories,
-    WishLists,
     UserAddresses,
     Cart,
-    UserPayments,
-    CartItems,
-    OrderItems
  
 };
