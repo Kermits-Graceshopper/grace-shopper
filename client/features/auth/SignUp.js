@@ -31,7 +31,6 @@ const SignUp = () => {
             setEmail('');
             setPassword('');
             setConfirmedPassword('');
-            set
         } catch(e){
             setError(e.toString());
         }

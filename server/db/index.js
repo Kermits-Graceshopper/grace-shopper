@@ -19,6 +19,5 @@ module.exports = {
     Reviews,
     Categories,
     UserAddresses,
-    Cart,
- 
+    Cart
 };
