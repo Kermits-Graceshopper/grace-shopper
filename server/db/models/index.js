@@ -7,6 +7,9 @@ const WishLists = require('./wishList');
 const UserAddresses = require('./userAddress');
 const Cart = require('./cart');
 const UserPayments = require('./userPaymentDetails');
+const CartItems = require('./cartItems');
+const OrderItems = require('./orderItems');
+
 
 // import all models
 
@@ -18,24 +21,24 @@ Categories.hasMany(Users)
 
 Products.belongsTo(Categories)
 Products.belongsTo(Users)
-Products.belongsToMany(Cart, { through: CartItems })
-Products.belongsToMany(Orders, { through: OrderItems })
-Products.belongsToMany(Reviews, { through: ProductReviews })
+// Products.belongsToMany(Cart, { through: CartItems })
+// Products.belongsToMany(Orders, { through: OrderItems })
+// Products.belongsToMany(Reviews, { through: ProductReviews })
 
 Users.hasMany(Categories)
 Users.hasMany(Products)
 Users.hasOne(Cart)
 Users.hasMany(Orders)
 Users.hasOne(UserAddresses);
-Users.belongsToMany(Reviews, { through: ProductReviews, targetKey: `${fname} ${lname}`, foreignKey: 'author' })
+// Users.belongsToMany(Reviews, { through: ProductReviews, targetKey: `${fname} ${lname}`, foreignKey: 'author' })
 
 UserAddresses.hasMany(Users); //! Can have multiple users that live together
 
 Cart.belongsTo(Users)
-Cart.belongsToMany(Products, { through: CartItems } )
+// Cart.belongsToMany(Products, { through: CartItems } )
 
 Orders.belongsTo(Users)
-Orders.belongsToMany(Products, { through: OrderItems })
+// Orders.belongsToMany(Products, { through: OrderItems })
 
 Reviews.belongsTo(Users)
 Reviews.belongsTo(Products)
@@ -52,5 +55,7 @@ module.exports = {
   WishLists,
   UserAddresses,
   Cart,
-  UserPayments
+  UserPayments,
+  CartItems,
+  OrderItems
 }

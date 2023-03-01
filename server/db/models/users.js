@@ -10,14 +10,14 @@ const Users = db.define('user', {
     //   },
     fname: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
         validate: {
             notEmpty: true,
         }
     },
     lname: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
         validate: {
             notEmpty: true,
         }

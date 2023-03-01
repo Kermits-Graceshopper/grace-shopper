@@ -7,7 +7,7 @@ import { MDBCol, MDBRow } from 'mdbreact';
 import Button from 'react-bootstrap/Button';
 
 const Navbar = () => {
-  const isLoggedIn = useSelector((state) => !!state.auth.me.id);
+  // const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const logoutAndRedirectHome = () => {
@@ -36,7 +36,9 @@ const Navbar = () => {
 
         <MDBCol md="2">
           <nav>
-            {isLoggedIn ? (
+            
+            {/* // isLoggedIn ?  */}
+            
               <div>
                 {/* The navbar will show these links after you log in */}
                 <Link to="/home">Home</Link>
@@ -44,25 +46,23 @@ const Navbar = () => {
                   Logout
                 </button>
               </div>
-            ) : (
               <div className="login">
                 {/* The navbar will show these links before you log in */}
                 <Link
                   style={{ textDecoration: 'none', color: 'white' }}
                   className="link"
-                  to="/login"
+                  to="/api/login"
                 >
                   Login
                 </Link>
                 <Link
                   style={{ textDecoration: 'none', color: 'white' }}
                   className="link"
-                  to="/signup"
+                  to="/api/signup"
                 >
                   Sign Up
                 </Link>
               </div>
-            )}
           </nav>
         </MDBCol>
       </div>
