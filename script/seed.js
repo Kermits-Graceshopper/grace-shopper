@@ -156,6 +156,7 @@ async function seed() {
 
   const createdUsers = await Users.bulkCreate(users, { returning: true });
   console.log(`seeded ${createdUsers.length} users`);
+  // await Users.save()
 
   const createdProducts = await Products.bulkCreate(products, { returning: true });
   console.log(`seeded ${createdProducts.length} products`);
