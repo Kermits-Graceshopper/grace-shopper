@@ -21,7 +21,7 @@ const Navbar = () => {
         <MDBCol md="2">
           <h1>Game Share</h1>
         </MDBCol>
-          <MDBCol md='6'>
+          <MDBCol md='7'>
             <input
               className="form-control searchBar"
               type="text"
@@ -34,7 +34,7 @@ const Navbar = () => {
             <Button variant="light" className='search'>Search</Button>
           </MDBCol>
 
-        <MDBCol>
+        <MDBCol md="2">
           <nav>
             {isLoggedIn ? (
               <div>
