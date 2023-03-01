@@ -12,5 +12,4 @@
 //     allowNull: false
 //   }
 // });
-
 // module.exports = CartItems;
