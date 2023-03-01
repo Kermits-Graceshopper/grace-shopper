@@ -14,3 +14,4 @@ const orderItems = db.define('orderItem', {
 });
 
 module.exports = orderItems;
+

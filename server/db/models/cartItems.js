@@ -14,3 +14,4 @@ const CartItems = db.define('cartItem', {
 });
 
 module.exports = CartItems;
+
