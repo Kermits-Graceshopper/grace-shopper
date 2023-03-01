@@ -7,9 +7,10 @@ const path = require('path');
 
 const handleLogin = async (req, res) => {
     console.log('handleLogin function, TOP OF FUNCTION');
-    const { email, pwd } = req.body;
-    if (!email || !pwd){
+    const { email, password } = req.body;
+    if (!email || !password){
         console.log('handleLogin function, EITHER NO EMAIL OR NO PASSWORD');
+        console.log('REQ.BODY: ', req.body);
         return res.status(400).json({ 'message': 'Username and password are required.' });
     }
     const foundUser = await Users.findOne({
@@ -24,7 +25,7 @@ const handleLogin = async (req, res) => {
     // evaluate password 
     try{
         console.log('handleLogin function, TOP OF INSIDE OF TRY BRACKET')
-        const match = await bcrypt.compare(pwd, foundUser.password);
+        const match = await bcrypt.compare(password, foundUser.password);
         if (match) {
             // create JWTs
             const accessToken = jwt.sign(
@@ -46,6 +47,7 @@ const handleLogin = async (req, res) => {
             //     path.join(__dirname, '..', 'model', 'users.json'),
             //     JSON.stringify(usersDB.users)
             // );
+            await foundUser.save();
             res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 24 * 60 * 60 * 1000 });
             res.json({ accessToken });
         } else {
