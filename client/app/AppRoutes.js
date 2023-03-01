@@ -4,9 +4,10 @@ import { Route, Routes } from 'react-router-dom';
 // import AuthForm from '../features/auth/AuthForm';
 import Login from '../features/auth/Login';
 import SignUp from '../features/auth/SignUp';
-// import Footer from '../features/footer/Footer';
 import Home from '../features/home/Home';
 // import { me } from './store';
+import CheckoutForm from '../features/checkout/CheckoutForm';
+import ShoppingCart from '../features/shoppingCart/ShoppingCart';
 
 /**
  * COMPONENT
@@ -39,6 +40,14 @@ const AppRoutes = () => {
           <Route
             path="/api/signup"
             element={<SignUp />}
+          />
+          <Route
+            path="/api/cart"
+            element={<ShoppingCart />}
+          />
+         <Route
+            path="/api/checkout"
+            element={<CheckoutForm />}
           />
         </Routes>
     </div>

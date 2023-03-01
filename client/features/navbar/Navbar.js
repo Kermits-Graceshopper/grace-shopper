@@ -65,6 +65,7 @@ const Navbar = () => {
                 </Link>
               </div>
           </nav>
+          <Link to="/api/cart"> Cart</Link>
         </MDBCol>
       </div>
     </div>
