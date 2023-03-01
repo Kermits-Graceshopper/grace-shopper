@@ -1,37 +1,39 @@
-const { Products } = require('../db/models')
-const router = require('express').Router()
+const { Products } = require('../db/models');
+const router = require('express').Router();
+const Categories = require('../db/models/categories');
 
 // all "/products" routes go here
 // "/products" will already be mounted on this router so "/" here will really be "/products"
 
+//* GET /api/products
 router.get('/', async (req, res) => {
   try {
-    const allProducts = await Products.findAll();
+    const allProducts = await Products.findAll({
+      include: Categories
+    });
     res.send(allProducts);
-  } catch(e){
+  } catch (e) {
     console.log(e);
   }
-})
+});
 
 router.get('/:productId', (req, res) => {
-  try{
+  try {
     const product = Products.findOne({
       where: {
         id: req.params.productId
       }
     });
     res.send(product);
-  } catch(e){
+  } catch (e) {
     console.log(e);
   }
-})
+});
 
 router.use((req, res, next) => {
-  const error = new Error('Not Found')
-  error.status = 404
-  next(error)
-})
+  const error = new Error('Not Found');
+  error.status = 404;
+  next(error);
+});
 
 module.exports = router;
-
-
