@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../app/store';
-//import logo from './logo.png'
 import { MDBCol, MDBRow } from 'mdbreact';
 import Button from 'react-bootstrap/Button';
 
@@ -18,21 +17,23 @@ const Navbar = () => {
   return (
     <div>
       <div className="navbar">
-        <MDBCol md="2">
-          <h1>Game Share</h1>
+        <MDBCol md='2'>
+          <img src="/logo.png" className="logo" />
         </MDBCol>
-          <MDBCol md='7'>
-            <input
-              className="form-control searchBar"
-              type="text"
-              placeholder="Search"
-              aria-label="Search"
-            />
+        <MDBCol md="7">
+          <input
+            className="form-control searchBar"
+            type="text"
+            placeholder="Search"
+            aria-label="Search"
+          />
         </MDBCol>
 
         <MDBCol md="1">
-            <Button variant="light" className='search'>Search</Button>
-          </MDBCol>
+          <Button variant="light" className="search">
+            Search
+          </Button>
+        </MDBCol>
 
         <MDBCol md="2">
           <nav>

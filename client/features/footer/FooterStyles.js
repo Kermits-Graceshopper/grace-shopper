@@ -1,12 +1,10 @@
 import styled from 'styled-components';
 
 export const Box = styled.div`
-  padding: 45px 40px;
+  padding: 60px 40px;
   background: #181823;
-  position: absolute;
   bottom: 0;
   width: 100%;
-
   @media (max-width: 1000px) {
     padding: 50px 30px;
   }
@@ -18,7 +16,7 @@ export const Container = styled.div`
   justify-content: center;
   max-width: 1000px;
   margin: 0 auto;
-  max-height: 300px;
+  max-height: 200px;
 `;
 
 export const Column = styled.div`
