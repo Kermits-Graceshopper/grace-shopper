@@ -36,14 +36,14 @@ const UserAddresses = db.define('userAddress', {
       notEmpty: true
     }
   },
-  userId: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    references: {
-      model: Users,
-      key: 'id'
-    }
-  }
+  // userId: {
+  //   type: Sequelize.INTEGER,
+  //   allowNull: false,
+  //   references: {
+  //     model: Users,
+  //     key: 'id'
+  //   }
+  // }
 });
 
 module.exports = UserAddresses;
