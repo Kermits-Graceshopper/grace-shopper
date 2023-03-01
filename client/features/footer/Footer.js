@@ -8,10 +8,11 @@ import {
   Heading,
 } from './FooterStyles';
 
+
 const Footer = () => {
   return (
-    <Box>
-      <h1 style={{ color: 'white', textAlign: 'center', marginTop: '-50px' }}>
+    <Box className='footer'>
+      <h1 style={{ color: 'white', textAlign: 'center', marginTop: '-40px', marginBottom:'50px' }}>
         Game Share
       </h1>
       <Container>

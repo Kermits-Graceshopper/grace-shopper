@@ -1,5 +1,8 @@
 body {
   font-family: sans-serif;
+  min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 a {
@@ -30,7 +33,7 @@ form div {
 }
 
 .navbar{
-  background-color: #181823;
+  background-color: #1b0b54;
   color: white;
 }
 
@@ -50,4 +53,12 @@ form div {
 .specItem{
   color: white;
   text-decoration: none;
+}
+.logo{
+  width: 150px;
+  height: auto;
+}
+
+.footer{
+  margin-top: auto;
 }
