@@ -39,9 +39,7 @@ const AllProducts = () => {
       <div className="productCardParent">
         {selectedCategory
           ? products
-              .filter(
-                (product) => product.categories.category === selectedCategory
-              )
+              .filter((product) => product.categories.name === selectedCategory)
               .map((product, i) => <Product product={product} key={i} />)
           : products.map((product, i) => <Product product={product} key={i} />)}
       </div>
