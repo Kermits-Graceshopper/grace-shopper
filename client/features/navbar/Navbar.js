@@ -43,7 +43,6 @@ const Navbar = () => {
 
             <div>
               {/* The navbar will show these links after you log in */}
-              <Link to="/home">Home</Link>
               <button type="button" onClick={logoutAndRedirectHome}>
                 Logout
               </button>
@@ -66,7 +65,9 @@ const Navbar = () => {
               </Link>
             </div>
           </nav>
-          <Link to="/api/cart"> Cart</Link>
+          <Link to="/api/cart">
+            <img className="cart" src="/cart.png"  />
+          </Link>
         </MDBCol>
       </div>
     </div>
