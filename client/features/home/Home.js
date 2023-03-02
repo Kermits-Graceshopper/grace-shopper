@@ -1,18 +1,22 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { selectUser } from '../../app/reducers/userSlice';
 
 /**
  * COMPONENT
  */
-const Home = (props) => {
+const Home = () => {
   // const username = useSelector((state) => state.auth.me.username);
-
+  const user = useSelector(selectUser);
   return (
     <div className="changingBody">
-      {/* <h3>Welcome, {username}</h3> */}
-      <h4>Welcome, Team!</h4>
+      {user.firstName ? 
+      <h1>Welcome {user.firstName}!</h1>
+    :
+    <h1>Welcome! Be our guest.</h1>}
     </div>
   );
 };
 
 export default Home;
+
