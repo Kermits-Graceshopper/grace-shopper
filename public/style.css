@@ -3,6 +3,7 @@ body {
   min-height: 100vh;
     display: flex;
     flex-direction: column;
+    
 }
 
 a {
@@ -61,4 +62,53 @@ form div {
 
 .footer{
   margin-top: auto;
+}
+
+.cartDiv{
+  display: flex;
+
+  min-width: 500px;
+  min-height: 500px;
+  max-height: 800px;
+  max-width: 700px;
+  background-color: white;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  padding: 40px;
+}
+
+.cartDivParent{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.checkoutButton{
+  position: relative;
+  top: 720px;
+}
+
+.mainArea{
+  background-color:#eaeded;
+}
+
+.cartTitle{
+  display: flex;
+  justify-content: space-between;
+}
+.changingBody{
+  padding: 50px 100px 100px 100px;
+}
+
+.productCard{
+  background-color: white;
+  width: 400px;
+  height: 400px;
+  margin: 10px;
+}
+
+.productContainer{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
