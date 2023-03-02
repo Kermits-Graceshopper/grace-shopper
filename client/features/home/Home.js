@@ -10,7 +10,7 @@ const Home = (props) => {
   return (
     <div className="changingBody">
       {/* <h3>Welcome, {username}</h3> */}
-      <h3>Welcome</h3>
+      <h4>Welcome, Team!</h4>
     </div>
   );
 };
