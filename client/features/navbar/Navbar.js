@@ -17,8 +17,10 @@ const Navbar = () => {
   return (
     <div>
       <div className="navbar">
-        <MDBCol md='2'>
-          <img src="/logo.png" className="logo" />
+        <MDBCol md="2">
+          <Link to="/home">
+            <img src="/logo.png" className="logo" />
+          </Link>
         </MDBCol>
         <MDBCol md="7">
           <input
@@ -37,33 +39,32 @@ const Navbar = () => {
 
         <MDBCol md="2">
           <nav>
-            
             {/* // isLoggedIn ?  */}
-            
-              <div>
-                {/* The navbar will show these links after you log in */}
-                <Link to="/home">Home</Link>
-                <button type="button" onClick={logoutAndRedirectHome}>
-                  Logout
-                </button>
-              </div>
-              <div className="login">
-                {/* The navbar will show these links before you log in */}
-                <Link
-                  style={{ textDecoration: 'none', color: 'white' }}
-                  className="link"
-                  to="/api/login"
-                >
-                  Login
-                </Link>
-                <Link
-                  style={{ textDecoration: 'none', color: 'white' }}
-                  className="link"
-                  to="/api/signup"
-                >
-                  Sign Up
-                </Link>
-              </div>
+
+            <div>
+              {/* The navbar will show these links after you log in */}
+              <Link to="/home">Home</Link>
+              <button type="button" onClick={logoutAndRedirectHome}>
+                Logout
+              </button>
+            </div>
+            <div className="login">
+              {/* The navbar will show these links before you log in */}
+              <Link
+                style={{ textDecoration: 'none', color: 'white' }}
+                className="link"
+                to="/api/login"
+              >
+                Login
+              </Link>
+              <Link
+                style={{ textDecoration: 'none', color: 'white' }}
+                className="link"
+                to="/api/signup"
+              >
+                Sign Up
+              </Link>
+            </div>
           </nav>
           <Link to="/api/cart"> Cart</Link>
         </MDBCol>

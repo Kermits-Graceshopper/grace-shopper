@@ -8,6 +8,8 @@ import Home from '../features/home/Home';
 // import { me } from './store';
 import CheckoutForm from '../features/checkout/CheckoutForm';
 import ShoppingCart from '../features/shoppingCart/ShoppingCart';
+import Wishlist from '../features/Wishlist/Wishlist';
+import Featured from '../features/Featured/Featured';
 
 /**
  * COMPONENT
@@ -48,6 +50,14 @@ const AppRoutes = () => {
          <Route
             path="/api/checkout"
             element={<CheckoutForm />}
+          />
+          <Route
+            path="/api/wishlist"
+            element={<Wishlist />}
+          />
+          <Route
+            path="/api/featured"
+            element={<Featured />}
           />
         </Routes>
     </div>
