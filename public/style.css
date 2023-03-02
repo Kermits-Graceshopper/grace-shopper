@@ -64,28 +64,14 @@ form div {
 }
 
 .cartDiv{
-  display: flex;
-
-  min-width: 500px;
-  min-height: 500px;
-  max-height: 800px;
-  max-width: 700px;
+  width: 800px;
+  height: 500px;
   background-color: white;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   padding: 40px;
+  margin-bottom: 100px;
 }
 
-.cartDivParent{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 50px;
-}
-
-.checkoutButton{
-  position: relative;
-  top: 720px;
-}
 
 .mainArea{
   background-color:#eaeded;
@@ -94,9 +80,6 @@ form div {
 .cartTitle{
   display: flex;
   justify-content: space-between;
-}
-.changingBody{
-  padding: 50px 100px 100px 100px;
 }
 
 .productCard{
@@ -110,4 +93,14 @@ form div {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+}
+
+.checkoutSidebar{
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: white;
+  width: 300px;
+  height: 224px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
