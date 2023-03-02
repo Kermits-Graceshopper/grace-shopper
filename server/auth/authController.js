@@ -39,7 +39,8 @@ const handleLogin = async (req, res) => {
                 { expiresIn: '1d' }
             );
             // Saving refreshToken with current user
-            foundUser.refreshToken = refreshToken
+            foundUser.refreshToken = refreshToken;
+            foundUser.isLoggedIn = true;
             // const otherUsers = usersDB.users.filter(person => person.username !== foundUser.username);
             // const currentUser = { ...foundUser, refreshToken };
             // usersDB.setUsers([...otherUsers, currentUser]);
@@ -48,8 +49,14 @@ const handleLogin = async (req, res) => {
             //     JSON.stringify(usersDB.users)
             // );
             await foundUser.save();
+            const role = foundUser.role;
+            const fullName = foundUser.fullName;
+            const firstName = foundUser.fname;
+            const lastName = foundUser.lname;
+            const email = foundUser.email;
+
             res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 24 * 60 * 60 * 1000 });
-            res.json({ accessToken });
+            res.json({ accessToken, fullName, firstName, lastName, email, refreshToken, role });
         } else {
             console.log('handleLogin function, INSIDE TRY, IN ELSE STATEMENT');
             res.sendStatus(401);

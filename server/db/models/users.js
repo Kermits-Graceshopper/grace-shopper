@@ -4,11 +4,11 @@ const Sequelize = require("sequelize");
 const Users = db.define("user", {
   fullName: {
     type: Sequelize.STRING,
-    allowNull: true,
+    allowNull: false,
   },
   fname: {
     type: Sequelize.STRING,
-    allowNull: true,
+    allowNull: false,
   },
   lname: {
     type: Sequelize.STRING,
@@ -34,6 +34,16 @@ const Users = db.define("user", {
     type: Sequelize.TEXT,
     allowNull: true,
   },
+  role: {
+    type: Sequelize.ENUM('user', 'admin'),
+    allowNull: false,
+    defaultValue: 'user'
+  },
+  isLoggedIn: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  }
 });
 
 module.exports = Users;
