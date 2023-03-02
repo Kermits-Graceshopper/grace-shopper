@@ -4,7 +4,12 @@ body {
   display: flex;
   flex-direction: column;
 }
-
+.cart{
+  height: 50px;
+  width: 50px;
+  position: relative;
+  left: 200px;
+}
 a {
   text-decoration: none;
 }
@@ -23,7 +28,7 @@ form div {
   display: inline-block;
 }
 
-.login{
+.navButtons{
   position: absolute;
   right: 5px;
   top: 10px;
@@ -35,6 +40,7 @@ form div {
 .navbar{
   background-color: #1b0b54;
   color: white;
+  overflow: hidden;
 }
 
 .search{
@@ -65,7 +71,7 @@ form div {
 
 .cartDiv{
   width: 800px;
-  height: 500px;
+  height: 1000px;
   background-color: white;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   padding: 40px;
@@ -103,4 +109,6 @@ form div {
   width: 300px;
   height: 224px;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  position: relative;
+  overflow: hidden;
 }
