@@ -1,8 +1,5 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
-
-const Sequelize = require('sequelize');
-const db = require('../db');
 const Users = require('./users');
 const Products = require('./products');
 
@@ -22,3 +19,5 @@ const WishLists = db.define('wishlist', {
     }
   }
 });
+
+module.exports = WishLists
