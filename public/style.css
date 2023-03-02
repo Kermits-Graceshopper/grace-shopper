@@ -62,3 +62,25 @@ form div {
 .footer{
   margin-top: auto;
 }
+
+.cartDiv{
+  display: flex;
+
+  min-width: 500px;
+  min-height: 500px;
+  max-height: 800px;
+  max-width: 700px;
+  border: 3px solid black;
+}
+
+.cartDivParent{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.checkoutButton{
+  position: relative;
+  top: 720px;
+}
