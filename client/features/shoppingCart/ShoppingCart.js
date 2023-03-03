@@ -51,7 +51,12 @@ const ShoppingCart = () => {
           <div className="cartDiv">
             {cartProducts.length > 0
               ? cartProducts.map((product) => {
-                  return <div key={product.key}>{product.name}</div>;
+                return (
+                  <div key={product.key}>
+                    <h3> {product.name}</h3>
+                    <p> {product.price}</p>
+                  </div>
+                );
                 })
               : 'There is nothing in your cart'}
             <div></div>
