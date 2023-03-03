@@ -8,10 +8,16 @@ import AppRoutes from './AppRoutes';
 
 const App = () => {
   return (
-    <div className = "mainArea">
-      <Navbar />
-      <SpecializedNavbar />
-      <AppRoutes />
+    <div className="page-container">
+      <div className="content-wrap">
+        <Navbar />
+        <SpecializedNavbar />
+        <AppRoutes />
+        <br />
+        <br />
+        <br />
+      </div>
+
       <Footer />
     </div>
   );
