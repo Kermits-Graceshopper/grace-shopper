@@ -16,7 +16,7 @@ const AllProducts = () => {
     if (selectedCategory === '') {
       setFiltered(products)
     } else {
-      const filtered = products.filter((product) => product.category === selectedCategory);
+      const filtered = products.filter((product) => product.platform === selectedCategory);
       console.log('directly after.filter()', 'filtered: ', filtered)
       setFiltered(filtered);
     }

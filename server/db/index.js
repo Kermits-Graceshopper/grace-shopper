@@ -21,7 +21,7 @@ const syncDb = async () => {
         name: product.name,
         description: product.description,
         price: product.price,
-        category: product.category
+        platform: product.platform
       })
     })
     categories.map(cat => {
