@@ -16,7 +16,7 @@ const AllProducts = () => {
     if (selectedCategory === '') {
       setFiltered(products)
     } else {
-      const filtered = products.filter((product) => product.platform === selectedCategory);
+      const filtered = products.filter((product) => product.category === selectedCategory);
       console.log('directly after.filter()', 'filtered: ', filtered)
       setFiltered(filtered);
     }
@@ -44,34 +44,40 @@ const AllProducts = () => {
             <option value="Nintendo">Nintendo</option>
           </select>
         </div>
-        <div className="categoryFilters">
-          <ul>
-            <li onClick={() => setSelectedCategory('Nintendo')}>Nintendo</li>
-            <li onClick={() => setSelectedCategory('Microsoft')}>
-              Playstation
-            </li>
-            <li onClick={() => setSelectedCategory('Xbox')}>Xbox</li>
-          </ul>
-        </div>
-        <h1>Products:</h1>
-        <div className="productContainer">
-          {!filtered[0] && search[0] === ''
-            ? products.map((product) => (
-                <div className="product" key={product.name}>
-                  <h1>{product.name}</h1>
-                  <img className="productImage" src={product.imageUrl} />
-                  <h3>{product.price}</h3>
-                  <h5>Category: {product.platform}</h5>
-                  <p>{product.description}</p>
-                </div>
-              ))
-            : filtered && products && search[0] === ''
-            ? filtered.map((product) => (
+        <select defaultValue='' onChange={(e) => setSelectedCategory(e.target.value)}>
+          <option value=''>All</option>
+          <option value='XBOX'>XBOX</option>
+          <option value='PS5'>PS5</option>
+          <option value='Nintendo'>Nintendo</option>
+        </select>
+      </div>
+      <div className="categoryFilters">
+        <ul>
+          <li onClick={() => setSelectedCategory('Nintendo')}>Nintendo</li>
+          <li onClick={() => setSelectedCategory('Microsoft')}>Playstation</li>
+          <li onClick={() => setSelectedCategory('Xbox')}>Xbox</li>
+        </ul>
+      </div>
+      <h1>Products:</h1>
+      <div className='products'>
+        {
+          !filtered[0] && search[0] === '' ?
+            products.map(product => (
+              <div className='product'>
+                <h1>{product.name}</h1>
+                <img className='productImage' src={product.imageUrl} />
+                <h3>{product.price}</h3>
+                <h5>Category: {product.category}</h5>
+                <p>{product.description}</p>
+              </div>
+            )) :
+            filtered && products && search[0] === '' ?
+              filtered.map(product => (
                 <div>
                   <h1>{product.name}</h1>
                   <img className="productImage" src={product.imageUrl} />
                   <h3>{product.price}</h3>
-                  <h5>Category: {product.platform}</h5>
+                  <h5>Category: {product.category}</h5>
                   <p>{product.description}</p>
                 </div>
               ))
@@ -82,7 +88,7 @@ const AllProducts = () => {
                     <h1>{product.name}</h1>
                     <img className="productImage" src={product.imageUrl} />
                     <h3>{product.price}</h3>
-                    <h5>Category: {product.platform}</h5>
+                    <h5>Category: {product.category}</h5>
                     <p>{product.description}</p>
                   </div>
                 ) : null
