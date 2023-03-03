@@ -11,7 +11,7 @@ const users = [
     password: 'password123',
     fname: 'John',
     lname: 'Doe',
-    roles: 'user',
+    isAdmin: 'user',
     isLoggedIn: false
   },
   {
@@ -20,7 +20,7 @@ const users = [
     password: '123password',
     fname: 'Jane',
     lname: 'Doe',
-    roles: 'admin',
+    isAdmin: 'admin',
     isLoggedIn: false
   },
 ];
@@ -31,37 +31,46 @@ const products = [
     description: 'This is product 1',
     price: 9.99,
     imageUrl: 'https://via.placeholder.com/150',
-    platform: 'XBOX'
+    category: 'XBOX'
   },
   {
     name: 'Capstone Game',
     description: 'This is product 2',
     price: 19.99,
     imageUrl: 'https://via.placeholder.com/150',
-    platform: 'PS5'
+    category: 'PS5'
   },
   {
     name: 'Cap toss',
     description: 'This is product 3',
     price: 29.99,
     imageUrl: 'https://via.placeholder.com/150',
-    platform: 'Nintendo'
+    category: 'Nintendo'
   },
 ]
 
 const orders = [
   {
-    orderDate: new Date(),
+    date: new Date(),
+    quantity: 2,
+    isCompleted: true,
+    isWishList: false,
     userId: 1,
     productId: 1,
   },
   {
     orderDate: new Date(),
+    quantity: 5,
+    isCompleted: false,
+    isWishList: true,
     userId: 1,
     productId: 2,
   },
   {
     orderDate: new Date(),
+    quantity: 3,
+    isCompleted: false,
+    isWishList: false,
     userId: 2,
     productId: 3,
   },
@@ -91,33 +100,6 @@ const addresses = [
   }
 ]
 
-const cart = [
-  {
-    qty: 5,
-    userId: 1,
-    productId: 1
-  },
-  {
-    qty: 3,
-    userId: 1,
-    productId: 2
-  },
-  {
-    qty: 1,
-    userId: 1,
-    productId: 3
-  },
-  {
-    qty: 3,
-    userId: 1,
-    productId: 2,
-  },
-  {
-    qty: 1,
-    userId: 2,
-    productId: 3,
-  },
-]
 const reviews = [
   {
     rating: 5,
@@ -137,18 +119,6 @@ const reviews = [
     userId: 2,
     productId: 3,
   },
-]
-
-const categories = [
-{  name: 'PS5',
-  productId: 1
-},
-{  name: 'XBOX',
-  productId: 2
-},
-{  name: 'Nintendo',
-  productId: 3
-},
 ]
 
 
