@@ -24,15 +24,28 @@ const ShoppingCart = () => {
   //   }, []);
 
   const handleCheckout = async () => {
-    await axios
-      .post('/api/checkout', {
-        body: JSON.stringify({ cartProducts })
-      })
-      .then((response) => {
-        if (response.url) {
-          window.location.assign(response.url); // Forwarding user to Stripe
-        }
-      });
+    try {
+      await axios
+        .post(
+          '/api/checkout',
+          {
+            cart: cartProducts
+          },
+          {
+            headers: {
+              'Access-Control-Allow-Origin': '*'
+            }
+          }
+        )
+        .then((response) => {
+          console.log(response);
+          if (response.data.sessionUrl) {
+            window.location.replace(response.data.sessionUrl); // Forwarding user to Stripe
+          }
+        });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

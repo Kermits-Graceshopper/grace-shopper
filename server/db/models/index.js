@@ -11,33 +11,38 @@ const UserAddresses = require('./userAddress');
 Products.hasMany(Orders, {
   foreignKey: 'productId',
   constraints: false
-})
-Products.hasMany(Reviews)
+});
+Products.hasMany(Reviews, {
+  foreignKey: 'productId',
+  constraints: false
+});
 
 Users.hasMany(Orders, {
   foreignKey: 'userId',
   constraints: false
-})
+});
 Users.belongsTo(UserAddresses);
-Users.hasMany(Reviews)
+Users.hasMany(Reviews, {
+  foreignKey: 'userId',
+  constraints: false
+});
 
 UserAddresses.hasMany(Users);
 
 Orders.belongsTo(Users, {
   foreignKey: 'userId',
   constraints: false
-})
-Orders.hasMany(Products)
+});
+Orders.hasMany(Products);
 // Orders.belongsTo(Products)
 
-Reviews.belongsTo(Users)
-Reviews.belongsTo(Products)
-
+Reviews.belongsTo(Users);
+Reviews.belongsTo(Products);
 
 module.exports = {
   Users,
   Products,
   Reviews,
   Orders,
-  UserAddresses,
-}
+  UserAddresses
+};

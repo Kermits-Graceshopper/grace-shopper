@@ -5,17 +5,18 @@ const app = express();
 const cors = require('cors');
 
 //cors
-app.use(
-  cors({
-    origin: 'https://localhost:8080'
-  })
-);
+app.use(cors());
 
 // logging middleware
 app.use(morgan('dev'));
 
 // body parsing middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  next();
+});
 
 // auth and api routes
 // app.use('/auth', require('./auth'))
