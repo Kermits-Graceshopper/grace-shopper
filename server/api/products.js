@@ -13,6 +13,7 @@ router.get('/', async (req, res) => {
     console.log(e);
   }
 });
+// use this temporarily
 
 
 router.get('/:productId', (req, res) => {
