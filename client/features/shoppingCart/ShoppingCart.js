@@ -45,7 +45,7 @@ const ShoppingCart = () => {
   const handleCheckout = () => {};
 
   return (
-    <Container>
+    <Container fluid className='productContainer'>
       <Row>
         <Col>
           <div className="cartDiv">

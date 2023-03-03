@@ -48,11 +48,11 @@ const AllProducts = () => {
         </ul>
       </div>
       <h1>Products:</h1>
-      <div>
+      <div className='products'>
         {
           !filtered[0] && search[0] === '' ?
             products.map(product => (
-              <div>
+              <div className='product'>
                 <h1>{product.name}</h1>
                 <img className='productImage' src={product.imageUrl} />
                 <h3>{product.price}</h3>
