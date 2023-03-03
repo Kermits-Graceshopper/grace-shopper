@@ -4,36 +4,17 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import axios from '../api/axios';
+import { useNavigate } from 'react-router-dom';
 
 const ShoppingCart = () => {
   let cartProducts = [
-    { key: 1, name: 'Elden Ring', price: 10.99 },
-    {
-      key: 2,
-      name: 'Spiderman',
-      price: 10.99,
-    },
-    {
-      key: 3,
-      name: 'that one cat game',
-      price: 10.99,
-    },
-    {
-      key: 4,
-      name: 'elder scrolls',
-      price: 10.99,
-    },
-    {
-      key: 5,
-      name: 'fallout',
-      price: 10.99,
-    },
-    {
-      key: 6,
-      name: 'Spiderman2',
-      price: 10.99,
-    },
+    { id: 1, name: 'Elden Ring', price: 10.99, quantity: 2 },
+    { id: 2, name: 'Dark Souls', price: 10.99, quantity: 2 },
+    { id: 3, name: 'Diablo II', price: 10.99, quantity: 2 }
   ];
+
+  const navigate = useNavigate();
 
   //   const dispatch = useDispatch();
   //   const cartProducts = useSelector(selectCartProducts); //! IMPORT FROM REDUX
@@ -42,7 +23,17 @@ const ShoppingCart = () => {
   //     dispatch(fetchCartProductsAsync()); //! IMPORT FROM REDUX
   //   }, []);
 
-  const handleCheckout = () => {};
+  const handleCheckout = async () => {
+    await axios
+      .post('/api/checkout', {
+        body: JSON.stringify({ cartProducts })
+      })
+      .then((response) => {
+        if (response.url) {
+          window.location.assign(response.url); // Forwarding user to Stripe
+        }
+      });
+  };
 
   return (
     <Container>
@@ -51,12 +42,14 @@ const ShoppingCart = () => {
           <div className="cartDiv">
             {cartProducts.length > 0
               ? cartProducts.map((product) => {
-                return (
-                  <div key={product.key}>
-                    <h3> {product.name}</h3>
-                    <p> {product.price}</p>
-                  </div>
-                );
+                  return (
+                    <div key={product.id}>
+                      <h3>{product.name}</h3>
+                      <p>Price: {product.price}</p>
+                      <p>Quantity: {product.quantity}</p>
+                      <button>Remove from Cart</button>
+                    </div>
+                  );
                 })
               : 'There is nothing in your cart'}
             <div></div>
@@ -67,7 +60,7 @@ const ShoppingCart = () => {
             <div className="cartTitle">
               <h2>
                 Order Summary <br />
-                <h4>{`Subtotal: (${cartProducts.length}items)`}</h4>
+                {`Subtotal: (${cartProducts.length}items)`}
               </h2>
               <hr />
               <h2></h2>

@@ -2,31 +2,28 @@ const router = require('express').Router();
 require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 
-router.post('/', async (req, res, next) => {
-  try {
-    const cart = req.body.cart;
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      mode: 'payment',
-      line_items: cart.lineitems.map((item) => {
-        return {
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: item.events[0].name
-            },
-            unit_amount: Math.floor(item.events[0].price * 100)
-          },
-          quantity: item.qty
-        };
-      }),
-      success_url: `${process.env.PAGE_URL}/success`,
-      cancel_url: `${process.env.PAGE_URL}/canceled`
+router.post('/checkout', async (req, res) => {
+  const items = req.body.cartProducts;
+  let lineItems = [];
+  items.forEach((item) => {
+    lineItems.push({
+      price: item.id,
+      quantity: item.quantity
     });
-    res.json({ url: session.url });
-  } catch (err) {
-    next(err);
-  }
+  });
+
+  const session = await stripe.checkout.sessions.create({
+    line_items: lineItems,
+    mode: 'payment',
+    success_url: 'http://localhost:3000/success',
+    cancel_url: 'http://localhost:3000/cancel'
+  });
+
+  res.send(
+    JSON.stringify({
+      url: session.url
+    })
+  );
 });
 
 module.exports = router;
