@@ -28,7 +28,7 @@ const Wishlist = () => {
           {wishlist.length ? wishlist.map((item) => {
               return (
                 
-                  <div className="productCard product">
+                  <div className="productCard">
                     {item.name}
                     {item.price}
                   </div>

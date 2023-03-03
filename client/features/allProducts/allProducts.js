@@ -28,7 +28,7 @@ const AllProducts = () => {
     dispatch(fetchAllProductsAsync());
   }, []);
   return (
-    <div className="allProducts">
+    <div className="changingBody">
       <div>
         <div className="cartButton">
           <Link to={`/api/cart`}>Cart</Link>
@@ -48,7 +48,7 @@ const AllProducts = () => {
         </ul>
       </div>
       <h1>Products:</h1>
-      <div className='products'>
+      <div className='productCard'>
         {
           !filtered[0] && search[0] === '' ?
             products.map(product => (
