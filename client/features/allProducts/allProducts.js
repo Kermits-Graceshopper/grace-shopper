@@ -16,7 +16,7 @@ const AllProducts = () => {
     if (selectedCategory === '') {
       setFiltered(products)
     } else {
-      const filtered = products.filter((product) => product.platform === selectedCategory);
+      const filtered = products.filter((product) => product.category === selectedCategory);
       console.log('directly after.filter()', 'filtered: ', filtered)
       setFiltered(filtered);
     }
@@ -56,7 +56,7 @@ const AllProducts = () => {
                 <h1>{product.name}</h1>
                 <img className='productImage' src={product.imageUrl} />
                 <h3>{product.price}</h3>
-                <h5>Category: {product.platform}</h5>
+                <h5>Category: {product.category}</h5>
                 <p>{product.description}</p>
               </div>
             )) :
@@ -66,7 +66,7 @@ const AllProducts = () => {
                   <h1>{product.name}</h1>
                   <img className='productImage' src={product.imageUrl} />
                   <h3>{product.price}</h3>
-                  <h5>Category: {product.platform}</h5>
+                  <h5>Category: {product.category}</h5>
                   <p>{product.description}</p>
                 </div>
               )) :
@@ -76,7 +76,7 @@ const AllProducts = () => {
                     <h1>{product.name}</h1>
                     <img className='productImage' src={product.imageUrl} />
                     <h3>{product.price}</h3>
-                    <h5>Category: {product.platform}</h5>
+                    <h5>Category: {product.category}</h5>
                     <p>{product.description}</p>
                   </div>
                   : null

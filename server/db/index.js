@@ -1,17 +1,14 @@
 const db = require("./db");
-const { Users, Products, Orders, Reviews, Categories, UserAddresses, Cart, } = require("./models");
-// const seed = require("../../script/seed");
+const { Users, Products, Orders, Reviews, UserAddresses } = require("./models");
 const {
-  seed,
   products,
-  categories,
-  // users,
-  // reviews,
-  // cart,
-  // addresses,
-  // cart,
-  // orders
-} = require('../../script/seed')
+  users,
+  reviews,
+  addresses,
+  orders
+} = require('../../script/seed');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const syncDb = async () => {
   try {
@@ -21,15 +18,49 @@ const syncDb = async () => {
         name: product.name,
         description: product.description,
         price: product.price,
-        platform: product.platform
+        category: product.category
       })
     })
-    categories.map(cat => {
-      Categories.create({
-        name: cat.name
+    users.map(user => {
+      Users.create({
+        fullName: user.fullName,
+        fname: user.fname,
+        lname: user.lname,
+        email: user.email,
+        password: bcrypt.hash(user.password),
+        refreshToken: jwt.sign({ email: user.email }, process.env.REFRESH_TOKEN_SECRET),
+        isAdmin: user.isAdmin,
+        isLoggedIn: user.isLoggedIn
+      })
+    });
+    reviews.map(review => {
+      Reviews.create({
+        rating: review.rating,
+        comment: review.comment,
+        userId: review.userId,
+        productId: review.productId
+      })
+    });
+    addresses.map(add => {
+      UserAddresses.create({
+        streetAddress: add.streetAddress,
+        city: add.city,
+        state: add.state,
+        zip: add.zip,
+        userId: add.userId
+      })
+    });
+    orders.map(order => {
+      Orders.create({
+        date: order.date,
+        quantity: order.quantity,
+        isCompleted: order.isCompleted,
+        isWishList: order.isWishList,
+        userId: order.userId,
+        productId: order.productId
       })
     })
-    console.log("SUCCESS, db has been synced");
+    console.log("SUCCESS, db has been synced and seeded");
     
   } catch (e) {
     console.log("ERROR IN CATCH OF syncDb FUNCTION: ", e);
@@ -43,7 +74,5 @@ module.exports = {
     Products,
     Orders,
     Reviews,
-    Categories,
     UserAddresses,
-    Cart
 };
