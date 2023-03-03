@@ -1,33 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {
-  selectProducts,
-  fetchAllProductsAsync
-} from '.../app/reducers/allProductsSlice';
-import Navbar from '../navbar/Navbar';
-import Footer from '../footer/Footer';
-import Product from './product';
-// import SpecializedNavbar from //! import later
+import { selectAllProducts, fetchAllProductsAsync } from '../../app/reducers/allProductsSlice';
+import { selectSearchState } from '../../app/reducers/searchSlice';
 
 const AllProducts = () => {
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const products = useSelector(selectAllProducts);
+  const [filtered, setFiltered] = useState(products);
 
   const dispatch = useDispatch();
-  const products = useSelector(selectProducts);
+  const search = useSelector(selectSearchState);
 
   useEffect(() => {
+    if (selectedCategory === '') {
+      setFiltered(products)
+    } else {
+      const filtered = products.filter((product) => product.category === selectedCategory);
+      console.log('directly after.filter()', 'filtered: ', filtered)
+      setFiltered(filtered);
+    }
+  }, [selectedCategory])
+  useEffect(() => {
+    if (selectedCategory === '') {
+      setFiltered(products)
+    }
     dispatch(fetchAllProductsAsync());
   }, []);
-
   return (
     <div className="allProducts">
       <div>
-        <Navbar />
         <div className="cartButton">
           <Link to={`/api/cart`}>Cart</Link>
         </div>
-        {/* <SpecializedNavbar /> */} //! uncomment later
+        <select defaultValue='' onChange={(e) => setSelectedCategory(e.target.value)}>
+          <option value=''>All</option>
+          <option value='XBOX'>XBOX</option>
+          <option value='PS5'>PS5</option>
+          <option value='Nintendo'>Nintendo</option>
+        </select>
       </div>
       <div className="categoryFilters">
         <ul>
@@ -36,14 +47,43 @@ const AllProducts = () => {
           <li onClick={() => setSelectedCategory('Xbox')}>Xbox</li>
         </ul>
       </div>
-      <div className="productCardParent">
-        {selectedCategory
-          ? products
-              .filter((product) => product.categories.name === selectedCategory)
-              .map((product, i) => <Product product={product} key={i} />)
-          : products.map((product, i) => <Product product={product} key={i} />)}
+      <h1>Products:</h1>
+      <div>
+        {
+          !filtered[0] && search[0] === '' ?
+            products.map(product => (
+              <div>
+                <h1>{product.name}</h1>
+                <img className='productImage' src={product.imageUrl} />
+                <h3>{product.price}</h3>
+                <h5>Category: {product.category}</h5>
+                <p>{product.description}</p>
+              </div>
+            )) :
+            filtered && products && search[0] === '' ?
+              filtered.map(product => (
+                <div>
+                  <h1>{product.name}</h1>
+                  <img className='productImage' src={product.imageUrl} />
+                  <h3>{product.price}</h3>
+                  <h5>Category: {product.category}</h5>
+                  <p>{product.description}</p>
+                </div>
+              )) :
+              products && search !== '' ? products.map(product => (
+                product.name.includes(search[0]) ?
+                  <div>
+                    <h1>{product.name}</h1>
+                    <img className='productImage' src={product.imageUrl} />
+                    <h3>{product.price}</h3>
+                    <h5>Category: {product.category}</h5>
+                    <p>{product.description}</p>
+                  </div>
+                  : null
+              ))
+                : null
+        }
       </div>
-      <Footer />
     </div>
   );
 };

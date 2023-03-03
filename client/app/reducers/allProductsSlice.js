@@ -26,7 +26,10 @@ const allProductsSlice = createSlice({
   }
 });
 
-export const selectProducts = (state) => {
+// export const selectProducts = (state) => {
+//   return state.allProducts;
+// };
+export const selectAllProducts = (state) => {
   return state.allProducts;
 };
 

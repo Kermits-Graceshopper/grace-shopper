@@ -7,13 +7,14 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setCurrentUser: (state, action) => {
-            const { fullName, firstName, lastName, email, accessToken, role} = action.payload
+            const { fullName, firstName, lastName, email, accessToken, role, isLoggedIn} = action.payload
             state.fullName = fullName;
             state.firstName = firstName;
             state.lastName = lastName;
             state.email = email;
             state.accessToken = accessToken;
             state.role = role;
+            state.isLoggedIn = isLoggedIn;
         }
     }
 });

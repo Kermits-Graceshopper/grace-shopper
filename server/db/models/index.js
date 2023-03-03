@@ -10,9 +10,9 @@ const Cart = require('./cart');
 
 // define relationships here
 
-Categories.hasMany(Products)
+// Categories.hasMany(Products);
 
-Products.belongsTo(Categories)
+// Products.belongsTo(Categories)
 Products.hasMany(Cart)
 Products.hasMany(Orders)
 Products.hasMany(Reviews)

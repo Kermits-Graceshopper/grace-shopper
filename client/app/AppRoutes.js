@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 // import AuthForm from '../features/auth/AuthForm';
-import Login from '../features/auth/Login';
 import SignUp from '../features/auth/SignUp';
 import Home from '../features/home/Home';
 // import { me } from './store';
@@ -10,7 +9,10 @@ import CheckoutForm from '../features/checkout/CheckoutForm';
 import ShoppingCart from '../features/shoppingCart/ShoppingCart';
 import Wishlist from '../features/Wishlist/Wishlist';
 import Featured from '../features/Featured/Featured';
-// import ProductsTest from '../features/allProducts/ProductsTest'
+
+import Login from '../features/auth/Login';
+import AllProducts from '../features/allProducts/allProducts';
+
 
 /**
  * COMPONENT
@@ -59,6 +61,10 @@ const AppRoutes = () => {
           <Route
             path="/api/featured"
             element={<Featured />}
+          />
+          <Route
+            path="/api/products"
+            element={<AllProducts />}
           />
         </Routes>
     </div>

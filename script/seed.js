@@ -6,39 +6,46 @@ const { Users, Products, Orders, UserAddresses, Categories, Cart, Reviews, WishL
 
 const users = [
   {
+    fullName: 'John Doe',
     email: 'user1@test.com',
     password: 'password123',
     fname: 'John',
     lname: 'Doe',
-    isAdmin: false,
+    roles: 'user',
+    isLoggedIn: false
   },
   {
+    fullName: 'Jane Doe',
     email: 'admin@test.com',
     password: '123password',
     fname: 'Jane',
     lname: 'Doe',
-    isAdmin: true,
+    roles: 'admin',
+    isLoggedIn: false
   },
 ];
 
 const products = [
   {
-    name: 'Product 1',
+    name: 'Call of Duty',
     description: 'This is product 1',
     price: 9.99,
     imageUrl: 'https://via.placeholder.com/150',
+    category: 'XBOX'
   },
   {
-    name: 'Product 2',
+    name: 'Capstone Game',
     description: 'This is product 2',
     price: 19.99,
     imageUrl: 'https://via.placeholder.com/150',
+    category: 'PS5'
   },
   {
-    name: 'Product 3',
+    name: 'Cap toss',
     description: 'This is product 3',
     price: 29.99,
     imageUrl: 'https://via.placeholder.com/150',
+    category: 'Nintendo'
   },
 ]
 
@@ -134,13 +141,13 @@ const reviews = [
 
 const categories = [
 {  name: 'PS5',
-  productId: 2
+  productId: 1
 },
 {  name: 'XBOX',
   productId: 2
 },
 {  name: 'Nintendo',
-  productId: 2
+  productId: 3
 },
 ]
 
@@ -211,4 +218,14 @@ if (module === require.main) {
 }
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
-module.exports = seed
+module.exports = {
+  seed,
+  products,
+  categories,
+  users,
+  reviews,
+  cart,
+  addresses,
+  cart,
+  orders
+}

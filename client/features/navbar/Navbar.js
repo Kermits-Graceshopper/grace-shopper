@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../app/store';
 import { MDBCol, MDBRow } from 'mdbreact';
 import Button from 'react-bootstrap/Button';
+import { addSearchQuery } from '../../app/reducers/searchSlice';
 
 const Navbar = () => {
+  const [searchInput, setSearchInput] = useState('')
   // const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -13,6 +15,10 @@ const Navbar = () => {
     dispatch(logout());
     navigate('/login');
   };
+
+  useEffect(() => {
+    dispatch(addSearchQuery(searchInput))
+  }, [searchInput])
 
   return (
     <div>
@@ -26,6 +32,8 @@ const Navbar = () => {
           <input
             className="form-control searchBar"
             type="text"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
             placeholder="Search"
             aria-label="Search"
           />
@@ -71,6 +79,15 @@ const Navbar = () => {
               >
                 Sign Up
               </Link>
+              <Link
+                style={{ textDecoration: 'none', color: 'white' }}
+                className="link"
+                to="/api/products"
+              >
+                All Products
+              </Link>
+            </div>
+
           </nav>
           <Link to="/api/cart">
             <img className="cart" src="/cart.png" />

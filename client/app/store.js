@@ -4,6 +4,7 @@ import authReducer from '../features/auth/authSlice';
 import allProductsReducer from './reducers/allProductsSlice';
 import singleProductReducer from './reducers/singleProductSlice';
 import currentUser from '../app/reducers/userSlice'
+import searchString from '../app/reducers/searchSlice';
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     allProducts: allProductsReducer,
     singleProduct: singleProductReducer,
     user: currentUser,
+    search: searchString,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
 });
