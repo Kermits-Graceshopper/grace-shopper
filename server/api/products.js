@@ -8,6 +8,7 @@ const Categories = require('../db/models/categories');
 router.get('/', async (req, res) => {
   try {
     const allProducts = await Products.findAll();
+    
     res.send(allProducts);
   } catch (e) {
     console.log(e);
