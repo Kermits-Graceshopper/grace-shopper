@@ -123,14 +123,6 @@ form div {
 .content-wrap{
   flex:1;
 }
-/* .allProducts{
-  padding: 0 0 50px 50px;
-  
-} */
-
-/* .changingBody{
-  padding: 50px 0 100px 100px;
-} */
 
 .products{
   display: flex;
@@ -142,4 +134,9 @@ form div {
 
 .welcomeSign{
   padding-top: 50px;
+  margin-left: 50px;
+}
+
+.bodyContent{
+  margin-left: 50px;
 }

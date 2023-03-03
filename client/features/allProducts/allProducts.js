@@ -29,60 +29,66 @@ const AllProducts = () => {
   }, []);
   return (
     <div className="changingBody">
-      <div>
-        <div className="cartButton">
-          <Link to={`/api/cart`}>Cart</Link>
+      <div className='bodyContent'>
+        <div>
+          <div className="cartButton">
+            <Link to={`/api/cart`}>Cart</Link>
+          </div>
+          <select
+            defaultValue=""
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            <option value="">All</option>
+            <option value="XBOX">XBOX</option>
+            <option value="PS5">PS5</option>
+            <option value="Nintendo">Nintendo</option>
+          </select>
         </div>
-        <select defaultValue='' onChange={(e) => setSelectedCategory(e.target.value)}>
-          <option value=''>All</option>
-          <option value='XBOX'>XBOX</option>
-          <option value='PS5'>PS5</option>
-          <option value='Nintendo'>Nintendo</option>
-        </select>
-      </div>
-      <div className="categoryFilters">
-        <ul>
-          <li onClick={() => setSelectedCategory('Nintendo')}>Nintendo</li>
-          <li onClick={() => setSelectedCategory('Microsoft')}>Playstation</li>
-          <li onClick={() => setSelectedCategory('Xbox')}>Xbox</li>
-        </ul>
-      </div>
-      <h1>Products:</h1>
-      <div className='productCard'>
-        {
-          !filtered[0] && search[0] === '' ?
-            products.map(product => (
-              <div className='product'>
-                <h1>{product.name}</h1>
-                <img className='productImage' src={product.imageUrl} />
-                <h3>{product.price}</h3>
-                <h5>Category: {product.platform}</h5>
-                <p>{product.description}</p>
-              </div>
-            )) :
-            filtered && products && search[0] === '' ?
-              filtered.map(product => (
-                <div>
+        <div className="categoryFilters">
+          <ul>
+            <li onClick={() => setSelectedCategory('Nintendo')}>Nintendo</li>
+            <li onClick={() => setSelectedCategory('Microsoft')}>
+              Playstation
+            </li>
+            <li onClick={() => setSelectedCategory('Xbox')}>Xbox</li>
+          </ul>
+        </div>
+        <h1>Products:</h1>
+        <div className="productContainer">
+          {!filtered[0] && search[0] === ''
+            ? products.map((product) => (
+                <div className="product" key={product.name}>
                   <h1>{product.name}</h1>
-                  <img className='productImage' src={product.imageUrl} />
+                  <img className="productImage" src={product.imageUrl} />
                   <h3>{product.price}</h3>
                   <h5>Category: {product.platform}</h5>
                   <p>{product.description}</p>
                 </div>
-              )) :
-              products && search !== '' ? products.map(product => (
-                product.name.includes(search[0]) ?
+              ))
+            : filtered && products && search[0] === ''
+            ? filtered.map((product) => (
+                <div>
+                  <h1>{product.name}</h1>
+                  <img className="productImage" src={product.imageUrl} />
+                  <h3>{product.price}</h3>
+                  <h5>Category: {product.platform}</h5>
+                  <p>{product.description}</p>
+                </div>
+              ))
+            : products && search !== ''
+            ? products.map((product) =>
+                product.name.includes(search[0]) ? (
                   <div>
                     <h1>{product.name}</h1>
-                    <img className='productImage' src={product.imageUrl} />
+                    <img className="productImage" src={product.imageUrl} />
                     <h3>{product.price}</h3>
                     <h5>Category: {product.platform}</h5>
                     <p>{product.description}</p>
                   </div>
-                  : null
-              ))
-                : null
-        }
+                ) : null
+              )
+            : null}
+        </div>
       </div>
     </div>
   );
