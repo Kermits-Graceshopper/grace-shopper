@@ -1,7 +1,5 @@
 const { Products } = require("../db/models");
 const router = require("express").Router();
-const Categories = require("../db/models/categories");
-// const apicalypse = require('apicalypse');
 const apicalypse = require("apicalypse").default;
 
 // all "/products" routes go here
