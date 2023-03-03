@@ -48,15 +48,22 @@ const Navbar = () => {
         <MDBCol md="2">
           <nav>
             {/* // isLoggedIn ?  */}
-
-            <div>
+            <div className="navButtons">
               {/* The navbar will show these links after you log in */}
-              <Link to="/home">Home</Link>
-              <button type="button" onClick={logoutAndRedirectHome}>
+              <button
+                className="Logout"
+                style={{
+                  textDecoration: 'none',
+                  color: 'white',
+                  border: 'none',
+                  backgroundColor: '#1b0b54',
+                }}
+                type="button"
+                onClick={logoutAndRedirectHome}
+              >
                 Logout
               </button>
             </div>
-            <div className="login">
               {/* The navbar will show these links before you log in */}
               <Link
                 style={{ textDecoration: 'none', color: 'white' }}
@@ -80,8 +87,11 @@ const Navbar = () => {
                 All Products
               </Link>
             </div>
+
           </nav>
-          <Link to="/api/cart"> Cart</Link>
+          <Link to="/api/cart">
+            <img className="cart" src="/cart.png" />
+          </Link>
         </MDBCol>
       </div>
     </div>
