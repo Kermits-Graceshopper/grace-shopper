@@ -5,14 +5,14 @@ import { Route, Routes } from 'react-router-dom';
 import SignUp from '../features/auth/SignUp';
 import Home from '../features/home/Home';
 // import { me } from './store';
-import CheckoutForm from '../features/checkout/CheckoutForm';
 import ShoppingCart from '../features/shoppingCart/ShoppingCart';
 import Wishlist from '../features/Wishlist/Wishlist';
 import Featured from '../features/Featured/Featured';
 // import ProductsTest from '../features/allProducts/ProductsTest'
 import Login from '../features/auth/Login';
 import AllProducts from '../features/allProducts/allProducts';
-
+import CheckoutSuccess from '../features/checkout/CheckoutSuccess';
+import CheckoutCanceled from '../features/checkout/CheckoutCanceled';
 
 /**
  * COMPONENT
@@ -29,44 +29,24 @@ const AppRoutes = () => {
   return (
     <div>
       {/* // isLoggedIn ?  */}
-        <Routes>
-          <Route path="/*" element={<Home />} />
-          <Route to="/home" element={<Home />} />
-        </Routes>
-        <Routes>
-          {/* <Route
+      <Routes>
+        <Route path="/*" element={<Home />} />
+        <Route to="/home" element={<Home />} />
+      </Routes>
+      <Routes>
+        {/* <Route
             path="/*"
             element={<AuthForm name="login" displayName="Login" />}
           /> */}
-          <Route
-            path="/login"
-            element={<Login />}
-          />
-          <Route
-            path="/signup"
-            element={<SignUp />}
-          />
-          <Route
-            path="/cart"
-            element={<ShoppingCart />}
-          />
-         <Route
-            path="/checkout"
-            element={<CheckoutForm />}
-          />
-          <Route
-            path="/wishlist"
-            element={<Wishlist />}
-          />
-          <Route
-            path="/featured"
-            element={<Featured />}
-          />
-          <Route
-            path="/products"
-            element={<AllProducts />}
-          />
-        </Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/cart" element={<ShoppingCart />} />
+        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/featured" element={<Featured />} />
+        <Route path="/products" element={<AllProducts />} />
+        <Route path="/success" element={<CheckoutSuccess />} />
+        <Route path="/canceled" element={<CheckoutCanceled />} />
+      </Routes>
     </div>
   );
 };
