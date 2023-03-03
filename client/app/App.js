@@ -12,7 +12,10 @@ const App = () => {
       <div className="content-wrap">
         <Navbar />
         <SpecializedNavbar />
-        <AppRoutes />
+        <div className='changingBody'>
+          <AppRoutes />
+        </div>
+
         <br />
         <br />
         <br />

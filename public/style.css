@@ -127,3 +127,10 @@ form div {
 .content-wrap{
   flex:1;
 }
+.allProducts{
+  padding: 0 0 50px 50px;
+}
+
+.changingBody{
+  padding: 0 0 50px 50px;
+}

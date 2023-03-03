@@ -6,8 +6,8 @@ import Col from 'react-bootstrap/Col';
 const Footer = () => {
   return (
     <div className="main-footer">
-      <img style={{leftMargin: '10px', margin: 'auto', display: 'block', width: '200px'}} src='/logo.png'/>
-      <Row>
+      <img style={{ margin: 'auto', display: 'block', width: '200px'}} src='/logo.png'/>
+      <Row className='main'>
         <Col>
           <h1>About Us</h1>
           <ul className="list-unstyled">
