@@ -10,30 +10,23 @@ router.get("/", async (req, res) => {
 
     // const requestOptions = {
     //   queryMethod: "url",
-    //   method: "get", // The default is `get`
+    //   method: "get",
     //   baseURL: "https://api.igdb.com/v4",
     //   headers: {
     //     Accept: "application/json",
-    //     Authorization: "Bearer 2xgejwyu5ixxxm9ywrp0do96e3hgyh",
+    //     Authorization: "Bearer xq93gjmuu4d3gmckti4k4ziqi632nw",
     //     "Client-ID": "cbp9b79dpahqpwj67jav97dtdnrbk6",
+    //     grant_type: "client_credentials",
+    //     client_secret: "8nq1gjsfylziqbjnlknfbt201pnslj"
     //   },
     //   responseType: "json",
     //   timeout: 1000, // 1 second timeout
     // };
 
     // const response = await apicalypse(requestOptions)
-    //   .fields([
-    //     "age_ratings",
-    //     "category",
-    //     "cover",
-    //     "first_release_date",
-    //     "genres",
-    //     "involved_companies",
-    //     "name",
-    //     "rating",
-    //   ])
+    //   .fields(['name'])
     //   // .query('category')
-    //   // .request('/games')
+    //   .request('/games')
     //   .limit(10);
     // res.json(response.data);
 
@@ -67,6 +60,21 @@ router.get("/:productId", (req, res) => {
       },
     });
     res.send(product);
+  } catch(e){
+    console.log(e);
+  }
+})
+
+
+router.delete("/:productId", async (req, res) => {
+  try {
+    await Products.destroy({
+      where: {
+        id: req.params.productId
+      }
+    });
+    const allProducts = await Products.findAll()
+    res.send(allProducts);
   } catch(e){
     console.log(e);
   }

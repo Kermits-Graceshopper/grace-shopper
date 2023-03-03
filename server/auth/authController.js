@@ -49,14 +49,14 @@ const handleLogin = async (req, res) => {
             //     JSON.stringify(usersDB.users)
             // );
             await foundUser.save();
-            const role = foundUser.role;
+            const isAdmin = foundUser.isAdmin;
             const fullName = foundUser.fullName;
             const firstName = foundUser.fname;
             const lastName = foundUser.lname;
             const email = foundUser.email;
             const isLoggedIn = foundUser.isLoggedIn
             res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 24 * 60 * 60 * 1000 });
-            res.json({ accessToken, fullName, firstName, lastName, email, refreshToken, role, isLoggedIn });
+            res.json({ accessToken, fullName, firstName, lastName, email, refreshToken, isAdmin, isLoggedIn });
         } else {
             console.log('handleLogin function, INSIDE TRY, IN ELSE STATEMENT');
             res.sendStatus(401);

@@ -55,7 +55,7 @@ const handleNewUser = async (req, res) => {
             email: userCreated.email,
             accessToken: accessToken,
             refreshToken: refreshToken,
-            role: userCreated.role,
+            isAdmin: userCreated.isAdmin,
             isLoggedIn: true
         })
     } catch (err) {

@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { selectAllProducts, fetchAllProductsAsync } from '../../app/reducers/allProductsSlice';
 import { selectSearchState } from '../../app/reducers/searchSlice';
+import { selectUser } from '../../app/reducers/userSlice';
+import axios from '../api/axios';
 
 const AllProducts = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -11,13 +13,14 @@ const AllProducts = () => {
 
   const dispatch = useDispatch();
   const search = useSelector(selectSearchState);
+  const currUser = useSelector(selectUser);
+  console.log(currUser);
 
   useEffect(() => {
     if (selectedCategory === '') {
       setFiltered(products)
     } else {
       const filtered = products.filter((product) => product.category === selectedCategory);
-      console.log('directly after.filter()', 'filtered: ', filtered)
       setFiltered(filtered);
     }
   }, [selectedCategory])
@@ -53,6 +56,17 @@ const AllProducts = () => {
           !filtered[0] && search[0] === '' ?
             products.map(product => (
               <div>
+                {
+                currUser.isAdmin ? 
+                <button type='submit' onClick={async (e) => {
+                  e.preventDefault();
+                  await axios.delete(`/api/products/${product.id}`)
+                  .then(res => {
+                    dispatch(fetchAllProductsAsync())
+                    
+                  });
+                }}>X</button> : null
+              }
                 <h1>{product.name}</h1>
                 <img className='productImage' src={product.imageUrl} />
                 <h3>{product.price}</h3>
