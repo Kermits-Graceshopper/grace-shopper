@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 const SpecializedNavbar = () => {
   return (
       <div className='specializedNavbar'>
-          <Link to="/api/wishlist" className='specItem'>
+          <Link to="/wishlist" className='specItem'>
               Wishlist
           </Link>
-          <Link to="/api/featured" className='specItem'>
+          <Link to="/featured" className='specItem'>
               Featured
           </Link>
     </div>

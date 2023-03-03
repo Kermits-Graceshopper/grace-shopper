@@ -39,31 +39,31 @@ const AppRoutes = () => {
             element={<AuthForm name="login" displayName="Login" />}
           /> */}
           <Route
-            path="/api/login"
+            path="/login"
             element={<Login />}
           />
           <Route
-            path="/api/signup"
+            path="/signup"
             element={<SignUp />}
           />
           <Route
-            path="/api/cart"
+            path="/cart"
             element={<ShoppingCart />}
           />
          <Route
-            path="/api/checkout"
+            path="/checkout"
             element={<CheckoutForm />}
           />
           <Route
-            path="/api/wishlist"
+            path="/wishlist"
             element={<Wishlist />}
           />
           <Route
-            path="/api/featured"
+            path="/featured"
             element={<Featured />}
           />
           <Route
-            path="/api/products"
+            path="/products"
             element={<AllProducts />}
           />
         </Routes>

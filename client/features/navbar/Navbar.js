@@ -69,28 +69,28 @@ const Navbar = () => {
               <Link
                 style={{ textDecoration: 'none', color: 'white' }}
                 className="link"
-                to="/api/login"
+                to="/login"
               >
                 Login
               </Link>
               <Link
                 style={{ textDecoration: 'none', color: 'white' }}
                 className="link"
-                to="/api/signup"
+                to="/signup"
               >
                 Sign Up
               </Link>
               <Link
                 style={{ textDecoration: 'none', color: 'white' }}
                 className="link"
-                to="/api/products"
+                to="/products"
               >
                 All Products
               </Link>
             </div>
 
           </nav>
-          <Link to="/api/cart">
+          <Link to="/cart">
             <img className="cart" src="/cart.png" />
           </Link>
         </MDBCol>
