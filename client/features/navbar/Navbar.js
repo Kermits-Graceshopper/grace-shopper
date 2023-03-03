@@ -64,6 +64,7 @@ const Navbar = () => {
                 Logout
               </button>
             </div>
+            <div>
               {/* The navbar will show these links before you log in */}
               <Link
                 style={{ textDecoration: 'none', color: 'white' }}

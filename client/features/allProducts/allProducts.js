@@ -56,7 +56,7 @@ const AllProducts = () => {
                 <h1>{product.name}</h1>
                 <img className='productImage' src={product.imageUrl} />
                 <h3>{product.price}</h3>
-                <h5>Category: {product.category}</h5>
+                <h5>Category: {product.platform}</h5>
                 <p>{product.description}</p>
               </div>
             )) :
@@ -66,7 +66,7 @@ const AllProducts = () => {
                   <h1>{product.name}</h1>
                   <img className='productImage' src={product.imageUrl} />
                   <h3>{product.price}</h3>
-                  <h5>Category: {product.category}</h5>
+                  <h5>Category: {product.platform}</h5>
                   <p>{product.description}</p>
                 </div>
               )) :
@@ -76,7 +76,7 @@ const AllProducts = () => {
                     <h1>{product.name}</h1>
                     <img className='productImage' src={product.imageUrl} />
                     <h3>{product.price}</h3>
-                    <h5>Category: {product.category}</h5>
+                    <h5>Category: {product.platform}</h5>
                     <p>{product.description}</p>
                   </div>
                   : null
