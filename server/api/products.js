@@ -10,34 +10,34 @@ router.get("/", async (req, res) => {
   try {
     // first get api data
 
-    const requestOptions = {
-      queryMethod: "url",
-      method: "get", // The default is `get`
-      baseURL: "https://api.igdb.com/v4",
-      headers: {
-        Accept: "application/json",
-        Authorization: "Bearer 2xgejwyu5ixxxm9ywrp0do96e3hgyh",
-        "Client-ID": "cbp9b79dpahqpwj67jav97dtdnrbk6",
-      },
-      responseType: "json",
-      timeout: 1000, // 1 second timeout
-    };
+    // const requestOptions = {
+    //   queryMethod: "url",
+    //   method: "get", // The default is `get`
+    //   baseURL: "https://api.igdb.com/v4",
+    //   headers: {
+    //     Accept: "application/json",
+    //     Authorization: "Bearer 2xgejwyu5ixxxm9ywrp0do96e3hgyh",
+    //     "Client-ID": "cbp9b79dpahqpwj67jav97dtdnrbk6",
+    //   },
+    //   responseType: "json",
+    //   timeout: 1000, // 1 second timeout
+    // };
 
-    const response = await apicalypse(requestOptions)
-      .fields([
-        "age_ratings",
-        "category",
-        "cover",
-        "first_release_date",
-        "genres",
-        "involved_companies",
-        "name",
-        "rating",
-      ])\
-      // .query('category')
-      // .request('/games')
-      .limit(10);
-    res.json(response.data);
+    // const response = await apicalypse(requestOptions)
+    //   .fields([
+    //     "age_ratings",
+    //     "category",
+    //     "cover",
+    //     "first_release_date",
+    //     "genres",
+    //     "involved_companies",
+    //     "name",
+    //     "rating",
+    //   ])
+    //   // .query('category')
+    //   // .request('/games')
+    //   .limit(10);
+    // res.json(response.data);
 
     // const response = await apicalypse(requestOptions)
     // .fields(
@@ -53,9 +53,7 @@ router.get("/", async (req, res) => {
 
     // return the data to be mapped over in component to be displayed
 
-    const allProducts = await Products.findAll({
-      include: Categories,
-    });
+    const allProducts = await Products.findAll();
     res.send(allProducts);
   } catch(e){
     console.log(e);
