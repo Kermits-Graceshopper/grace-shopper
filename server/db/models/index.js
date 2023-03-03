@@ -3,49 +3,43 @@ const Products = require('./products');
 const Reviews = require('./reviews');
 const Orders = require('./orders');
 const Categories = require('./categories');
-const WishLists = require('./wishList');
 const UserAddresses = require('./userAddress');
 const Cart = require('./cart');
-const UserPayments = require('./userPaymentDetails');
 
 // import all models
 
 // define relationships here
-UserAddresses.hasMany(Users); //! Can have multiple users that live together
-Users.hasOne(UserAddresses);
 
-Users.hasOne(Cart);
-Cart.hasOne(Users);
+// Categories.hasMany(Products);
 
-Cart.hasMany(Products);
-Products.hasOne(Cart);
+// Products.belongsTo(Categories)
+Products.hasMany(Cart)
+Products.hasMany(Orders)
+Products.hasMany(Reviews)
 
-WishLists.hasOne(Users);
-Users.hasOne(WishLists);
+Users.hasOne(Cart)
+Users.hasMany(Orders)
+Users.belongsTo(UserAddresses);
+Users.hasMany(Reviews)
 
-WishLists.hasMany(Products);
-Products.hasOne(WishLists);
+UserAddresses.hasMany(Users);
 
-Users.hasMany(Orders);
-Orders.hasOne(Users);
+Cart.belongsTo(Users)
+Cart.belongsTo(Products)
 
-Users.hasMany(Reviews);
-Reviews.hasOne(Users);
+Orders.belongsTo(Users)
+Orders.belongsTo(Products)
 
-Reviews.hasOne(Products);
-Products.hasMany(Reviews);
+Reviews.belongsTo(Users)
+Reviews.belongsTo(Products)
 
-Orders.hasMany(Products);
-Products.hasOne(Orders);
-
-Products.hasOne(Categories);
-Categories.hasOne(Products);
-
-//!UserPaymentDetails
 
 module.exports = {
   Users,
   Products,
   Reviews,
-  Orders
+  Orders,
+  Categories,
+  UserAddresses,
+  Cart,
 }

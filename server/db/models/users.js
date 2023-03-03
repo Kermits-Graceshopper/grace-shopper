@@ -1,41 +1,49 @@
-const db = require('../db')
-const Sequelize = require('sequelize');
+const db = require("../db");
+const Sequelize = require("sequelize");
 
-const Users = db.define('user', {
-    fname: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: true,
-        }
+const Users = db.define("user", {
+  fullName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  fname: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  lname: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  email: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: true,
+    validate: {
+      notEmpty: true,
+      isEmail: true,
     },
-    lname: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: true,
-        }
+  },
+  password: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
     },
-    email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-            notEmpty: true,
-            isEmail: true
-        }
-    },
-    password: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: true
-        }
-    },
-    refreshToken: {
-        type: Sequelize.TEXT,
-        allowNull: true
-    }
+  },
+  refreshToken: {
+    type: Sequelize.TEXT,
+    allowNull: true,
+  },
+  // role: {
+  //   type: Sequelize.ENUM('user', 'admin'),
+  //   allowNull: false,
+  //   defaultValue: 'user'
+  // },
+  isLoggedIn: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  }
 });
 
-module.exports = Users
+module.exports = Users;

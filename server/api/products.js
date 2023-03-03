@@ -62,6 +62,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+
 router.get("/:productId", (req, res) => {
   try {
     const product = Products.findOne({

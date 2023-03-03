@@ -1,7 +1,15 @@
 body {
   font-family: sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
-
+.cart{
+  height: 50px;
+  width: 50px;
+  position: relative;
+  left: 200px;
+}
 a {
   text-decoration: none;
 }
@@ -18,4 +26,91 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.navButtons{
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  width: 200px;
+  text-decoration: none;
+  z-index: 1;
+}
+
+.navbar{
+  background-color: #1b0b54;
+  color: white;
+  overflow: hidden;
+}
+
+.search{
+  position: relative;
+  right: 10px;
+  z-index: 1;
+}
+
+.specializedNavbar{
+  color: white;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #537FE7
+}
+
+.specItem{
+  color: white;
+  text-decoration: none;
+}
+.logo{
+  width: 150px;
+  height: auto;
+}
+
+.footer{
+  margin-top: auto;
+}
+
+.cartDiv{
+  width: 800px;
+  height: 1000px;
+  background-color: white;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  padding: 40px;
+  margin-bottom: 100px;
+}
+
+
+.mainArea{
+  background-color:#eaeded;
+}
+
+.cartTitle{
+  display: flex;
+  justify-content: space-between;
+}
+
+.productCard{
+  background-color: white;
+  width: 400px;
+  height: 400px;
+  margin: 10px;
+}
+
+.productContainer{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.checkoutSidebar{
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: white;
+  width: 300px;
+  height: 224px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+.productImage {
+  height: 10vh;
 }

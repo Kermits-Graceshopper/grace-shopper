@@ -1,12 +1,11 @@
 const router = require('express').Router()
-const { models: { User }} = require('../db')
-module.exports = router
+const { Users } = require('../db')
 
-// "/users" will already be mounted on this router so "/" here will really be "/users"
 
-router.get('/', async (req, res, next) => {
+
+router.get('/users', async (req, res, next) => {
   try {
-    const users = await User.findAll({
+    const users = await Users.findAll({
       // explicitly select only the id and username fields - even though
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
@@ -17,3 +16,4 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+module.exports = router

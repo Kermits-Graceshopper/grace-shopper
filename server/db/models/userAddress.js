@@ -1,6 +1,5 @@
 const db = require('../db');
 const Sequelize = require('sequelize');
-const Users = require('./users');
 
 const UserAddresses = db.define('userAddress', {
   streetAddress: {
@@ -36,14 +35,6 @@ const UserAddresses = db.define('userAddress', {
       notEmpty: true
     }
   },
-  userId: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    references: {
-      model: Users,
-      key: 'id'
-    }
-  }
 });
 
 module.exports = UserAddresses;
