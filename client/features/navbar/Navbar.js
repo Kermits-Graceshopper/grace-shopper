@@ -34,7 +34,7 @@ const Navbar = () => {
             type="text"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
-            placeholder="Search"
+            placeholder="Search for a title..."
             aria-label="Search"
           />
         </MDBCol>

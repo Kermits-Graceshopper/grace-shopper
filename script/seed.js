@@ -31,21 +31,21 @@ const products = [
     description: 'This is product 1',
     price: 9.99,
     imageUrl: 'https://via.placeholder.com/150',
-    category: 'XBOX'
+    platform: 'XBOX'
   },
   {
     name: 'Capstone Game',
     description: 'This is product 2',
     price: 19.99,
     imageUrl: 'https://via.placeholder.com/150',
-    category: 'PS5'
+    platform: 'PS5'
   },
   {
     name: 'Cap toss',
     description: 'This is product 3',
     price: 29.99,
     imageUrl: 'https://via.placeholder.com/150',
-    category: 'Nintendo'
+    platform: 'Nintendo'
   },
 ]
 

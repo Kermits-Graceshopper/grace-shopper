@@ -34,11 +34,11 @@ const Users = db.define("user", {
     type: Sequelize.TEXT,
     allowNull: true,
   },
-  role: {
-    type: Sequelize.ENUM('user', 'admin'),
-    allowNull: false,
-    defaultValue: 'user'
-  },
+  // role: {
+  //   type: Sequelize.ENUM('user', 'admin'),
+  //   allowNull: false,
+  //   defaultValue: 'user'
+  // },
   isLoggedIn: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
