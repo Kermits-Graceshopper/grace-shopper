@@ -22,22 +22,24 @@ const Wishlist = () => {
         }
     ]
   return (
-      <div className='changingBody'>
-          <h1> Wishlist</h1>
-          <div className='productContainer'>
-          {wishlist.length ? wishlist.map((item) => {
-              return (
-                
-                  <div className="productCard product">
+    <div className="changingBody">
+      <div className="bodyContent">
+        <h1> Wishlist</h1>
+        <div className="productContainer">
+          {wishlist.length
+            ? wishlist.map((item) => {
+                return (
+                  <div className="productCard" key={item.name}>
                     {item.name}
                     {item.price}
                   </div>
-    
-              );
-          }): 'nope'}
-          </div>
+                );
+              })
+            : 'nope'}
+        </div>
       </div>
-  )
+    </div>
+  );
 }
 
 export default Wishlist

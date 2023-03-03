@@ -45,46 +45,51 @@ const ShoppingCart = () => {
   const handleCheckout = () => {};
 
   return (
-    <Container fluid className='productContainer'>
-      <Row>
-        <Col>
-          <div className="cartDiv">
-            {cartProducts.length > 0
-              ? cartProducts.map((product) => {
-                return (
-                  <div key={product.key}>
-                    <h3> {product.name}</h3>
-                    <p> {product.price}</p>
-                  </div>
-                );
-                })
-              : 'There is nothing in your cart'}
-            <div></div>
-          </div>
-        </Col>
-        <Col>
-          <div className="checkoutSidebar">
-            <div className="cartTitle">
-              <h2>
-                Order Summary <br />
-                <h4>{`Subtotal: (${cartProducts.length}items)`}</h4>
-              </h2>
-              <hr />
-              <h2></h2>
+    <div className="changingBody">
+      <div className='bodyContent'>
+        <h1> Cart</h1>
+        <div className="productContainer">
+          <div>
+            <div>
+              <div>
+                {cartProducts.length > 0
+                  ? cartProducts.map((product) => {
+                      return (
+                        <div key={product.key}>
+                          <h3> {product.name}</h3>
+                          <p> {product.price}</p>
+                        </div>
+                      );
+                    })
+                  : 'There is nothing in your cart'}
+                <div></div>
+              </div>
             </div>
-            <hr />
-            <Button
-              className="coButton"
-              variant="primary"
-              size="lg"
-              onClick={handleCheckout}
-            >
-              Proceed to checkout
-            </Button>
+            <div>
+              <div>
+                <div className="cartTitle">
+                  <h2>
+                    Order Summary <br />
+                    <div>{`Subtotal: (${cartProducts.length}items)`}</div>
+                  </h2>
+                  <hr />
+                  <h2></h2>
+                </div>
+                <hr />
+                <Button
+                  className="coButton"
+                  variant="primary"
+                  size="lg"
+                  onClick={handleCheckout}
+                >
+                  Proceed to checkout
+                </Button>
+              </div>
+            </div>
           </div>
-        </Col>
-      </Row>
-    </Container>
+        </div>
+      </div>
+    </div>
   );
 };
 

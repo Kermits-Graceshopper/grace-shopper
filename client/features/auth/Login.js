@@ -73,7 +73,7 @@ const Login = () => {
     const isNotValid = !email && !password
 
     return (
-        <div>
+        <div className='bodyContent'>
             {
                 success ?
                     <div className='successfulLogin'>
