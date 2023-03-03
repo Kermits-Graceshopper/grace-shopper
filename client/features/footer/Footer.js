@@ -6,8 +6,11 @@ import Col from 'react-bootstrap/Col';
 const Footer = () => {
   return (
     <div className="main-footer">
-      <img style={{leftMargin: '10px', margin: 'auto', display: 'block', width: '200px'}} src='/logo.png'/>
-      <Row>
+      <img
+        style={{ margin: 'auto', display: 'block', width: '200px' }}
+        src="/logo-nobckgrnd.png"
+      />
+      <Row className="main">
         <Col>
           <h1>About Us</h1>
           <ul className="list-unstyled">
@@ -52,12 +55,12 @@ const Footer = () => {
           </ul>
         </Col>
       </Row>
-      <hr/>
+      <hr />
       <Row>
-        <p style={{textAlign: 'center'}} className='col-sm'>
-          &copy;{new Date().getFullYear()} GAMESHARE INC | All Rights Reserved | Terms of Service | Privacy
+        <p style={{ textAlign: 'center' }} className="col-sm">
+          &copy;{new Date().getFullYear()} GAMESHARE INC | All Rights Reserved |
+          Terms of Service | Privacy
         </p>
-
       </Row>
     </div>
   );

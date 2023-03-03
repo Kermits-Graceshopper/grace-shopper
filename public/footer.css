@@ -1,7 +1,7 @@
 .main-footer{
     color: white;
-    background-color: #1b0b54;
-    padding-top: .5em;
+    background-color: #2B3467;
+    padding-top: 1em;
     position: relative;
     bottom: 0;
     width: 100vw;
@@ -9,3 +9,13 @@
     padding-bottom: .5em;
 }
 
+.main{
+    padding-bottom: 3em;
+    padding-right: 1em;
+    padding-left: 1em;
+}
+
+li:not(:last-child) { 
+    /* adds space b/t list items */
+   margin-bottom: 10px;  
+}

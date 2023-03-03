@@ -25,7 +25,7 @@ const Navbar = () => {
       <div className="navbar">
         <MDBCol md="2">
           <Link to="/home">
-            <img src="/logo.png" className="logo" />
+            <img src="/logo-nobckgrnd.png" className="logo" />
           </Link>
         </MDBCol>
         <MDBCol md="7">
@@ -50,19 +50,6 @@ const Navbar = () => {
             {/* // isLoggedIn ?  */}
             <div className="navButtons">
               {/* The navbar will show these links after you log in */}
-              <button
-                className="Logout"
-                style={{
-                  textDecoration: 'none',
-                  color: 'white',
-                  border: 'none',
-                  backgroundColor: '#1b0b54',
-                }}
-                type="button"
-                onClick={logoutAndRedirectHome}
-              >
-                Logout
-              </button>
             </div>
             <div>
               {/* The navbar will show these links before you log in */}
@@ -80,19 +67,27 @@ const Navbar = () => {
               >
                 Sign Up
               </Link>
-              <Link
-                style={{ textDecoration: 'none', color: 'white' }}
-                className="link"
-                to="/products"
-              >
-                All Products
+              <Link to="/cart">
+                <img
+                  style={{ width: '30px', height: 'auto' }}
+                  src="/cart.png"
+                />
               </Link>
+              <button
+                className="Logout"
+                style={{
+                  textDecoration: 'none',
+                  color: 'white',
+                  border: 'none',
+                  backgroundColor: '#2B3467',
+                }}
+                type="button"
+                onClick={logoutAndRedirectHome}
+              >
+                Logout
+              </button>
             </div>
-
           </nav>
-          <Link to="/cart">
-            <img className="cart" src="/cart.png" />
-          </Link>
         </MDBCol>
       </div>
     </div>
