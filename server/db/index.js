@@ -27,7 +27,7 @@ const syncDb = async () => {
         fname: user.fname,
         lname: user.lname,
         email: user.email,
-        password: bcrypt.hash(user.password),
+        password: bcrypt.hash(user.password, 10).toString(),
         refreshToken: jwt.sign({ email: user.email }, process.env.REFRESH_TOKEN_SECRET),
         isAdmin: user.isAdmin,
         isLoggedIn: user.isLoggedIn

@@ -8,17 +8,27 @@ const UserAddresses = require('./userAddress');
 
 // define relationships here
 
-Products.hasMany(Orders)
+Products.hasMany(Orders, {
+  foreignKey: 'productId',
+  constraints: false
+})
 Products.hasMany(Reviews)
 
-Users.hasMany(Orders)
+Users.hasMany(Orders, {
+  foreignKey: 'userId',
+  constraints: false
+})
 Users.belongsTo(UserAddresses);
 Users.hasMany(Reviews)
 
 UserAddresses.hasMany(Users);
 
-Orders.belongsTo(Users)
-Orders.belongsTo(Products)
+Orders.belongsTo(Users, {
+  foreignKey: 'userId',
+  constraints: false
+})
+Orders.hasMany(Products)
+// Orders.belongsTo(Products)
 
 Reviews.belongsTo(Users)
 Reviews.belongsTo(Products)
