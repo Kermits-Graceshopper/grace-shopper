@@ -10,10 +10,15 @@ const Home = () => {
   const user = useSelector(selectUser);
   return (
     <div className="changingBody">
-      {user.firstName ? 
-      <h1>Welcome {user.firstName}!</h1>
-    :
-    <h1>Welcome! Be our guest.</h1>}
+      {user.firstName ? (
+        <h1>Welcome {user.firstName}!</h1>
+      ) : (
+        <h1>Welcome! Be our guest.</h1>
+      )}
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 };
