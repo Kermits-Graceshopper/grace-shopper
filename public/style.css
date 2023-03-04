@@ -35,7 +35,7 @@ form div {
 }
 
 .navbar{
-  background-color: #2B3467;
+  background-color: #000000;
   color: white;
   overflow: hidden;
   width: 100vw;
@@ -52,8 +52,9 @@ form div {
 .specializedNavbar{
   color: white;
   display: flex;
+  height: 30px;
   justify-content: space-evenly;
-  background-color: #EB455F;
+  background-color: red;
 }
 
 .specItem{
@@ -110,7 +111,7 @@ form div {
 }
 
 .footer{
-  height: 500px;
+  height: 10px;
 }
 
 .page-container{

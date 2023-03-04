@@ -111,7 +111,7 @@ const Login = () => {
                         </form>
                         <p>
                             Need an account? <br />
-                            <span><Link to='/api/signup'>Sign Up</Link></span>
+                            <span><Link to='/signup'>Sign Up</Link></span>
                         </p>
                     </div>
             }

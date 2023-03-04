@@ -15,11 +15,20 @@ const userSlice = createSlice({
             state.accessToken = accessToken;
             state.isAdmin = isAdmin;
             state.isLoggedIn = isLoggedIn;
+        },
+        logout: (state, action) => {
+            state.fullName = ''
+            state.firstName = ''
+            state.lastName = ''
+            state.email = ''
+            state.accessToken = ''
+            state.isAdmin = false
+            state.isLoggedIn = false
         }
     }
 });
 
 // export const selectUserRole = state => state.user.role;
 export const selectUser = state => state.user;
-export const { setCurrentUser } = userSlice.actions;
+export const { setCurrentUser, logout } = userSlice.actions;
 export default userSlice.reducer;

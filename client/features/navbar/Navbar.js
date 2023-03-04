@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { logout } from '../../app/store';
+// import { logout } from '../../app/store';
+import { logout } from '../../app/reducers/userSlice';
 import { MDBCol, MDBRow } from 'mdbreact';
 import Button from 'react-bootstrap/Button';
 import { addSearchQuery } from '../../app/reducers/searchSlice';
@@ -12,8 +13,10 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoggedIn = useSelector(selectUser).isLoggedIn;
+  const user = useSelector(selectUser)
   const logoutAndRedirectHome = () => {
     dispatch(logout());
+    console.log('user: ', user)
     navigate('/login');
   };
 
