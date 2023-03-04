@@ -58,7 +58,7 @@ const SignUp = () => {
     }, [email, password, confirmedPassword]);
 
     return (
-        <div>
+        <div className='bodyContent'>
             { success ? 
             <div>
                 <h1>Thanks for signing up!</h1>

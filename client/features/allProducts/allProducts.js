@@ -46,6 +46,7 @@ const AllProducts = () => {
                       console.log(updatedProducts)
                     }}>X</button> : null
                 }
+
                 <h1>{product.name}</h1>
                 <img className='productImage' src={product.imageUrl} />
                 <h3>{product.price}</h3>
@@ -113,7 +114,7 @@ const AllProducts = () => {
                       }}>X</button> : null
                   }
                   <h1>{product.name}</h1>
-                  <img className='productImage' src={product.imageUrl} />
+                  <img className="productImage" src={product.imageUrl} />
                   <h3>{product.price}</h3>
                   <h5>Category: {product.category}</h5>
                   <p>{product.description}</p>
