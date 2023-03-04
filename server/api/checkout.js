@@ -2,13 +2,6 @@ const router = require('express').Router();
 require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 
-const setCors = (req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  next();
-};
-
-router.use(setCors);
-
 router.post('/', async (req, res) => {
   try {
     const lineItems = req.body.cart.map((obj) => {

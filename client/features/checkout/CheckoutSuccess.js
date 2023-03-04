@@ -5,7 +5,7 @@ function CheckoutSuccess() {
   return (
     <div>
       <h1>Thank you for your order!</h1>
-      <Link path={`/home`}>Continue Shopping</Link>
+      <Link to={`/home`}>Continue Shopping</Link>
     </div>
   );
 }
