@@ -13,6 +13,7 @@ import Login from '../features/auth/Login';
 import AllProducts from '../features/allProducts/allProducts';
 import CheckoutSuccess from '../features/checkout/CheckoutSuccess';
 import CheckoutCanceled from '../features/checkout/CheckoutCanceled';
+import { selectUser } from './reducers/userSlice';
 
 
 /**

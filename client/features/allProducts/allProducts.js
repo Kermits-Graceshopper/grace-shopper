@@ -57,7 +57,7 @@ const AllProducts = () => {
           :
           !filtered[0] && search !== '' && category === '' ?
             products?.map(product => (
-              product.name.toLowerCase().includes(search) || product.name.toUpperCase().includes(search) ?
+              product.name.toLowerCase().includes(search) || product.name.toUpperCase().includes(search)  ?
                 <div>
                   {
                     currUser.isAdmin ?
@@ -119,10 +119,12 @@ const AllProducts = () => {
                   <h5>Category: {product.category}</h5>
                   <p>{product.description}</p>
                 </div>
-              ))
-      }
-    </div>
-  )
-}
+                  ))
+                }
+                </div>
 
-export default AllProducts
+              )
+}
+                  
+
+export default AllProducts                    

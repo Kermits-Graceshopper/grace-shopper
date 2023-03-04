@@ -5,12 +5,13 @@ import { logout } from '../../app/store';
 import { MDBCol, MDBRow } from 'mdbreact';
 import Button from 'react-bootstrap/Button';
 import { addSearchQuery } from '../../app/reducers/searchSlice';
+import { selectUser } from '../../app/reducers/userSlice';
 
 const Navbar = () => {
   const [searchInput, setSearchInput] = useState('')
-  // const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isLoggedIn = useSelector(selectUser).isLoggedIn;
   const logoutAndRedirectHome = () => {
     dispatch(logout());
     navigate('/login');
@@ -53,6 +54,9 @@ const Navbar = () => {
             </div>
             <div>
               {/* The navbar will show these links before you log in */}
+              {
+                !isLoggedIn ? 
+                <div>
               <Link
                 style={{ textDecoration: 'none', color: 'white' }}
                 className="link"
@@ -67,12 +71,15 @@ const Navbar = () => {
               >
                 Sign Up
               </Link>
+              </div> : null
+}
               <Link to="/cart">
                 <img
                   style={{ width: '30px', height: 'auto' }}
                   src="/cart.png"
                 />
               </Link>
+              { isLoggedIn ?
               <button
                 className="Logout"
                 style={{
@@ -85,7 +92,8 @@ const Navbar = () => {
                 onClick={logoutAndRedirectHome}
               >
                 Logout
-              </button>
+              </button> : null
+}
             </div>
           </nav>
         </MDBCol>
