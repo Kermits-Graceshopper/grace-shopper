@@ -9,11 +9,16 @@ const Home = () => {
   // const username = useSelector((state) => state.auth.me.username);
   const user = useSelector(selectUser);
   return (
-    <div className="changingBody">
-      {user.firstName ? 
-      <h1>Welcome {user.firstName}!</h1>
-    :
-    <h1>Welcome! Be our guest.</h1>}
+    <div className='welcomeSign'>
+      {user.firstName ? (
+        <h1>Welcome {user.firstName}!</h1>
+      ) : (
+        <h1>Welcome! Login For Special Deals</h1>
+      )}
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 };

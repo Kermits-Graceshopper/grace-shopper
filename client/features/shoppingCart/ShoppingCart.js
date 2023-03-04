@@ -49,48 +49,53 @@ const ShoppingCart = () => {
   };
 
   return (
-    <Container>
-      <Row>
-        <Col>
-          <div className="cartDiv">
-            {cartProducts.length > 0
-              ? cartProducts.map((product) => {
-                  return (
-                    <div key={product.id}>
+    <div className="changingBody">
+      <div className='bodyContent'>
+        <h1> Cart</h1>
+        <div className="productContainer">
+          <div>
+            <div>
+              <div>
+                {cartProducts.length > 0
+                  ? cartProducts.map((product) => {
+                      return (
+                        <div key={product.id}>
                       <h3>{product.name}</h3>
                       <p>Price: {product.price}</p>
                       <p>Quantity: {product.quantity}</p>
                       <button>Remove from Cart</button>
                     </div>
-                  );
-                })
-              : 'There is nothing in your cart'}
-            <div></div>
-          </div>
-        </Col>
-        <Col>
-          <div className="checkoutSidebar">
-            <div className="cartTitle">
-              <h2>
-                Order Summary <br />
-                {`Subtotal: (${cartProducts.length}items)`}
-              </h2>
-              <hr />
-              <h2></h2>
+                      );
+                    })
+                  : 'There is nothing in your cart'}
+                <div></div>
+              </div>
             </div>
-            <hr />
-            <Button
-              className="coButton"
-              variant="primary"
-              size="lg"
-              onClick={handleCheckout}
-            >
-              Proceed to checkout
-            </Button>
+            <div>
+              <div>
+                <div className="cartTitle">
+                  <h2>
+                    Order Summary <br />
+                    <div>{`Subtotal: (${cartProducts.length}items)`}</div>
+                  </h2>
+                  <hr />
+                  <h2></h2>
+                </div>
+                <hr />
+                <Button
+                  className="coButton"
+                  variant="primary"
+                  size="lg"
+                  onClick={handleCheckout}
+                >
+                  Proceed to checkout
+                </Button>
+              </div>
+            </div>
           </div>
-        </Col>
-      </Row>
-    </Container>
+        </div>
+      </div>
+    </div>
   );
 };
 

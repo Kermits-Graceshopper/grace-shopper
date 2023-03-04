@@ -1,19 +1,17 @@
-body {
+html, body {
   font-family: sans-serif;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-}
-.cart{
-  height: 50px;
-  width: 50px;
-  position: relative;
-  left: 200px;
+  margin: 0;
+  padding: 0;
+  /* fixes issue w white space to the right!!!! */
+  overflow-x: hidden;
+  background-color: #E9E8E8;
 }
 a {
   text-decoration: none;
 }
-
 label {
   display: block;
 }
@@ -34,13 +32,15 @@ form div {
   top: 10px;
   width: 200px;
   text-decoration: none;
-  z-index: 1;
 }
 
 .navbar{
-  background-color: #1b0b54;
+  background-color: #2B3467;
   color: white;
   overflow: hidden;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
 }
 
 .search{
@@ -53,7 +53,7 @@ form div {
   color: white;
   display: flex;
   justify-content: space-evenly;
-  background-color: #537FE7
+  background-color: #EB455F;
 }
 
 .specItem{
@@ -65,9 +65,6 @@ form div {
   height: auto;
 }
 
-.footer{
-  margin-top: auto;
-}
 
 .cartDiv{
   width: 800px;
@@ -76,11 +73,6 @@ form div {
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   padding: 40px;
   margin-bottom: 100px;
-}
-
-
-.mainArea{
-  background-color:#eaeded;
 }
 
 .cartTitle{
@@ -99,6 +91,8 @@ form div {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  align-items:center;
+  justify-content:center;
 }
 
 .checkoutSidebar{
@@ -113,4 +107,36 @@ form div {
 
 .productImage {
   height: 10vh;
+}
+
+.footer{
+  height: 500px;
+}
+
+.page-container{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+}
+
+.content-wrap{
+  flex:1;
+}
+
+.products{
+  display: flex;
+  flex-direction: row;
+}
+.product{
+  margin: 100px;
+}
+
+.welcomeSign{
+  padding-top: 50px;
+  margin-left: 50px;
+}
+
+.bodyContent{
+  margin-left: 50px;
 }

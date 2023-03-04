@@ -28,10 +28,21 @@ const AllProducts = () => {
     dispatch(fetchAllProductsAsync());
   }, []);
   return (
-    <div className="allProducts">
-      <div>
-        <div className="cartButton">
-          <Link to={`/api/cart`}>Cart</Link>
+    <div className="changingBody">
+      <div className='bodyContent'>
+        <div>
+          <div className="cartButton">
+            <Link to={`/api/cart`}>Cart</Link>
+          </div>
+          <select
+            defaultValue=""
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            <option value="">All</option>
+            <option value="XBOX">XBOX</option>
+            <option value="PS5">PS5</option>
+            <option value="Nintendo">Nintendo</option>
+          </select>
         </div>
         <select defaultValue='' onChange={(e) => setSelectedCategory(e.target.value)}>
           <option value=''>All</option>
@@ -48,11 +59,11 @@ const AllProducts = () => {
         </ul>
       </div>
       <h1>Products:</h1>
-      <div>
+      <div className='products'>
         {
           !filtered[0] && search[0] === '' ?
             products.map(product => (
-              <div>
+              <div className='product'>
                 <h1>{product.name}</h1>
                 <img className='productImage' src={product.imageUrl} />
                 <h3>{product.price}</h3>
@@ -64,25 +75,26 @@ const AllProducts = () => {
               filtered.map(product => (
                 <div>
                   <h1>{product.name}</h1>
-                  <img className='productImage' src={product.imageUrl} />
+                  <img className="productImage" src={product.imageUrl} />
                   <h3>{product.price}</h3>
                   <h5>Category: {product.category}</h5>
                   <p>{product.description}</p>
                 </div>
-              )) :
-              products && search !== '' ? products.map(product => (
-                product.name.includes(search[0]) ?
+              ))
+            : products && search !== ''
+            ? products.map((product) =>
+                product.name.includes(search[0]) ? (
                   <div>
                     <h1>{product.name}</h1>
-                    <img className='productImage' src={product.imageUrl} />
+                    <img className="productImage" src={product.imageUrl} />
                     <h3>{product.price}</h3>
                     <h5>Category: {product.category}</h5>
                     <p>{product.description}</p>
                   </div>
-                  : null
-              ))
-                : null
-        }
+                ) : null
+              )
+            : null}
+        </div>
       </div>
     </div>
   );

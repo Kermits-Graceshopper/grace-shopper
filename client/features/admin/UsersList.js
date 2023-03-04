@@ -20,8 +20,8 @@ const UsersList = () => {
             {
                 allUsers ? allUsers.map(user => (
                     <div>
-                        <h4>Name: {user.fullName ? user.fullName : null}</h4>
-                        <h4>Email: {user.email}</h4>
+                        <div>Name: {user.fullName ? user.fullName : null}</div>
+                        <div>Email: {user.email}</div>
                     </div>
                 ))
                     : <h3>No current users are signed up...</h3>
