@@ -12,6 +12,8 @@ import Featured from '../features/Featured/Featured';
 // import ProductsTest from '../features/allProducts/ProductsTest'
 import Login from '../features/auth/Login';
 import AllProducts from '../features/allProducts/allProducts';
+import { selectUser } from './reducers/userSlice';
+import UsersList from '../features/admin/UsersList';
 
 
 /**
@@ -21,7 +23,7 @@ import AllProducts from '../features/allProducts/allProducts';
 const AppRoutes = () => {
   // const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   // const dispatch = useDispatch();
-
+  const isAdmin = useSelector(selectUser).isAdmin
   // useEffect(() => {
   //   dispatch(me());
   // }, []);
@@ -29,44 +31,50 @@ const AppRoutes = () => {
   return (
     <div>
       {/* // isLoggedIn ?  */}
-        <Routes>
-          <Route path="/*" element={<Home />} />
-          <Route to="/home" element={<Home />} />
-        </Routes>
-        <Routes>
-          {/* <Route
+      <Routes>
+        <Route path="/*" element={<Home />} />
+        <Route to="/home" element={<Home />} />
+      </Routes>
+      <Routes>
+        {/* <Route
             path="/*"
             element={<AuthForm name="login" displayName="Login" />}
           /> */}
+        <Route
+          path="/login"
+          element={<Login />}
+        />
+        <Route
+          path="/signup"
+          element={<SignUp />}
+        />
+        {isAdmin ?
           <Route
-            path="/login"
-            element={<Login />}
-          />
-          <Route
-            path="/signup"
-            element={<SignUp />}
-          />
-          <Route
-            path="/cart"
-            element={<ShoppingCart />}
-          />
-         <Route
-            path="/checkout"
-            element={<CheckoutForm />}
-          />
-          <Route
-            path="/wishlist"
-            element={<Wishlist />}
-          />
-          <Route
-            path="/featured"
-            element={<Featured />}
-          />
-          <Route
-            path="/products"
-            element={<AllProducts />}
-          />
-        </Routes>
+            path="/users/all"
+            element={<UsersList />}
+          /> : null
+        }
+        <Route
+          path="/cart"
+          element={<ShoppingCart />}
+        />
+        <Route
+          path="/checkout"
+          element={<CheckoutForm />}
+        />
+        <Route
+          path="/wishlist"
+          element={<Wishlist />}
+        />
+        <Route
+          path="/featured"
+          element={<Featured />}
+        />
+        <Route
+          path="/products"
+          element={<AllProducts />}
+        />
+      </Routes>
     </div>
   );
 };

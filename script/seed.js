@@ -47,6 +47,13 @@ const products = [
     imageUrl: 'https://via.placeholder.com/150',
     category: 'Nintendo'
   },
+  {
+    name: 'Random game',
+    description: 'This is product 4',
+    price: 14.99,
+    imageUrl: 'https://via.placeholder.com/150',
+    category: 'Nintendo'
+  },
 ]
 
 const orders = [

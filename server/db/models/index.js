@@ -19,7 +19,10 @@ Users.hasMany(Orders, {
   constraints: false
 })
 Users.belongsTo(UserAddresses);
-Users.hasMany(Reviews)
+Users.hasMany(Reviews, {
+  foreignKey: 'userId',
+  constraints: false
+})
 
 UserAddresses.hasMany(Users);
 
