@@ -70,20 +70,6 @@ const SignUp = () => {
             <h2>Sign Up</h2>
             {error && <h4 style={{color: 'red'}}>Error: {error}</h4>}
             <form onSubmit={signUp}>
-                {/* <label htmlFor='fname'>First Name</label>
-                <input 
-                id='fname'
-                value={fname}
-                type='text'
-                onChange={(e) => {setFName(e.target.value)}}
-                />
-                <label htmlFor='lname'>Last Name</label>
-                <input 
-                id='lname'
-                value={lname}
-                type='text'
-                onChange={(e) => {setLName(e.target.value)}}
-                /> */}
                 <label htmlFor='first'>First Name</label>
                 <input 
                 id='first'
@@ -126,6 +112,7 @@ const SignUp = () => {
                 />
                 <button disabled={!isDisabled} className='btn btn-success' type='submit'>Sign Up</button>
             </form>
+            <p>Already have an account? <Link to='/login'>Log In</Link></p>
         </div>
 }
         </div>

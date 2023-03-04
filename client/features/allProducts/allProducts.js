@@ -13,6 +13,7 @@ const AllProducts = () => {
   const products = useSelector(selectAllProducts);
   const search = useSelector(selectSearchState)[0];
   const currUser = useSelector(selectUser);
+  console.log(currUser);
   const filter = () => {
     const filtered = products.filter(product => product.category === category);
     setFiltered(filtered);
