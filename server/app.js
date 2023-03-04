@@ -2,12 +2,21 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const app = express();
+const cors = require('cors');
+
+//cors
+app.use(cors());
 
 // logging middleware
 app.use(morgan('dev'));
 
 // body parsing middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  next();
+});
 
 // auth and api routes
 // app.use('/auth', require('./auth'))
@@ -16,6 +25,7 @@ app.use('/api/users', require('./api/users'));
 app.use('/api', require('./api/login'));
 app.use('/api', require('./api/signUp'));
 app.use('/api/products', require('./api/products'));
+app.use('/api/checkout', require('./api/checkout'));
 
 app.get('/', (req, res) =>
   res.sendFile(path.join(__dirname, '..', 'public/index.html'))

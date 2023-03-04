@@ -1,5 +1,4 @@
 import React from 'react';
-import CheckoutForm from '../features/checkout/CheckoutForm';
 import Footer from '../features/footer/Footer';
 
 import Navbar from '../features/navbar/Navbar';
@@ -11,8 +10,8 @@ const App = () => {
   return (
     <div className="page-container">
       <div className="content-wrap">
-        <Navbar />
-        <SpecializedNavbar />
+      <Navbar />
+      <SpecializedNavbar />
         <div className='changingBody'>
           <AppRoutes />
         </div>
@@ -21,6 +20,7 @@ const App = () => {
         <br />
         <br />
       </div>
+
 
       <Footer />
     </div>
