@@ -15,7 +15,6 @@ import CheckoutSuccess from '../features/checkout/CheckoutSuccess';
 import CheckoutCanceled from '../features/checkout/CheckoutCanceled';
 import { selectUser } from './reducers/userSlice';
 
-
 /**
  * COMPONENT
  */
@@ -23,7 +22,7 @@ import { selectUser } from './reducers/userSlice';
 const AppRoutes = () => {
   // const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   // const dispatch = useDispatch();
-  const isAdmin = useSelector(selectUser).isAdmin
+  const isAdmin = useSelector(selectUser).isAdmin;
   // useEffect(() => {
   //   dispatch(me());
   // }, []);
