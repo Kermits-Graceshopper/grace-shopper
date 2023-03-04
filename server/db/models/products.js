@@ -32,14 +32,7 @@ const Products = db.define('product', {
   category: {
     type: Sequelize.STRING,
     allowNull: true
-  },
-  // categoryId: {
-  //   type: Sequelize.INTEGER,
-  //   reference: {
-  //     model: Categories,
-  //     key: 'id'
-  //   }
-  // }
+  }
 })
 
 module.exports = Products;

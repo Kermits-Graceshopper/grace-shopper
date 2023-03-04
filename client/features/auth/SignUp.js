@@ -41,7 +41,7 @@ const SignUp = () => {
                 lastName: response?.data?.lastName,
                 email: response?.data?.email,
                 accessToken: response?.data?.accessToken,
-                role: response?.data?.role,
+                isAdmin: response?.data?.isAdmin,
                 isLoggedIn: response?.data?.isLoggedIn
             }))
             setSuccess(true);
