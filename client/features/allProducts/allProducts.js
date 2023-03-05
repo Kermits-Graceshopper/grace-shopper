@@ -4,6 +4,9 @@ import { fetchAllProductsAsync, selectAllProducts } from '../../app/reducers/all
 import { selectSearchState } from '../../app/reducers/searchSlice';
 import { selectUser } from '../../app/reducers/userSlice';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+
+// TODO: add form for admin to add a product
 
 const AllProducts = () => {
   const [category, setCategory] = useState('');
@@ -47,8 +50,7 @@ const AllProducts = () => {
                       console.log(updatedProducts)
                     }}>X</button> : null
                 }
-
-                <h1>{product.name}</h1>
+                <h1><Link to={`/products/${product.id}`}>{product.name}</Link></h1>
                 <img className='productImage' src={product.imageUrl} />
                 <h3>{product.price}</h3>
                 <h5>Category: {product.category}</h5>
@@ -71,7 +73,7 @@ const AllProducts = () => {
                         console.log(updatedProducts)
                       }}>X</button> : null
                   }
-                  <h1>{product.name}</h1>
+                  <h1><Link to={`/products/${product.id}`}>{product.name}</Link></h1>
                   <img className='productImage' src={product.imageUrl} />
                   <h3>{product.price}</h3>
                   <h5>Category: {product.category}</h5>
@@ -93,7 +95,7 @@ const AllProducts = () => {
                         console.log(updatedProducts)
                       }}>X</button> : null
                   }
-                  <h1>{product.name}</h1>
+                  <h1><Link to={`/products/${product.id}`}>{product.name}</Link></h1>
                   <img className='productImage' src={product.imageUrl} />
                   <h3>{product.price}</h3>
                   <h5>Category: {product.category}</h5>
@@ -114,7 +116,7 @@ const AllProducts = () => {
                         console.log(updatedProducts)
                       }}>X</button> : null
                   }
-                  <h1>{product.name}</h1>
+                  <h1><Link to={`/products/${product.id}`}>{product.name}</Link></h1>
                   <img className="productImage" src={product.imageUrl} />
                   <h3>{product.price}</h3>
                   <h5>Category: {product.category}</h5>
