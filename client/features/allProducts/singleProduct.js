@@ -15,7 +15,7 @@ const SingleProduct = () => {
 	const [newPrice, setNewPrice] = useState(0);
 	const [newImageUrl, setNewImageUrl] = useState("");
 	const [newCategory, setNewCategory] = useState("");
-	const [submitted, setSubmitted] = useState(false);
+	const [toggleSubmitted, setToggleSubmitted] = useState(false);
 	const { id } = useParams();
 	const dispatch = useDispatch();
 
@@ -41,12 +41,12 @@ const SingleProduct = () => {
 			newImageUrl,
 			newCategory
 		});
-		setSubmitted(!submitted);
+		setToggleSubmitted(!toggleSubmitted);
 	};
 
 	useEffect(() => {
 		dispatch(fetchSingleProductAsync(id));
-	}, [submitted]);
+	}, [toggleSubmitted]);
 
   useEffect(() => {
     setError('');
@@ -96,7 +96,7 @@ const SingleProduct = () => {
 							value={newImageUrl}
 							onChange={(e) => setNewImageUrl(e.target.value)}
 						/>
-						<label htmlFor="Category">Category</label>
+						<label>Category</label>
 						<select onChange={(e) => setNewCategory(e.target.value)}>
 							<option value="">Select Category...</option>
 							<option value="XBOX">Xbox</option>
