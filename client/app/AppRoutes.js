@@ -14,6 +14,7 @@ import AllProducts from '../features/allProducts/allProducts';
 import CheckoutSuccess from '../features/checkout/CheckoutSuccess';
 import CheckoutCanceled from '../features/checkout/CheckoutCanceled';
 import { selectUser } from './reducers/userSlice';
+import SingleProduct from '../features/allProducts/singleProduct';
 
 /**
  * COMPONENT
@@ -35,10 +36,6 @@ const AppRoutes = () => {
         <Route to="/home" element={<Home />} />
       </Routes>
       <Routes>
-        {/* <Route
-            path="/*"
-            element={<AuthForm name="login" displayName="Login" />}
-          /> */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/cart" element={<ShoppingCart />} />
@@ -46,6 +43,7 @@ const AppRoutes = () => {
         <Route path="/featured" element={<Featured />} />
         <Route path="/products" element={<AllProducts />} />
         <Route path="/success" element={<CheckoutSuccess />} />
+        <Route path="/products/:productId" element={<SingleProduct />} />
       </Routes>
     </div>
   );

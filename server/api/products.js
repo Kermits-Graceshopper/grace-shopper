@@ -80,6 +80,49 @@ router.delete("/:productId", async (req, res) => {
   }
 })
 
+router.put("/:productId", async (req, res) => {
+  try {
+    const { name, description, price, imageUrl, category, productId } = req.body
+    console.log('req.body.name : ', name)
+    console.log('req.body.description : ', description)
+    console.log('req.body.price : ', price)
+    console.log('req.body.imageUrl : ', imageUrl)
+    console.log('req.body.category : ', category)
+    console.log('req.body.productId : ', productId)
+    const product = await Products.findOne({
+      where: {
+        id: productId
+      }
+    })
+    product.name = name;
+    product.description = description;
+    product.price = price;
+    product.imageUrl = imageUrl;
+    product.category = category;
+    await product.save();
+    res.send(product);
+  } catch(e){
+    console.log('ERROR IN CATCH OF ROUTER.PUT("/:PRODUCTID")', e);
+  }
+})
+
+
+router.post('/', async (req, res) => {
+  try{
+    const { name, imageUrl, price, description } = req.body;
+    await Products.create({
+      name,
+      imageUrl,
+      price,
+      description
+    });
+    const updated = await Products.findAll();
+    res.send(updated)
+  } catch(e){
+    console.log('error in catch of post (add product) backend catch: ', e);
+  }
+})
+
 router.use((req, res, next) => {
   const error = new Error("Not Found");
   error.status = 404;

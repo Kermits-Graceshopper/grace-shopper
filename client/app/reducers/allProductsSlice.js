@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import Axios from 'axios';
+import axios from 'axios';
 
 export const fetchAllProductsAsync = createAsyncThunk(
   'getProducts',
   async () => {
     try {
-      const { data } = await Axios.get(`/api/products`);
+      const { data } = await axios.get(`/api/products`);
       return data;
     } catch (error) {
       console.log(error);
@@ -13,9 +13,18 @@ export const fetchAllProductsAsync = createAsyncThunk(
   }
 );
 
+export const addNewProductAsync = createAsyncThunk('addNewProduct', async ({ name, imageUrl, price, description }) => {
+  try {
+    const { data } = await axios.post(`/api/products`, { name, imageUrl, price, description});
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
+})
+
 const initialState = [];
 
-const allProductsSlice = createSlice({
+export const allProductsSlice = createSlice({
   name: 'allProducts',
   initialState,
   reducers: {},
@@ -23,6 +32,9 @@ const allProductsSlice = createSlice({
     builder.addCase(fetchAllProductsAsync.fulfilled, (state, action) => {
       return action.payload;
     });
+    builder.addCase(addNewProductAsync.fulfilled, (state, action) => {
+      return action.payload;
+    })
   }
 });
 

@@ -26,6 +26,7 @@ app.use('/api', require('./api/login'));
 app.use('/api', require('./api/signUp'));
 app.use('/api/products', require('./api/products'));
 app.use('/api/checkout', require('./api/checkout'));
+app.use('/api/order', require('./api/order'));
 
 app.get('/', (req, res) =>
   res.sendFile(path.join(__dirname, '..', 'public/index.html'))
