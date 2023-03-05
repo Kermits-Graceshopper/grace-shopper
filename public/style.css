@@ -141,3 +141,7 @@ form div {
 .bodyContent{
   margin-left: 50px;
 }
+
+.productCard img {
+  height: 150px;
+}
