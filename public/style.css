@@ -65,7 +65,10 @@ form div {
   width: 150px;
   height: auto;
 }
-
+.gear{
+  width: 20px;
+  height: auto;
+}
 
 .cartDiv{
   width: 800px;
@@ -144,4 +147,27 @@ form div {
 
 .productCard img {
   height: 150px;
+}
+
+.dropdown-menu::before{
+  content:'';
+  height: 20px;
+  width: 20px;
+  transform: rotate(45deg);
+}
+
+.dropdown-menu ul li:hover a{
+  color: red;
+  cursor: pointer;
+}
+
+.dropdownItem{
+  display: flex;
+  margin: 10px auto;
+}
+
+.dropdownItem a{
+  max-width: 100px;
+  margin-left: 10px;
+  transition: var(--speed);
 }

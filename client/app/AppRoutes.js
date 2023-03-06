@@ -15,6 +15,7 @@ import CheckoutSuccess from '../features/checkout/CheckoutSuccess';
 import CheckoutCanceled from '../features/checkout/CheckoutCanceled';
 import { selectUser } from './reducers/userSlice';
 import SingleProduct from '../features/allProducts/singleProduct';
+import UsersList from '../features/admin/UsersList';
 
 /**
  * COMPONENT
@@ -44,6 +45,7 @@ const AppRoutes = () => {
         <Route path="/products" element={<AllProducts />} />
         <Route path="/success" element={<CheckoutSuccess />} />
         <Route path="/products/:id" element={<SingleProduct />} />
+        <Route path="/editUsers" element={<UsersList />} />
       </Routes>
     </div>
   );

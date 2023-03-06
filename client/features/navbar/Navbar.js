@@ -29,7 +29,7 @@ const Navbar = () => {
       <div className="navbar">
         <MDBCol md="2">
           <Link to="/home">
-            <img src="/logo-nobckgrnd.png" className="logo" />
+            <img src="/img/logo-nobckgrnd.png" className="logo" />
           </Link>
         </MDBCol>
         <MDBCol md="7">
@@ -79,7 +79,7 @@ const Navbar = () => {
               <Link to="/cart">
                 <img
                   style={{ width: '30px', height: 'auto' }}
-                  src="/cart.png"
+                  src="/img/cart.png"
                 />
               </Link>
               { isLoggedIn ?

@@ -8,7 +8,7 @@ const Footer = () => {
     <div className="main-footer">
       <img
         style={{ margin: 'auto', display: 'block', width: '200px' }}
-        src="/logo-nobckgrnd.png"
+        src="/img/logo-nobckgrnd.png"
       />
       <Row className="main">
         <Col>
