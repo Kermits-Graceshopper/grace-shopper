@@ -12,6 +12,7 @@ import Featured from '../features/Featured/Featured';
 // import ProductsTest from '../features/allProducts/ProductsTest'
 import Login from '../features/auth/Login';
 import AllProducts from '../features/allProducts/allProducts';
+import Games from '../../server/api/utils/game'
 
 
 /**
@@ -65,6 +66,10 @@ const AppRoutes = () => {
           <Route
             path="/products"
             element={<AllProducts />}
+          />
+          <Route
+            path="/games"
+            element={<Games />}
           />
         </Routes>
     </div>
