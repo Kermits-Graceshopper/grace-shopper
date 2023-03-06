@@ -15,6 +15,7 @@ import { v4 as uuidv4 } from "uuid";
 import { addToCartAsync } from "../../app/reducers/cartSlice";
 
 const SingleProduct = () => {
+	const [editMode, setEditMode] = useState(false);
 	const [error, setError] = useState("");
 	const [newName, setNewName] = useState("");
 	const [newDescription, setNewDescription] = useState("");
@@ -130,7 +131,22 @@ const SingleProduct = () => {
 			<p>
 				Back to <Link to="/products">All Products</Link>
 			</p>
-			{currentUser.isAdmin ? (
+			{currentUser.isAdmin && editMode ? (
+				<button
+					onClick={(e) => setEditMode(!editMode)}
+					className="btn btn-warning"
+					type="button">
+					Toggle user view mode
+				</button>
+			) : currentUser.isAdmin ? (
+				<button
+					className="btn btn-warning"
+					type="button"
+					onClick={(e) => setEditMode(!editMode)}>
+					Toggle edit product mode
+				</button>
+			) : null}
+			{currentUser.isAdmin && editMode ? (
 				<div>
 					<h1>Edit Product</h1>
 					{error !== "" ? (
