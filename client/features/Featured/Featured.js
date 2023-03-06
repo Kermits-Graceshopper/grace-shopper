@@ -36,7 +36,7 @@ const Featured = () => {
     },
   ];
   return (
-    <div className="changingBody">
+    <div >
       <div className='bodyContent'>
         <h1> Featured</h1>
         <div className="productContainer">
