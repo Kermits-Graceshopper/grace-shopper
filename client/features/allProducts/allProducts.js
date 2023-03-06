@@ -5,10 +5,13 @@ import { selectSearchState } from '../../app/reducers/searchSlice';
 import { selectUser } from '../../app/reducers/userSlice';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { v4 as uuidv4 } from "uuid";
 
 // TODO: add form for admin to add a product
 
 const AllProducts = () => {
+  const isLoggedIn = sessionStorage.getItem("accessToken") ? true : false;
+  const isAdmin = sessionStorage.getItem('isAdmin');
   const [editMode, setEditMode] = useState(false);
   const [category, setCategory] = useState('');
   const [filtered, setFiltered] = useState([]);
@@ -23,8 +26,12 @@ const AllProducts = () => {
   const dispatch = useDispatch()
   const products = useSelector(selectAllProducts);
   const search = useSelector(selectSearchState)[0];
-  const currUser = useSelector(selectUser);
-  console.log(currUser);
+  // const currUser = useSelector(selectUser);
+  // const token = window.localStorage.getItem(token);
+  // console.log('token', token);
+  // console.log('window.localStorage.token: ', window.localStorage.token);
+  // window.localStorage.removeItem(token);
+  // console.log('token after window.localStorage.removeItem(token): ', token)
   const filter = () => {
     const filtered = products.filter(product => product.category === category);
     setFiltered(filtered);
@@ -52,17 +59,31 @@ const AllProducts = () => {
   }, [updatedProducts, category, toggleSubmitted]);
   useEffect(() => {
     setError('');
-  }, [addedName, addedDescription, addedPrice, addedImageUrl, addedCategory])
+  }, [addedName, addedDescription, addedPrice, addedImageUrl, addedCategory]);
+	useEffect(() => {
+		if (
+			!sessionStorage.getItem("accessToken") &&
+			!sessionStorage.getItem("guestId")
+		) {
+			sessionStorage.setItem("guestId", uuidv4());
+		}
+	}, []);
   return (
 		<div>
-			{currUser.isAdmin && editMode ? (
+			{
+      isAdmin
+      // currUser.isAdmin
+       && editMode ? (
 				<button
 					className="btn btn-warning"
 					type="button"
 					onClick={(e) => setEditMode(!editMode)}>
 					Toggle User Mode
 				</button>
-			) : currUser.isAdmin ? (
+			) : 
+      isAdmin
+      // currUser.isAdmin
+       ? (
 				<button
 					className="btn btn-warning"
 					type="button"
@@ -71,7 +92,10 @@ const AllProducts = () => {
 				</button> 
 				)
 			 : null}
-			{currUser.isAdmin && editMode ? (
+			{ 
+      isAdmin
+      // currUser.isAdmin
+       && editMode ? (
 				<div>
 					<form
 						onSubmit={(e) => {
@@ -133,7 +157,10 @@ const AllProducts = () => {
 						product.name.toLowerCase().includes(search) ||
 						product.name.toUpperCase().includes(search) ? (
 							<div>
-								{currUser.isAdmin && editMode ? (
+								{ 
+                isAdmin
+                // currUser.isAdmin 
+                && editMode ? (
 									<button
 										type="submit"
 										onClick={async (e) => {
@@ -163,7 +190,10 @@ const AllProducts = () => {
 						product.name.toLowerCase().includes(search) ||
 						product.name.toUpperCase().includes(search) ? (
 							<div>
-								{currUser.isAdmin && editMode ? (
+								{
+                isAdmin
+                // currUser.isAdmin
+                 && editMode ? (
 									<button
 										type="submit"
 										onClick={async (e) => {
@@ -191,7 +221,10 @@ const AllProducts = () => {
 				: (filtered[0] && search === "") || category !== ""
 				? filtered?.map((product) => (
 						<div>
-							{currUser.isAdmin && editMode ? (
+							{
+              isAdmin
+              // currUser.isAdmin
+               && editMode ? (
 								<button
 									type="submit"
 									onClick={async (e) => {
@@ -217,7 +250,10 @@ const AllProducts = () => {
 				  ))
 				: products.map((product) => (
 						<div>
-							{currUser.isAdmin && editMode ? (
+							{ 
+              isAdmin
+              // currUser.isAdmin
+               && editMode ? (
 								<button
 									type="submit"
 									onClick={async (e) => {

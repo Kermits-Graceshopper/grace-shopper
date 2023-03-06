@@ -3,31 +3,27 @@ const fsPromises = require("fs").promises;
 const path = require("path");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const axios = require('axios');
+const axios = require("axios");
 
 const handleNewUser = async (req, res) => {
-	let ip;
-	await axios.get("https://api.ipify.org").then((res) => (ip = res.data));
-    const guestCart = await Orders.findAll({
-        where: {
-            guestId: ip,
-            isCartItem: true
-        }
-    })
-    const guestWishlist = await Orders.findAll({
-        where: {
-            guestId: ip,
-            isWishList: true
-        }
-    })
-	const { fullName, first, last, email, password } = req.body;
+    const { fullName, first, last, email, password, guestId } = req.body;
+	const guestCart = await Orders.findAll({
+		where: {
+			guestId: guestId,
+			isCartItem: true
+		}
+	});
+	const guestWishlist = await Orders.findAll({
+		where: {
+			guestId: guestId,
+			isWishList: true
+		}
+	});
 	if (!email || !password) {
-		return res
-			.status(400)
-			.json({
-				message: "Username and password are required.",
-				"req.body": req.body
-			});
+		return res.status(400).json({
+			message: "Username and password are required.",
+			"req.body": req.body
+		});
 	}
 	// check for duplicate usernames in the db
 	const duplicate = await Users.findOne({
@@ -68,30 +64,36 @@ const handleNewUser = async (req, res) => {
 			process.env.ACCESS_TOKEN_SECRET,
 			{ expiresIn: "20m" }
 		);
-        if(guestWishlist){
-            guestWishlist.map(item => {
-                Orders.create({
-                    quantity: item.quantity,
-                    isWishList: item.isWishList,
-                    isCartItem: item.isCartItem,
-                    guestId: null,
-                    userId: userCreated.id,
-                    productId: item.productId
-                })
-            })
-        }
-        if(guestCart){
-            guestCart.map(item => {
-                Orders.create({
-                    quantity: item.quantity,
-                    isWishList: item.isWishList,
-                    isCartItem: item.isCartItem,
-                    guestId: null,
-                    userId: userCreated.id,
-                    productId: item.productId
-                })
-            })
-        }
+		// localStorage.setItem('accessToken', accessToken);
+		if (guestWishlist) {
+			guestWishlist.map((item) => {
+				Orders.create({
+					quantity: item.quantity,
+					isWishList: item.isWishList,
+					isCartItem: item.isCartItem,
+					guestId: null,
+					userId: userCreated.id,
+					productId: item.productId
+				});
+			});
+		}
+		if (guestCart) {
+			guestCart.map((item) => {
+				Orders.create({
+					quantity: item.quantity,
+					isWishList: item.isWishList,
+					isCartItem: item.isCartItem,
+					guestId: null,
+					userId: userCreated.id,
+					productId: item.productId
+				});
+			});
+		}
+		await Orders.destroy({
+			where: {
+				guestId: req.body.guestId
+			}
+		});
 		res.status(201).json({
 			fullName: userCreated.fullName,
 			firstName: userCreated.fname,

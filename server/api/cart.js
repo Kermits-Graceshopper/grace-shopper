@@ -10,6 +10,7 @@ router.get("/", async (req, res) => {
 			where: {
 				isCompleted: false,
 				userId: req.query.userId,
+                guestId: null,
                 isCartItem: true
 			}
 		})
@@ -17,6 +18,7 @@ router.get("/", async (req, res) => {
             where: {
                 isCompleted: false,
                 guestId: req.query.guestId,
+                userId: null,
                 isCartItem: true
             }
         })
