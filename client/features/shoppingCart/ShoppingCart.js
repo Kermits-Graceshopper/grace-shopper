@@ -84,7 +84,7 @@ const ShoppingCart = () => {
 	console.log("products: ", products);
 	console.log("cart: ", cart);
 	return (
-		<div className="changingBody">
+		<div>
 			<h1> Cart</h1>
 			<div className="productContainer">
 				{cart[0] ? (

@@ -41,7 +41,7 @@ const Wishlist = () => {
 		dispatch(fetchAllProductsAsync());
 	}, []);
 	return (
-		<div className="changingBody">
+		<div>
 			{wishlist ? (
 				wishlist.map((wishListItem) =>
 					products.map((product) =>

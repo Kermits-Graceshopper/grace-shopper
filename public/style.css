@@ -157,3 +157,7 @@ form div {
 .priceCalc {
   display: none;
 }
+
+.changingBody{
+  padding: 0 0 100px 100px;
+}
