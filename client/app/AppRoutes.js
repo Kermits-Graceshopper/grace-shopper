@@ -23,7 +23,7 @@ import SingleProduct from '../features/singleProduct/singleProduct';
 const AppRoutes = () => {
   // const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   // const dispatch = useDispatch();
-  const isAdmin = useSelector(selectUser).isAdmin;
+  // const isAdmin = useSelector(selectUser).isAdmin;
   // useEffect(() => {
   //   dispatch(me());
   // }, []);
@@ -44,7 +44,7 @@ const AppRoutes = () => {
         <Route path="/products" element={<AllProducts />} />
         <Route path="/success" element={<CheckoutSuccess />} />
         <Route path="/products/:id" element={<SingleProduct />} />
-        <Route path="/wishlist" element={<Wishlist />} />
+        {/* <Route path="/wishlist" element={<Wishlist />} /> */}
       </Routes>
     </div>
   );

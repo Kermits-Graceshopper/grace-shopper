@@ -11,10 +11,11 @@ import {
 	addToWishlistAsync,
 	selectWishlist
 } from "../../app/reducers/wishListSlice";
-import { v4 as uuidv4 } from "uuid";
 import { addToCartAsync } from "../../app/reducers/cartSlice";
+import { v4 as uuidv4 } from "uuid";
 
 const SingleProduct = () => {
+	const isLoggedIn = sessionStorage.getItem('accessToken') ? true : false
 	const [editMode, setEditMode] = useState(false);
 	const [error, setError] = useState("");
 	const [newName, setNewName] = useState("");
@@ -28,8 +29,9 @@ const SingleProduct = () => {
 	const [quantity, setQuantity] = useState(1);
 	const { id } = useParams();
 	const dispatch = useDispatch();
-
-	const currentUser = useSelector(selectUser);
+	const isAdmin = sessionStorage.getItem('isAdmin');
+	console.log('isAdmin in single product component: ', isAdmin);
+	// const currentUser = useSelector(selectUser);
 	const product = useSelector(selectProduct);
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -54,28 +56,29 @@ const SingleProduct = () => {
 	};
 
 	const addToWishlist = async () => {
-		let ip;
-		if (!currentUser.isLoggedIn) {
-			await axios
-				.get("https://api.ipify.org")
-				.then((response) => (ip = response.data));
-		}
-		console.log(
-			"ip variable in addToWishlist function in singleProduct.js: ",
-			ip
-		);
-		console.log("currentUser: ", currentUser);
-		currentUser.isLoggedIn
+		// let ip;
+		// if (!currentUser.isLoggedIn) {
+		// 	await axios
+		// 		.get("https://api.ipify.org")
+		// 		.then((response) => (ip = response.data));
+		// }
+		// console.log(
+		// 	"ip variable in addToWishlist function in singleProduct.js: ",
+		// 	ip
+		// );
+		// console.log("currentUser: ", currentUser);
+		// currentUser.isLoggedIn
+		isLoggedIn
 			? dispatch(
 					addToWishlistAsync({
-						userId: currentUser.id,
+						userId: sessionStorage.getItem('userId'),
 						quantity,
 						productId: product.id
 					})
 			  )
 			: dispatch(
 					addToWishlistAsync({
-						guestId: ip,
+						guestId: sessionStorage.getItem('guestId'),
 						quantity,
 						productId: product.id
 					})
@@ -86,28 +89,29 @@ const SingleProduct = () => {
 		}, 3000);
 	};
 	const addToCart = async () => {
-		let ip;
-		if (!currentUser.isLoggedIn) {
-			await axios
-				.get("https://api.ipify.org")
-				.then((response) => (ip = response.data));
-		}
-		console.log(
-			"ip variable in addToWishlist function in singleProduct.js: ",
-			ip
-		);
-		console.log("currentUser: ", currentUser);
-		currentUser.isLoggedIn
+		// let ip;
+		// if (!isLoggedIn) {
+		// 	await axios
+		// 		.get("https://api.ipify.org")
+		// 		.then((response) => (ip = response.data));
+		// }
+		// console.log(
+		// 	"ip variable in addToWishlist function in singleProduct.js: ",
+		// 	ip
+		// );
+		// console.log("currentUser: ", currentUser);
+		// currentUser.isLoggedIn
+		isLoggedIn
 			? dispatch(
 					addToCartAsync({
-						userId: currentUser.id,
+						userId: sessionStorage.getItem('userId'),
 						quantity,
 						productId: product.id
 					})
 			  )
 			: dispatch(
 					addToCartAsync({
-						guestId: ip,
+						guestId: sessionStorage.getItem('guestId'),
 						quantity,
 						productId: product.id
 					})
@@ -125,20 +129,34 @@ const SingleProduct = () => {
 	useEffect(() => {
 		setError("");
 	}, [newName, newDescription, newPrice, newImageUrl, newCategory]);
-
+	useEffect(() => {
+		if (
+			!sessionStorage.getItem("accessToken") &&
+			!sessionStorage.getItem("guestId")
+		) {
+			sessionStorage.setItem("guestId", uuidv4());
+		}
+	}, []);
+	console.log('single product component isLoggedIn: ', isLoggedIn)
+	console.log('single product component sessionStorage.getItem("userId"): ', sessionStorage.getItem('userId'));
 	return (
 		<div>
 			<p>
 				Back to <Link to="/products">All Products</Link>
 			</p>
-			{currentUser.isAdmin && editMode ? (
+			{ isAdmin
+			// currentUser.isAdmin 
+			&& editMode ? (
 				<button
 					onClick={(e) => setEditMode(!editMode)}
 					className="btn btn-warning"
 					type="button">
 					Toggle user view mode
 				</button>
-			) : currentUser.isAdmin ? (
+			) : 
+			// currentUser.isAdmin
+			isAdmin
+			 ? (
 				<button
 					className="btn btn-warning"
 					type="button"
@@ -146,7 +164,10 @@ const SingleProduct = () => {
 					Toggle edit product mode
 				</button>
 			) : null}
-			{currentUser.isAdmin && editMode ? (
+			{
+				isAdmin
+			// currentUser.isAdmin
+			 && editMode ? (
 				<div>
 					<h1>Edit Product</h1>
 					{error !== "" ? (
