@@ -20,7 +20,6 @@ router.get("/", async (req, res) => {
                 isCartItem: true
             }
         })
-        console.log('list: ', list);
 		res.send(list);
 	} catch (e) {
 		console.log('ERROR IN CATCH OF CART GET ROUTE: ', e);
