@@ -12,23 +12,42 @@ router.post('/', async (req, res) => {
 						name: obj.name
 					},
 					unit_amount: Math.round(obj.price * 100)
-					//! READS PRICE IN CENTS
 				},
 				quantity: obj.quantity
 			};
 		});
-		const session = await stripe.checkout.sessions.create({
-			payment_method_types: ['card'],
-			mode: 'payment',
-			line_items: lineItems,
-			success_url: 'http://localhost:8080/success',
-			cancel_url: 'http://localhost:8080/cart'
-		});
-		// res.redirect(session.url);
-
-		res.json({
-			sessionUrl: session.url
-		});
+		const userEmail = req.body.email;
+		if (userEmail) {
+			const session = await stripe.checkout.sessions.create({
+				customer_email: userEmail,
+				payment_method_types: ['card'],
+				mode: 'payment',
+				line_items: lineItems,
+				shipping_address_collection: {
+					allowed_countries: ['US']
+				},
+				//! change to deployed address later
+				success_url: 'http://localhost:8080/success',
+				cancel_url: 'http://localhost:8080/cart'
+			});
+			res.json({
+				sessionUrl: session.url
+			});
+		} else {
+			const session = await stripe.checkout.sessions.create({
+				payment_method_types: ['card'],
+				mode: 'payment',
+				line_items: lineItems,
+				shipping_address_collection: {
+					allowed_countries: ['US']
+				},
+				success_url: 'http://localhost:8080/success',
+				cancel_url: 'http://localhost:8080/cart'
+			});
+			res.json({
+				sessionUrl: session.url
+			});
+		}
 	} catch (e) {
 		console.log('some error');
 		console.log(e);

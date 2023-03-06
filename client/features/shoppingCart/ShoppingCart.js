@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from '../api/axios';
-import { useNavigate } from 'react-router-dom';
 import {
 	fetchAllProductsAsync,
 	selectAllProducts
@@ -11,12 +10,9 @@ import { Button } from 'react-bootstrap';
 
 const ShoppingCart = () => {
 	const [cart, setCart] = useState([]);
+	const [pageMessage, setPageMessage] = useState('Loading...');
 	let runningTotal = 0;
-	// let cartProducts = [
-	//   { id: 1, name: 'Elden Ring', price: 10.99, quantity: 2 },
-	//   { id: 2, name: 'Dark Souls', price: 10.99, quantity: 2 },
-	//   { id: 3, name: 'Diablo II', price: 10.99, quantity: 2 }
-	// ];
+
 	const products = useSelector(selectAllProducts);
 	const user = useSelector(selectUser);
 	const isLoggedIn = user.isLoggedIn;
@@ -33,7 +29,12 @@ const ShoppingCart = () => {
 			quantity: item.quantity
 		};
 	});
-	console.log('stripedata', stripeItems);
+
+	let userEmail = null;
+	const userToken = sessionStorage.getItem('accessToken');
+	if (userToken) {
+		userEmail = sessionStorage.getItem('email');
+	}
 
 	const handleCheckout = async () => {
 		try {
@@ -41,7 +42,8 @@ const ShoppingCart = () => {
 				.post(
 					'/api/checkout',
 					{
-						cart: stripeItems
+						cart: stripeItems,
+						email: userEmail
 					},
 					{
 						headers: {
@@ -60,6 +62,9 @@ const ShoppingCart = () => {
 		}
 	};
 	useEffect(() => {
+		setTimeout(() => {
+			setPageMessage('There are no items in your cart!');
+		}, 1000);
 		const getCart = async () => {
 			let ip;
 			if (!isLoggedIn) {
@@ -114,7 +119,7 @@ const ShoppingCart = () => {
 							: null
 					)
 				) : (
-					<h2>Your cart is empty!</h2>
+					<h2>{pageMessage}</h2>
 				)}
 			</div>
 			<div>
