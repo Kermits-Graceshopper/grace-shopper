@@ -1,18 +1,36 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "../../features/api/axios";
 
 const initialState = [];
 
+export const fetchWishlistProductsAsnyc = createAsyncThunk("fetchWishlistProductsAsnyc", async () => {
+	try {
+		const { data } = await axios.get("/api/wishlist");
+		return data;
+	} catch (error) {
+		console.lo(error);
+	}
+})
+
 export const addToWishlistAsync = createAsyncThunk(
 	"addToWishList",
-	async ({ userId, quantity, productId }) => {
+	async ({ userId, quantity, productId, guestId }) => {
 		try {
-			const { data } = await axios.post("/api/wishList", {
-				userId,
-				quantity,
-				productId
-			});
-			return data;
+			let response;
+			userId
+				? (response = await axios.post("/api/wishList", {
+						userId,
+						quantity,
+						productId
+				  }))
+				: response = await axios.post("/api/wishList", {
+                        guestId,
+						quantity,
+						productId
+				  });
+
+			return response.data;
 		} catch (e) {
 			console.log("ERROR IN CATCH OF ADDTOWISHLISTASYNC THUNK: ", e);
 		}
@@ -62,6 +80,6 @@ export const {
 	addToWishListAsGuest,
 	removeFromWishlistAsGuest,
 	renewUsersWishlist,
-    clearWishlistOnLogout
+	clearWishlistOnLogout
 } = wishlistSlice.actions;
-export default wishlistSlice;
+export default wishlistSlice.reducer;

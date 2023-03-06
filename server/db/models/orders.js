@@ -24,22 +24,10 @@ const Orders = db.define('order', {
     allowNull: false,
     defaultValue: false
   },
-  // productId: {
-  //   type: Sequelize.INTEGER,
-  //   allowNull: false,
-  //   reference: {
-  //     model: Products,
-  //     key: 'id'
-  //   }
-  // },
-  // userId: {
-  //   type: Sequelize.INTEGER,
-  //   allowNull: false,
-  //   reference: {
-  //     model: Users,
-  //     key: 'id'
-  //   }
-  // }
+  guestId: {
+    type: Sequelize.STRING,
+    allowNull: true
+  }
 });
 
 

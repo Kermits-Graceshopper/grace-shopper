@@ -7,20 +7,28 @@ import {
 	selectProduct
 } from "../../app/reducers/singleProductSlice";
 import { selectUser } from "../../app/reducers/userSlice";
+import {
+	addToWishlistAsync,
+	selectWishlist
+} from "../../app/reducers/wishListSlice";
+import { v4 as uuidv4 } from "uuid";
 
 const SingleProduct = () => {
-	const [error, setError] = useState("");
-	const [newName, setNewName] = useState("");
-	const [newDescription, setNewDescription] = useState("");
+	const [error, setError] = useState('');
+	const [newName, setNewName] = useState('');
+	const [newDescription, setNewDescription] = useState('');
 	const [newPrice, setNewPrice] = useState(0);
-	const [newImageUrl, setNewImageUrl] = useState("");
-	const [newCategory, setNewCategory] = useState("");
+	const [newImageUrl, setNewImageUrl] = useState('');
+	const [newCategory, setNewCategory] = useState('');
 	const [toggleSubmitted, setToggleSubmitted] = useState(false);
+	const [wishlistSuccess, setWishlistSuccess] = useState(false);
+	const [quantity, setQuantity] = useState(1);
 	const { id } = useParams();
 	const dispatch = useDispatch();
 
 	const currentUser = useSelector(selectUser);
-
+	// const wishlist = useSelector(selectWishlist);
+	// console.log("wishlist: ", wishlist);
 	const product = useSelector(selectProduct);
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -44,13 +52,39 @@ const SingleProduct = () => {
 		setToggleSubmitted(!toggleSubmitted);
 	};
 
+	const addToWishlist = async () => {
+		let ip;
+		await axios.get("https://api.ipify.org").then((response) => ip = response.data);
+		console.log('ip variable in addToWishlist function in singleProduct.js: ', ip);
+		console.log('currentUser: ', currentUser);
+		currentUser.isLoggedIn
+			? dispatch(
+					addToWishlistAsync({
+						userId: currentUser.id,
+						quantity,
+						productId: product.id
+					})
+			  )
+			: dispatch(
+					addToWishlistAsync({
+						guestId: ip,
+						quantity,
+						productId: product.id
+					})
+			  );
+		setWishlistSuccess(true);
+		setTimeout(() => {
+			setWishlistSuccess(false);
+		}, 3000);
+	};
+
 	useEffect(() => {
 		dispatch(fetchSingleProductAsync(id));
 	}, [toggleSubmitted]);
 
-  useEffect(() => {
-    setError('');
-  }, [newName, newDescription, newPrice, newImageUrl, newCategory])
+	useEffect(() => {
+		setError('');
+	}, [newName, newDescription, newPrice, newImageUrl, newCategory]);
 
 	return (
 		<div>
@@ -115,8 +149,25 @@ const SingleProduct = () => {
 				<h3>Price: {product.price}</h3>
 				<h5>{product.category}</h5>
 				<p>{product.description}</p>
-        {/* <button type='button' onClick={}>Add to Cart</button>
-        <button type='button' onClick={}>Add to Wishlist</button> */}
+				<select defaultValue={1} onChange={(e) => setQuantity(e.target.value)}>
+					<option value={1}>1</option>
+					<option value={2}>2</option>
+					<option value={3}>3</option>
+					<option value={4}>4</option>
+					<option value={5}>5</option>
+					<option value={6}>6</option>
+					<option value={7}>7</option>
+					<option value={8}>8</option>
+					<option value={9}>9</option>
+					<option value={10}>10</option>
+				</select>
+				{wishlistSuccess ? (
+					<h5 style={{ color: "green" }}>Item has been added to wishlist</h5>
+				) : null}
+				{/* <button type='button' onClick={}>Add to Cart</button> */}
+				<button type="button" onClick={addToWishlist}>
+					Add to Wishlist
+				</button>
 			</div>
 		</div>
 	);
