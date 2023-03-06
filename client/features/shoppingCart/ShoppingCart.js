@@ -4,18 +4,23 @@ import axios from '../api/axios';
 import {
 	fetchAllProductsAsync,
 	selectAllProducts
-} from '../../app/reducers/allProductsSlice';
-import { selectUser } from '../../app/reducers/userSlice';
-import { Button } from 'react-bootstrap';
+
+} from "../../app/reducers/allProductsSlice";
+import { selectUser } from "../../app/reducers/userSlice";
+import { Button } from "react-bootstrap";
+import { v4 as uuidv4 } from "uuid";
 
 const ShoppingCart = () => {
+  let isLoggedIn = sessionStorage.getItem('accessToken') ? true : false;
 	const [cart, setCart] = useState([]);
 	const [pageMessage, setPageMessage] = useState('Loading...');
 	let runningTotal = 0;
 
 	const products = useSelector(selectAllProducts);
-	const user = useSelector(selectUser);
-	const isLoggedIn = user.isLoggedIn;
+	// const navigate = useNavigate();
+	// const user = useSelector(selectUser);
+	// const isLoggedIn = user.isLoggedIn;
+
 	const dispatch = useDispatch();
 
 	const stripeItems = cart.map((item) => {
@@ -66,25 +71,33 @@ const ShoppingCart = () => {
 			setPageMessage('There are no items in your cart!');
 		}, 1000);
 		const getCart = async () => {
-			let ip;
-			if (!isLoggedIn) {
-				await axios
-					.get('https://api.ipify.org')
-					.then((response) => (ip = response.data));
-				console.log('IP VARIABLE FROM WISHLIST.JS USEEFFECT: ', ip);
-			}
+			// let ip;
+			// if (!isLoggedIn) {
+			// 	await axios
+			// 		.get("https://api.ipify.org")
+			// 		.then((response) => (ip = response.data));
+			// 	console.log("IP VARIABLE FROM WISHLIST.JS USEEFFECT: ", ip);
+			// }
 			let data;
-			console.log('user: ', user);
-			console.log('isLoggedIn: ', isLoggedIn);
+			// console.log("user: ", user);
+			console.log("isLoggedIn: ", isLoggedIn);
+      console.log(
+				'sessionStorage.getItem("guestId")',
+				sessionStorage.getItem("guestId")
+			);
+      console.log(
+				'sessionStorage.getItem("userId")',
+				sessionStorage.getItem("userId")
+			);
 			isLoggedIn
 				? (data = await axios.get('/api/cart', {
 						params: {
-							userId: user.id
+							userId: sessionStorage.getItem('userId')
 						}
 				  }))
 				: (data = await axios.get('/api/cart', {
 						params: {
-							guestId: ip
+							guestId: sessionStorage.getItem('guestId')
 						}
 				  }));
 			setCart(data.data);
@@ -92,7 +105,16 @@ const ShoppingCart = () => {
 		getCart();
 		dispatch(fetchAllProductsAsync());
 	}, []);
-
+		useEffect(() => {
+			if (
+				!sessionStorage.getItem("accessToken") &&
+				!sessionStorage.getItem("guestId")
+			) {
+				sessionStorage.setItem("guestId", uuidv4());
+			}
+		}, []);
+	console.log("products: ", products);
+	console.log("cart: ", cart);
 	return (
 		<div>
 			<h1> Cart</h1>

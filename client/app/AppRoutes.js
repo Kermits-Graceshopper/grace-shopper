@@ -24,7 +24,7 @@ import ProductExample from './components/comments/ProductExample';
 const AppRoutes = () => {
   // const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   // const dispatch = useDispatch();
-  const isAdmin = useSelector(selectUser).isAdmin;
+  // const isAdmin = useSelector(selectUser).isAdmin;
   // useEffect(() => {
   //   dispatch(me());
   // }, []);

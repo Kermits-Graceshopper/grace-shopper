@@ -34,13 +34,15 @@ router.post("/", async (req, res) => {
 					quantity: req.body.quantity,
 					isWishList: true,
 					productId: req.body.productId,
-					userId: req.body.userId
+					userId: req.body.userId,
+                    guestId: null
 			  })
 			: createdItem = await Orders.create({
 					quantity: req.body.quantity,
 					isWishList: true,
 					productId: req.body.productId,
-                    guestId: req.body.guestId
+                    guestId: req.body.guestId,
+                    userId: null
 			  });
 		res.send(createdItem);
 	} catch (e) {
