@@ -1,45 +1,67 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+	fetchAllProductsAsync,
+	selectAllProducts
+} from "../../app/reducers/allProductsSlice";
+import { selectUser } from "../../app/reducers/userSlice";
+import axios from "../api/axios";
 
 const Wishlist = () => {
-    let wishlist = [
-        {
-            name: 'product1', price: '$19.99'
-        },
-        {
-            name: 'product2', price: '$69.99'
-        },
-        {
-            name: 'product3', price: '$99.99'
-        },
-        {
-            name: 'product4', price: '$32.99'
-        },
-        {
-            name: 'product5', price: '$96.34'
-        },
-        {
-            name: 'product6', price: '$26.99'
-        }
-    ]
-  return (
-    <div className="changingBody">
-      <div className="bodyContent">
-        <h1> Wishlist</h1>
-        <div className="productContainer">
-          {wishlist.length
-            ? wishlist.map((item) => {
-                return (
-                  <div className="productCard" key={item.name}>
-                    {item.name}
-                    {item.price}
-                  </div>
-                );
-              })
-            : 'nope'}
-        </div>
-      </div>
-    </div>
-  );
-}
+	const [wishlist, setWishlist] = useState([]);
+	const user = useSelector(selectUser);
+	const isLoggedIn = user.isLoggedIn;
+	const dispatch = useDispatch();
+	const products = useSelector(selectAllProducts);
 
-export default Wishlist
+	useEffect(() => {
+		const getOldWishlist = async () => {
+			let ip;
+			if (!isLoggedIn) {
+				await axios
+					.get("https://api.ipify.org")
+					.then((response) => (ip = response.data));
+			}
+			let data;
+			isLoggedIn
+				? (data = await axios
+						.get("/api/wishlist", {
+							params: {
+								userId: user.id
+							}
+						}))
+				: (data = await axios.get("/api/wishlist", {
+						params: {
+							guestId: ip
+						}
+				  }));
+			setWishlist(data.data);
+		};
+		getOldWishlist();
+		dispatch(fetchAllProductsAsync());
+	}, []);
+	return (
+		<div className="changingBody">
+			{wishlist ? (
+				wishlist.map((wishListItem) =>
+					products.map((product) =>
+						product.id === wishListItem.productId ? (
+							<div className="wishlistDiv">
+								<h1>{product.name}</h1>
+								<img src={product.imageUrl} />
+								<h3>${product.price}</h3>
+								<h4>{product.category}</h4>
+								<p>{product.description}</p>
+								<h5>Quantity: {wishListItem.quantity}</h5>
+							</div>
+						) : null
+					)
+				)
+			) : (
+				<h2>There is nothing in your wishlist!</h2>
+			)}
+		</div>
+	);
+};
+
+export default Wishlist;

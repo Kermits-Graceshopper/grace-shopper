@@ -51,7 +51,8 @@ const Login = () => {
                 email: response?.data?.email,
                 accessToken: response?.data?.accessToken,
                 isAdmin: response?.data?.isAdmin,
-                isLoggedIn: response?.data?.isLoggedIn
+                isLoggedIn: response?.data?.isLoggedIn,
+                userId: response?.data?.userId
             }))
             setEmail('');
             setPassword('');

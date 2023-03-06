@@ -15,19 +15,6 @@ router.get("/", async (req, res) => {
 	}
 });
 
-router.get("/wishlist", async (req, res) => {
-	try {
-		const wishList = Orders.findAll({
-			where: {
-				isWishList: true
-			}
-		});
-		res.send(wishList);
-	} catch (e) {
-		console.log(e);
-	}
-});
-
 router.get("/history", async (req, res) => {
 	try {
 		const history = Orders.findAll({

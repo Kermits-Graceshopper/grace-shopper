@@ -145,3 +145,15 @@ form div {
 .productCard img {
   height: 150px;
 }
+
+.wishlistDiv img {
+  height: 100px;
+}
+
+.cartItem img {
+  height: 100px;
+}
+
+.priceCalc {
+  display: none;
+}

@@ -5,6 +5,8 @@ import allProductsReducer from './reducers/allProductsSlice';
 import singleProductReducer from './reducers/singleProductSlice';
 import currentUser from '../app/reducers/userSlice'
 import searchString from '../app/reducers/searchSlice';
+import wishlistReducer from '../app/reducers/wishListSlice';
+import cartReducer from '../app/reducers/cartSlice';
 
 const store = configureStore({
   reducer: {
@@ -13,6 +15,8 @@ const store = configureStore({
     singleProduct: singleProductReducer,
     user: currentUser,
     search: searchString,
+    wishlist: wishlistReducer,
+    cart: cartReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
 });
