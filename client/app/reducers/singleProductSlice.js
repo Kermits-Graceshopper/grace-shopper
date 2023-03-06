@@ -14,6 +14,8 @@ export const fetchSingleProductAsync = createAsyncThunk(
 	}
 );
 
+
+
 const initialState = {};
 
 const singleProductSlice = createSlice({

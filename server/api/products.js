@@ -4,8 +4,7 @@ const apicalypse = require("apicalypse").default;
 
 // all "/products" routes go here
 
-router.get("/", async (req, res) => {
-	try {
+
 		// first get api data
 
 		// const requestOptions = {
@@ -44,6 +43,9 @@ router.get("/", async (req, res) => {
 
 		// return the data to be mapped over in component to be displayed
 
+		
+router.get("/", async (req, res) => {
+	try {
 		const allProducts = await Products.findAll();
 		res.send(allProducts);
 	} catch (e) {
@@ -111,6 +113,31 @@ router.post("/", async (req, res) => {
 		console.log("error in catch of post (add product) backend catch: ", e);
 	}
 });
+
+// router.post("/:productId", async (req, res) => {
+// 	try {
+//     const { quantity, wishList, userId } = req.body
+//     const product = await Products.findByPk(req.params.productId);
+//     wishList
+// 			? await Orders.create({
+// 					quantity,
+// 					isCompleted: false,
+// 					isWishList: true,
+// 					productId: product.id,
+// 					userId
+// 			  })
+// 			: await Orders.create({
+// 					quantity,
+// 					isCompleted: false,
+// 					isWishList: false,
+// 					productId: product.id,
+//           userId
+// 			  });
+//         res.sendStatus(200);
+// 	} catch (e) {
+// 		console.log("error in catch of post route to add to cart backend catch: ", e);
+// 	}
+// });
 
 router.use((req, res, next) => {
 	const error = new Error("Not Found");

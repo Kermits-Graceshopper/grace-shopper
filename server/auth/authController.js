@@ -54,9 +54,10 @@ const handleLogin = async (req, res) => {
             const firstName = foundUser.fname;
             const lastName = foundUser.lname;
             const email = foundUser.email;
-            const isLoggedIn = foundUser.isLoggedIn
+            const isLoggedIn = foundUser.isLoggedIn;
+            const userId = foundUser.id;
             res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 24 * 60 * 60 * 1000 });
-            res.json({ accessToken, fullName, firstName, lastName, email, refreshToken, isAdmin, isLoggedIn });
+            res.json({ accessToken, fullName, firstName, lastName, email, refreshToken, isAdmin, isLoggedIn, userId });
         } else {
             console.log('handleLogin function, INSIDE TRY, IN ELSE STATEMENT');
             res.sendStatus(401);

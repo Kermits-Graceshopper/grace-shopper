@@ -1,45 +1,62 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllProductsAsync } from "../../app/reducers/allProductsSlice";
+import { selectUser } from "../../app/reducers/userSlice";
+import {
+	clearWishlistOnLogout,
+	renewUsersWishlist,
+	selectWishlist
+} from "../../app/reducers/wishListSlice";
+import axios from "../api/axios";
 
 const Wishlist = () => {
-    let wishlist = [
-        {
-            name: 'product1', price: '$19.99'
-        },
-        {
-            name: 'product2', price: '$69.99'
-        },
-        {
-            name: 'product3', price: '$99.99'
-        },
-        {
-            name: 'product4', price: '$32.99'
-        },
-        {
-            name: 'product5', price: '$96.34'
-        },
-        {
-            name: 'product6', price: '$26.99'
-        }
-    ]
-  return (
-    <div className="changingBody">
-      <div className="bodyContent">
-        <h1> Wishlist</h1>
-        <div className="productContainer">
-          {wishlist.length
-            ? wishlist.map((item) => {
-                return (
-                  <div className="productCard" key={item.name}>
-                    {item.name}
-                    {item.price}
-                  </div>
-                );
-              })
-            : 'nope'}
-        </div>
-      </div>
-    </div>
-  );
-}
+	const user = useSelector(selectUser);
+	const isLoggedIn = user.isLoggedIn;
+	const dispatch = useDispatch();
+	const wishlist = useSelector(selectWishlist);
+	const [products, setProducts] = useState([]);
+	useEffect(() => {
+		const getOldWishlist = async () => {
+			await axios
+				.get("/api/wishlist", {
+					params: {
+						userId: user.id
+					}
+				})
+				.then((res) => dispatch(renewUsersWishlist(res.data)));
+		};
+		if (isLoggedIn) {
+			getOldWishlist();
+		} else {
+			dispatch(clearWishlistOnLogout());
+		}
+	}, [isLoggedIn]);
+	useEffect(() => {
+		const products = dispatch(fetchAllProductsAsync());
+		setProducts(products);
+	}, []);
+	return (
+		<div className="changingBody">
+			{wishlist ? (
+				wishlist.map((wishListItem) =>
+					products.map((product) =>
+						product.id === wishListItem.productId ? (
+							<div>
+								<h1>{product.name}</h1>
+								<img src={product.imageUrl} />
+								<h3>${product.price}</h3>
+								<h4>{product.category}</h4>
+								<p>{product.description}</p>
+								<h5>Quantity: {wishListItem.quantity}</h5>
+							</div>
+						) : null
+					)
+				)
+			) : (
+				<h2>There is nothing in your wishlist!</h2>
+			)}
+		</div>
+	);
+};
 
-export default Wishlist
+export default Wishlist;

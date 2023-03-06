@@ -56,7 +56,8 @@ const handleNewUser = async (req, res) => {
             accessToken: accessToken,
             refreshToken: refreshToken,
             isAdmin: userCreated.isAdmin,
-            isLoggedIn: true
+            isLoggedIn: true,
+            userId: userCreated.id
         })
     } catch (err) {
         console.log('error in catch');

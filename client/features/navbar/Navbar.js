@@ -82,6 +82,7 @@ const Navbar = () => {
                   src="/cart.png"
                 />
               </Link>
+              <Link to='/wishlist'>Wishlist</Link>
               { isLoggedIn ?
               <button
                 className="Logout"

@@ -58,7 +58,6 @@ const products = [
 
 const orders = [
   {
-    date: new Date(),
     quantity: 2,
     isCompleted: true,
     isWishList: false,
@@ -66,7 +65,6 @@ const orders = [
     productId: 1,
   },
   {
-    date: new Date(),
     quantity: 5,
     isCompleted: false,
     isWishList: true,
@@ -74,7 +72,6 @@ const orders = [
     productId: 2,
   },
   {
-    date: new Date(),
     quantity: 3,
     isCompleted: false,
     isWishList: false,
