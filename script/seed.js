@@ -1,60 +1,69 @@
-'use strict'
-
-const {db } = require('../server/db')
+"use strict";
+const igdbProducts = require("./igdb.js");
+const { db } = require("../server/db");
 
 
 const users = [
   {
-    fullName: 'John Doe',
-    email: 'user1@test.com',
-    password: 'password123',
-    fname: 'John',
-    lname: 'Doe',
+    fullName: "John Doe",
+    email: "user1@test.com",
+    password: "password123",
+    fname: "John",
+    lname: "Doe",
     isAdmin: false,
-    isLoggedIn: false
+    isLoggedIn: false,
   },
   {
-    fullName: 'Jane Doe',
-    email: 'admin@test.com',
-    password: '123password',
-    fname: 'Jane',
-    lname: 'Doe',
+    fullName: "Jane Doe",
+    email: "admin@test.com",
+    password: "123password",
+    fname: "Jane",
+    lname: "Doe",
     isAdmin: true,
-    isLoggedIn: false
+    isLoggedIn: false,
   },
 ];
 
-const products = [
-  {
 
-    name: 'Call of Duty',
-    description: 'This is product 1',
-    price: 9.99,
-    imageUrl: 'https://via.placeholder.com/150',
-    category: 'XBOX'
-  },
-  {
-    name: 'Capstone Game',
-    description: 'This is product 2',
-    price: 19.99,
-    imageUrl: 'https://via.placeholder.com/150',
-    category: 'PS5'
-  },
-  {
-    name: 'Cap toss',
-    description: 'This is product 3',
-    price: 29.99,
-    imageUrl: 'https://via.placeholder.com/150',
-    category: 'Nintendo'
-  },
-  {
-    name: 'Random game',
-    description: 'This is product 4',
-    price: 14.99,
-    imageUrl: 'https://via.placeholder.com/150',
-    category: 'Nintendo'
-  },
-]
+const products = igdbProducts.map((product) => ({
+  name: product.name,
+  description: product.summary,
+  price: 9.99,
+  imageUrl: `https://images.igdb.com/igdb/image/upload/${product.cover}.jpg`,
+  category: product.platforms,
+}));
+
+// const products = [
+//   {
+
+//     name: 'Call of Duty',
+//     description: 'This is product 1',
+//     price: 9.99,
+//     imageUrl: 'https://via.placeholder.com/150',
+//     category: 'XBOX'
+//   },
+//   {
+//     name: 'Capstone Game',
+//     description: 'This is product 2',
+//     price: 19.99,
+//     imageUrl: 'https://via.placeholder.com/150',
+//     category: 'PS5'
+//   },
+//   {
+//     name: 'Cap toss',
+//     description: 'This is product 3',
+//     price: 29.99,
+//     imageUrl: 'https://via.placeholder.com/150',
+//     category: 'Nintendo'
+//   },
+//   {
+//     name: 'Random game',
+//     description: 'This is product 4',
+//     price: 14.99,
+//     imageUrl: 'https://via.placeholder.com/150',
+//     category: 'Nintendo'
+//   },
+// ]
 
 const orders = [
   {
@@ -86,28 +95,28 @@ const addresses = [
     city: "San Diego",
     state: "CA",
     zip: 12345,
-    userId: 1
+    userId: 1,
   },
   {
     streetAddress: "456 Broadway Ave",
     city: "New York",
     state: "NY",
     zip: 67890,
-    userId: 2
+    userId: 2,
   },
   {
     streetAddress: "789 Elm St",
     city: "Orlando",
     state: "FL",
     zip: 23456,
-    userId: 2
-  }
-]
+    userId: 2,
+  },
+];
 
 const reviews = [
   {
     rating: 5,
-    comment: 'Terrible',
+    comment: "Terrible",
     userId: 1,
     productId: 1,
   },
@@ -123,9 +132,7 @@ const reviews = [
     userId: 2,
     productId: 3,
   },
-]
-
-
+];
 
 /**
  * seed - this function clears the database, updates tables to
@@ -144,7 +151,7 @@ const reviews = [
 
 //   const createdOrders = await Orders.bulkCreate(orders, { returning: true });
 //   console.log(`seeded ${createdOrders.length} orders`);
-  
+
 //   const createdAddresses = await UserAddresses.bulkCreate(addresses, { returning: true });
 //   console.log(`seeded ${createdAddresses.length} addresses`);
 
@@ -153,7 +160,7 @@ const reviews = [
 
 //   const createdCategories = await Categories.bulkCreate(categories, { returning: true });
 //   console.log(`seeded ${createdCategories.length} categories`);
-  
+
 //   const createdReviews = await Reviews.bulkCreate(reviews, { returning: true });
 //   console.log(`seeded ${createdReviews.length} reviews`);
 
@@ -197,5 +204,5 @@ module.exports = {
   users,
   reviews,
   addresses,
-  orders
-}
+  orders,
+};

@@ -29,6 +29,7 @@ app.use("/api/checkout", require("./api/checkout"));
 app.use("/api/orders", require("./api/orders"));
 app.use("/api/wishlist", require("./api/wishList"));
 app.use('/api/cart', require("./api/cart"));
+app.use('/api/games', require("./api/games"));
 
 app.get("/", (req, res) =>
 	res.sendFile(path.join(__dirname, "..", "public/index.html"))
