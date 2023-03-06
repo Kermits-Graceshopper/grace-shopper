@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import axios from "../api/axios";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from '../api/axios';
 import {
 	fetchAllProductsAsync,
 	selectAllProducts
+
 } from "../../app/reducers/allProductsSlice";
 import { selectUser } from "../../app/reducers/userSlice";
 import { Button } from "react-bootstrap";
@@ -13,34 +13,46 @@ import { v4 as uuidv4 } from "uuid";
 const ShoppingCart = () => {
   let isLoggedIn = sessionStorage.getItem('accessToken') ? true : false;
 	const [cart, setCart] = useState([]);
-  let runningTotal = 0;
-	// let cartProducts = [
-	//   { id: 1, name: 'Elden Ring', price: 10.99, quantity: 2 },
-	//   { id: 2, name: 'Dark Souls', price: 10.99, quantity: 2 },
-	//   { id: 3, name: 'Diablo II', price: 10.99, quantity: 2 }
-	// ];
+	const [pageMessage, setPageMessage] = useState('Loading...');
+	let runningTotal = 0;
+
 	const products = useSelector(selectAllProducts);
 	// const navigate = useNavigate();
 	// const user = useSelector(selectUser);
 	// const isLoggedIn = user.isLoggedIn;
-	const dispatch = useDispatch();
-	//   const cartProducts = useSelector(selectCartProducts); //! IMPORT FROM REDUX
 
-	//   useEffect(() => {
-	//     dispatch(fetchCartProductsAsync()); //! IMPORT FROM REDUX
-	//   }, []);
+	const dispatch = useDispatch();
+
+	const stripeItems = cart.map((item) => {
+		const product = products.find((product) => product.id === item.productId);
+		const price = parseFloat(product.price);
+		return {
+			id: item.productId,
+			name: product.name,
+			imageUrl: product.imageUrl,
+			price: price,
+			quantity: item.quantity
+		};
+	});
+
+	let userEmail = null;
+	const userToken = sessionStorage.getItem('accessToken');
+	if (userToken) {
+		userEmail = sessionStorage.getItem('email');
+	}
 
 	const handleCheckout = async () => {
 		try {
 			await axios
 				.post(
-					"/api/checkout",
+					'/api/checkout',
 					{
-						cart: cart
+						cart: stripeItems,
+						email: userEmail
 					},
 					{
 						headers: {
-							"Access-Control-Allow-Origin": "*"
+							'Access-Control-Allow-Origin': '*'
 						}
 					}
 				)
@@ -55,6 +67,9 @@ const ShoppingCart = () => {
 		}
 	};
 	useEffect(() => {
+		setTimeout(() => {
+			setPageMessage('There are no items in your cart!');
+		}, 1000);
 		const getCart = async () => {
 			// let ip;
 			// if (!isLoggedIn) {
@@ -75,17 +90,16 @@ const ShoppingCart = () => {
 				sessionStorage.getItem("userId")
 			);
 			isLoggedIn
-				? (data = await axios.get("/api/cart", {
+				? (data = await axios.get('/api/cart', {
 						params: {
 							userId: sessionStorage.getItem('userId')
 						}
 				  }))
-				: (data = await axios.get("/api/cart", {
+				: (data = await axios.get('/api/cart', {
 						params: {
 							guestId: sessionStorage.getItem('guestId')
 						}
 				  }));
-			console.log("(cart) data.data: ", data.data);
 			setCart(data.data);
 		};
 		getCart();
@@ -102,27 +116,32 @@ const ShoppingCart = () => {
 	console.log("products: ", products);
 	console.log("cart: ", cart);
 	return (
-		<div className="changingBody">
+		<div>
 			<h1> Cart</h1>
 			<div className="productContainer">
 				{cart[0] ? (
-					cart.map((item) => (
+					cart.map((item) =>
 						products
-							? products.map(product => (
+							? products.map((product) =>
 									item.productId === product.id ? (
 										<div className="cartItem">
 											<h3>{product.name}</h3>
 											<img src={product.imageUrl} />
 											<h5>${product.price}</h5>
-                      <h5>Quantity: {item.quantity}</h5>
-                      <p className='priceCalc'>{runningTotal = runningTotal + product.price * item.quantity}</p>
+											<h5>Quantity: {item.quantity}</h5>
+											<p className="priceCalc">
+												{
+													(runningTotal =
+														runningTotal + product.price * item.quantity)
+												}
+											</p>
 										</div>
 									) : null
-							  ))
+							  )
 							: null
-          ))
+					)
 				) : (
-					<h2>Your cart is empty!</h2>
+					<h2>{pageMessage}</h2>
 				)}
 			</div>
 			<div>
@@ -130,19 +149,23 @@ const ShoppingCart = () => {
 					<div className="cartTitle">
 						<h2>
 							Order Summary <br />
-							{/* <div>{`Subtotal: (${cartProducts.length}items)`}</div> */}
 						</h2>
 						<hr />
 						<h2>Subtotal: ${runningTotal.toFixed(2)}</h2>
 					</div>
 					<hr />
-					<Button
-						className="coButton"
-						variant="primary"
-						size="lg"
-						onClick={handleCheckout}>
-						Proceed to checkout
-					</Button>
+					{cart[0] ? (
+						<Button
+							className="coButton"
+							variant="primary"
+							size="lg"
+							onClick={handleCheckout}
+						>
+							Proceed to checkout
+						</Button>
+					) : (
+						<></>
+					)}
 				</div>
 			</div>
 		</div>

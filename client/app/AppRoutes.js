@@ -15,6 +15,7 @@ import CheckoutSuccess from '../features/checkout/CheckoutSuccess';
 import CheckoutCanceled from '../features/checkout/CheckoutCanceled';
 import { selectUser } from './reducers/userSlice';
 import SingleProduct from '../features/singleProduct/singleProduct';
+import ProductExample from './components/comments/ProductExample';
 
 /**
  * COMPONENT
@@ -44,7 +45,8 @@ const AppRoutes = () => {
         <Route path="/products" element={<AllProducts />} />
         <Route path="/success" element={<CheckoutSuccess />} />
         <Route path="/products/:id" element={<SingleProduct />} />
-        {/* <Route path="/wishlist" element={<Wishlist />} /> */}
+        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path='/ProductExample' element={<ProductExample/>}/>
       </Routes>
     </div>
   );
