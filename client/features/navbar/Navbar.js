@@ -7,22 +7,23 @@ import { MDBCol, MDBRow } from 'mdbreact';
 import Button from 'react-bootstrap/Button';
 import { addSearchQuery } from '../../app/reducers/searchSlice';
 import { selectUser } from '../../app/reducers/userSlice';
+import DropdownItem from '../specializedNavbar/DropdownItem';
 
 const Navbar = () => {
-  const [searchInput, setSearchInput] = useState('')
+  const [searchInput, setSearchInput] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoggedIn = useSelector(selectUser).isLoggedIn;
-  const user = useSelector(selectUser)
+  const user = useSelector(selectUser);
   const logoutAndRedirectHome = () => {
     dispatch(logout());
-    console.log('user: ', user)
+    console.log('user: ', user);
     navigate('/login');
   };
 
   useEffect(() => {
-    dispatch(addSearchQuery(searchInput))
-  }, [searchInput])
+    dispatch(addSearchQuery(searchInput));
+  }, [searchInput]);
 
   return (
     <div>
@@ -57,46 +58,37 @@ const Navbar = () => {
             </div>
             <div>
               {/* The navbar will show these links before you log in */}
-              {
-                !isLoggedIn ? 
+              {!isLoggedIn ? (
                 <div>
-              <Link
-                style={{ textDecoration: 'none', color: 'white' }}
-                className="link"
-                to="/login"
-              >
-                Login
-              </Link>
-              <Link
-                style={{ textDecoration: 'none', color: 'white' }}
-                className="link"
-                to="/signup"
-              >
-                Sign Up
-              </Link>
-              </div> : null
-}
+                  <Link className="specItem" to="/login">
+                    Login
+                  </Link>
+                  <Link className="specItem" to="/signup">
+                    Sign Up
+                  </Link>
+                </div>
+              ) : null}
               <Link to="/cart">
                 <img
                   style={{ width: '30px', height: 'auto' }}
                   src="/img/cart.png"
                 />
               </Link>
-              { isLoggedIn ?
-              <button
-                className="Logout"
-                style={{
-                  textDecoration: 'none',
-                  color: 'white',
-                  border: 'none',
-                  backgroundColor: '#2B3467',
-                }}
-                type="button"
-                onClick={logoutAndRedirectHome}
-              >
-                Logout
-              </button> : null
-}
+              {isLoggedIn ? (
+                <button
+                  className="Logout"
+                  style={{
+                    textDecoration: 'none',
+                    color: 'white',
+                    border: 'none',
+                    backgroundColor: '#2B3467',
+                  }}
+                  type="button"
+                  onClick={logoutAndRedirectHome}
+                >
+                  Logout
+                </button>
+              ) : null}
             </div>
           </nav>
         </MDBCol>

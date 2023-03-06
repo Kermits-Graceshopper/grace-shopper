@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   font-family: sans-serif;
   min-height: 100vh;
   display: flex;
@@ -7,7 +8,10 @@ html, body {
   padding: 0;
   /* fixes issue w white space to the right!!!! */
   overflow-x: hidden;
-  background-color: #E9E8E8;
+  background-color: #e9e8e8;
+}
+ul {
+  list-style: none;
 }
 a {
   text-decoration: none;
@@ -26,7 +30,7 @@ form div {
   display: inline-block;
 }
 
-.navButtons{
+.navButtons {
   position: absolute;
   right: 5px;
   top: 10px;
@@ -34,7 +38,7 @@ form div {
   text-decoration: none;
 }
 
-.navbar{
+.navbar {
   background-color: #000000;
   color: white;
   overflow: hidden;
@@ -43,13 +47,13 @@ form div {
   padding: 0;
 }
 
-.search{
+.search {
   position: relative;
   right: 10px;
   z-index: 1;
 }
 
-.specializedNavbar{
+.specializedNavbar {
   color: white;
   display: flex;
   height: 30px;
@@ -57,20 +61,27 @@ form div {
   background-color: red;
 }
 
-.specItem{
+.specItem {
   color: white;
   text-decoration: none;
 }
-.logo{
+.specItem:hover{
+  color: gray;
+}
+.logo {
   width: 150px;
   height: auto;
 }
-.gear{
+.icon {
   width: 20px;
   height: auto;
 }
+.icon:hover{
+  filter: sepia(100%);
+  -webkit-filter: sepia(100%);
+}
 
-.cartDiv{
+.cartDiv {
   width: 800px;
   height: 1000px;
   background-color: white;
@@ -79,27 +90,27 @@ form div {
   margin-bottom: 100px;
 }
 
-.cartTitle{
+.cartTitle {
   display: flex;
   justify-content: space-between;
 }
 
-.productCard{
+.productCard {
   background-color: white;
   width: 400px;
   height: 400px;
   margin: 10px;
 }
 
-.productContainer{
+.productContainer {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  align-items:center;
-  justify-content:center;
+  align-items: center;
+  justify-content: center;
 }
 
-.checkoutSidebar{
+.checkoutSidebar {
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -113,35 +124,35 @@ form div {
   height: 10vh;
 }
 
-.footer{
+.footer {
   height: 10px;
 }
 
-.page-container{
+.page-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   align-items: center;
 }
 
-.content-wrap{
-  flex:1;
+.content-wrap {
+  flex: 1;
 }
 
-.products{
+.products {
   display: flex;
   flex-direction: row;
 }
-.product{
+.product {
   margin: 100px;
 }
 
-.welcomeSign{
+.welcomeSign {
   padding-top: 50px;
   margin-left: 50px;
 }
 
-.bodyContent{
+.bodyContent {
   margin-left: 50px;
 }
 
@@ -149,25 +160,34 @@ form div {
   height: 150px;
 }
 
-.dropdown-menu::before{
-  content:'';
+/* trying stylized dropdown */
+.menuButton {
+  background-color: red;
+  border: none;
+}
+.menuContainer {
+  list-style: none;
+  position: absolute;
+  right: 10px;
+}
+.navIcon {
   height: 20px;
-  width: 20px;
-  transform: rotate(45deg);
+  width: auto;
 }
 
-.dropdown-menu ul li:hover a{
-  color: red;
+.dropdownItems {
+  position: relative;
+  right: 110px;
+  padding: 10px;
+  background-color: rgb(214, 171, 53);
+}
+
+.dropdownItem {
+  border-top: 1px solid black;
+  padding: 10px;
+}
+ li:hover{
+  color: gray;
   cursor: pointer;
-}
 
-.dropdownItem{
-  display: flex;
-  margin: 10px auto;
-}
-
-.dropdownItem a{
-  max-width: 100px;
-  margin-left: 10px;
-  transition: var(--speed);
 }
