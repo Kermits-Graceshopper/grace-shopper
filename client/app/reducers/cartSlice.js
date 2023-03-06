@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import axios from '../../features/api/axios';
 
 export const fetchUsersCartAsync = createAsyncThunk(
   'fetchCartAsync',
@@ -13,11 +13,36 @@ export const fetchUsersCartAsync = createAsyncThunk(
   }
 );
 
-export const deleteCartItemAsync = createAsyncThunk(
-  'deleteCartItemAsync',
+
+export const addToCartAsync = createAsyncThunk(
+  'addToCartAsync',
+  async ({ userId, quantity, productId, guestId }) => {
+		try {
+			let response;
+			userId
+				? (response = await axios.post("/api/cart", {
+						userId,
+						quantity,
+						productId
+				  }))
+				: response = await axios.post("/api/cart", {
+                        guestId,
+						quantity,
+						productId
+				  });
+
+			return response.data;
+		} catch (e) {
+			console.log("ERROR IN CATCH OF ADDTOCART THUNK: ", e);
+		}
+	}
+);
+
+export const removeFromCartAsync = createAsyncThunk(
+  'removeFromCartAsync',
   async ({productId, userId}) => {
     try {
-      const { data } = await axios.delete(`/api/cart/`, 
+      const { data } = await axios.delete(`/api/cart`, 
       {
         productId,
         userId
@@ -27,24 +52,6 @@ export const deleteCartItemAsync = createAsyncThunk(
       console.log(error);
     }
 });
-
-export const addToCartAsync = createAsyncThunk(
-  'addToCartAsync',
-  async ({userId, productId, quantity}) => {
-    try {
-      const { data } = await axios.post(`/api/cart`,
-      {
-        userId, 
-        productId, 
-        quantity
-      });
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-);
-
 
 const initialState = [];
 
@@ -57,13 +64,16 @@ const cartSlice = createSlice({
     },
     deleteCartItemAsGuest: (state, action) => {
       state = state.filter((product) => product.id !== action.payload)
-  }
+    },
+		renewUsersCart: (state, action) => {
+			state.push(action.payload);
+		}
 },
   extraReducers: (builder) => {
     builder.addCase(fetchUsersCartAsync.fulfilled, (state, action) => {
       return action.payload;
     });
-    builder.addCase(deleteCartItemAsync.fulfilled, (state, action) => {
+    builder.addCase(removeFromCartAsync.fulfilled, (state, action) => {
       return action.payload;
     });
   }
@@ -73,5 +83,5 @@ export const selectCart = (state) => {
   return state.cart;
 };
 
-export const { addToCartAsGuest, deleteCartItemAsGuest } = cartSlice.actions;
+export const { addToCartAsGuest, deleteCartItemAsGuest, renewUsersCart } = cartSlice.actions;
 export default cartSlice.reducer;

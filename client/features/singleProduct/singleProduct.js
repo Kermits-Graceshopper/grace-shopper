@@ -12,23 +12,23 @@ import {
 	selectWishlist
 } from "../../app/reducers/wishListSlice";
 import { v4 as uuidv4 } from "uuid";
+import { addToCartAsync } from "../../app/reducers/cartSlice";
 
 const SingleProduct = () => {
-	const [error, setError] = useState('');
-	const [newName, setNewName] = useState('');
-	const [newDescription, setNewDescription] = useState('');
+	const [error, setError] = useState("");
+	const [newName, setNewName] = useState("");
+	const [newDescription, setNewDescription] = useState("");
 	const [newPrice, setNewPrice] = useState(0);
-	const [newImageUrl, setNewImageUrl] = useState('');
-	const [newCategory, setNewCategory] = useState('');
+	const [newImageUrl, setNewImageUrl] = useState("");
+	const [newCategory, setNewCategory] = useState("");
 	const [toggleSubmitted, setToggleSubmitted] = useState(false);
 	const [wishlistSuccess, setWishlistSuccess] = useState(false);
+	const [addCartSuccess, setAddCartSuccess] = useState(false);
 	const [quantity, setQuantity] = useState(1);
 	const { id } = useParams();
 	const dispatch = useDispatch();
 
 	const currentUser = useSelector(selectUser);
-	// const wishlist = useSelector(selectWishlist);
-	// console.log("wishlist: ", wishlist);
 	const product = useSelector(selectProduct);
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -54,9 +54,16 @@ const SingleProduct = () => {
 
 	const addToWishlist = async () => {
 		let ip;
-		await axios.get("https://api.ipify.org").then((response) => ip = response.data);
-		console.log('ip variable in addToWishlist function in singleProduct.js: ', ip);
-		console.log('currentUser: ', currentUser);
+		if (!currentUser.isLoggedIn) {
+			await axios
+				.get("https://api.ipify.org")
+				.then((response) => (ip = response.data));
+		}
+		console.log(
+			"ip variable in addToWishlist function in singleProduct.js: ",
+			ip
+		);
+		console.log("currentUser: ", currentUser);
 		currentUser.isLoggedIn
 			? dispatch(
 					addToWishlistAsync({
@@ -77,13 +84,45 @@ const SingleProduct = () => {
 			setWishlistSuccess(false);
 		}, 3000);
 	};
+	const addToCart = async () => {
+		let ip;
+		if (!currentUser.isLoggedIn) {
+			await axios
+				.get("https://api.ipify.org")
+				.then((response) => (ip = response.data));
+		}
+		console.log(
+			"ip variable in addToWishlist function in singleProduct.js: ",
+			ip
+		);
+		console.log("currentUser: ", currentUser);
+		currentUser.isLoggedIn
+			? dispatch(
+					addToCartAsync({
+						userId: currentUser.id,
+						quantity,
+						productId: product.id
+					})
+			  )
+			: dispatch(
+					addToCartAsync({
+						guestId: ip,
+						quantity,
+						productId: product.id
+					})
+			  );
+		setAddCartSuccess(true);
+		setTimeout(() => {
+			setAddCartSuccess(false);
+		}, 3000);
+	};
 
 	useEffect(() => {
 		dispatch(fetchSingleProductAsync(id));
 	}, [toggleSubmitted]);
 
 	useEffect(() => {
-		setError('');
+		setError("");
 	}, [newName, newDescription, newPrice, newImageUrl, newCategory]);
 
 	return (
@@ -161,10 +200,15 @@ const SingleProduct = () => {
 					<option value={9}>9</option>
 					<option value={10}>10</option>
 				</select>
-				{wishlistSuccess ? (
-					<h5 style={{ color: "green" }}>Item has been added to wishlist</h5>
+				{addCartSuccess ? (
+					<h5 style={{ color: "green" }}>Added to cart!</h5>
 				) : null}
-				{/* <button type='button' onClick={}>Add to Cart</button> */}
+				{wishlistSuccess ? (
+					<h5 style={{ color: "green" }}>Added to wishlist!</h5>
+				) : null}
+				<button type="button" onClick={addToCart}>
+					Add to Cart
+				</button>
 				<button type="button" onClick={addToWishlist}>
 					Add to Wishlist
 				</button>

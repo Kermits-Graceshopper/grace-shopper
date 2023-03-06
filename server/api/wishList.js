@@ -5,7 +5,6 @@ const router = require("express").Router();
 // '/' is mounted on '/wishlist'
 router.get("/", async (req, res) => {
 	try {
-        console.log('req.query.guestId: ', req.query.guestId);
         let list;
         req.query.userId
         ? list = await Orders.findAll({
@@ -20,7 +19,6 @@ router.get("/", async (req, res) => {
                 guestId: req.query.guestId
             }
         })
-        console.log('list: ', list);
 		res.send(list);
 	} catch (e) {
 		console.log(e);

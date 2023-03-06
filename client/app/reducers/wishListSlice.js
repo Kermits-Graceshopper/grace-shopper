@@ -1,10 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../features/api/axios";
 
 const initialState = [];
 
-export const fetchWishlistProductsAsnyc = createAsyncThunk("fetchWishlistProductsAsnyc", async () => {
+export const fetchWishlistProductsAsnyc = createAsyncThunk(
+	"fetchWishlistProductsAsnyc", 
+	async () => {
 	try {
 		const { data } = await axios.get("/api/wishlist");
 		return data;
@@ -60,9 +61,6 @@ const wishlistSlice = createSlice({
 		},
 		renewUsersWishlist: (state, action) => {
 			state.push(action.payload);
-		},
-		clearWishlistOnLogout: (state, action) => {
-			state = [];
 		}
 	},
 	extraReducers: (builder) => {
@@ -80,6 +78,5 @@ export const {
 	addToWishListAsGuest,
 	removeFromWishlistAsGuest,
 	renewUsersWishlist,
-	clearWishlistOnLogout
 } = wishlistSlice.actions;
 export default wishlistSlice.reducer;

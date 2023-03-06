@@ -149,3 +149,11 @@ form div {
 .wishlistDiv img {
   height: 100px;
 }
+
+.cartItem img {
+  height: 100px;
+}
+
+.priceCalc {
+  display: none;
+}

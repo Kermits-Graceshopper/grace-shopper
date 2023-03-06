@@ -24,6 +24,11 @@ const Orders = db.define('order', {
     allowNull: false,
     defaultValue: false
   },
+  isCartItem: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
   guestId: {
     type: Sequelize.STRING,
     allowNull: true
