@@ -82,14 +82,11 @@ const ShoppingCart = () => {
 							guestId: ip
 						}
 				  }));
-			// console.log('(cart) data.data: ', data.data);
 			setCart(data.data);
 		};
 		getCart();
 		dispatch(fetchAllProductsAsync());
 	}, []);
-	// console.log('products: ', products);
-	// console.log('cart: ', cart);
 
 	return (
 		<div className="changingBody">
