@@ -12,13 +12,14 @@ const DropdownMenu = () => {
         <img className="icon" src="/img/gear.png" />
       </button>
       {open ? (
-        <ul className='dropdownItems'>
-          <DropdownItem img="/img/user.png" text="Edit Users" />
-          <DropdownItem img="/img/edit.png" text="Edit Products" />
-        </ul>
-      ) : (
-        <div> is closed </div>
-      )}
+        <>
+          <ul className={`dropdownItems ${open ? 'active': 'inactive'}`}>
+            <p style={{ color: 'black' }}>Admin Settings</p>
+            <DropdownItem img="/img/user.png" text="Edit Users" />
+            <DropdownItem img="/img/edit.png" text="Edit Products" />
+          </ul>
+        </>
+      ) : null}
     </div>
   );
 };
