@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 // TODO: add form for admin to add a product
 
 const AllProducts = () => {
+  const [editMode, setEditMode] = useState(false);
   const [category, setCategory] = useState('');
   const [filtered, setFiltered] = useState([]);
   const [updatedProducts, setUpdatedProducts] = useState([]);
@@ -54,7 +55,23 @@ const AllProducts = () => {
   }, [addedName, addedDescription, addedPrice, addedImageUrl, addedCategory])
   return (
 		<div>
-			{currUser.isAdmin ? (
+			{currUser.isAdmin && editMode ? (
+				<button
+					className="btn btn-warning"
+					type="button"
+					onClick={(e) => setEditMode(!editMode)}>
+					Toggle User Mode
+				</button>
+			) : currUser.isAdmin ? (
+				<button
+					className="btn btn-warning"
+					type="button"
+					onClick={(e) => setEditMode(!editMode)}>
+					Toggle Admin Mode
+				</button> 
+				)
+			 : null}
+			{currUser.isAdmin && editMode ? (
 				<div>
 					<form
 						onSubmit={(e) => {
@@ -116,7 +133,7 @@ const AllProducts = () => {
 						product.name.toLowerCase().includes(search) ||
 						product.name.toUpperCase().includes(search) ? (
 							<div>
-								{currUser.isAdmin ? (
+								{currUser.isAdmin && editMode ? (
 									<button
 										type="submit"
 										onClick={async (e) => {
@@ -146,7 +163,7 @@ const AllProducts = () => {
 						product.name.toLowerCase().includes(search) ||
 						product.name.toUpperCase().includes(search) ? (
 							<div>
-								{currUser.isAdmin ? (
+								{currUser.isAdmin && editMode ? (
 									<button
 										type="submit"
 										onClick={async (e) => {
@@ -174,7 +191,7 @@ const AllProducts = () => {
 				: (filtered[0] && search === "") || category !== ""
 				? filtered?.map((product) => (
 						<div>
-							{currUser.isAdmin ? (
+							{currUser.isAdmin && editMode ? (
 								<button
 									type="submit"
 									onClick={async (e) => {
@@ -200,7 +217,7 @@ const AllProducts = () => {
 				  ))
 				: products.map((product) => (
 						<div>
-							{currUser.isAdmin ? (
+							{currUser.isAdmin && editMode ? (
 								<button
 									type="submit"
 									onClick={async (e) => {
