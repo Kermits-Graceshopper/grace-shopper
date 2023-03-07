@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
 	getAllUsersAsync,
@@ -9,9 +9,10 @@ import { v4 as uuidv4 } from "uuid";
 const UsersList = () => {
     const isLoggedIn = sessionStorage.getItem("accessToken") ? true : false;
 	const dispatch = useDispatch();
-
+    const isAdmin = sessionStorage.getItem('isAdmin');
+    console.log('isAdmin: ', isAdmin);
 	const getUsers = () => {
-		dispatch(getAllUsersAsync());
+		dispatch(getAllUsersAsync(isAdmin));
 	};
 	useEffect(() => {
 		getUsers();
@@ -30,7 +31,7 @@ const UsersList = () => {
 		<div>
 			<h2>All Users</h2>
 			{/* {allUsers ? dispatch(getAllUsersAsync()) : null} */}
-			{allUsers ? (
+			{allUsers && isLoggedIn && isAdmin ? (
 				allUsers.map((user) => (
 					<div>
 						<div>Name: {user.fullName ? user.fullName : null}</div>

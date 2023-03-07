@@ -6,9 +6,13 @@ import axios from "axios";
 // create async thunk that makes axios get request to retrieve all users
 // protected route - admin only
 
-export const getAllUsersAsync = createAsyncThunk('get/allUsers', async () => {
+export const getAllUsersAsync = createAsyncThunk('get/allUsers', async (isAdmin) => {
     try {
-        const response = await axios.get('/users/allusers');
+        const response = await axios.get('/users/allusers', {
+            params: {
+                isAdmin
+            }
+        });
         return response.data;
     } catch(e){
         console.log()

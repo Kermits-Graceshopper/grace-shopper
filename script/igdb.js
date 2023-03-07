@@ -1954,11 +1954,6 @@ module.exports = [
       "summary": "More than two years in the making, Gran Turismo 3 A-spec features over 150 detailed cars -- each composed of more than 4,000 polygons -- 60 beginner, amateur and professional championship races, as well as ten endurance races and ten rally races. In addition to all-new special effects, such as sun glare, heat distortion and reflections, Gran Turismo 3 A-spec also offers up a soundtrack of more than 20 licensed tracks, and an even better replay mode with TV-style camera views. Two players can go head-to-head via split-screen and up to six can duke it out by linking multiple systems together via i.LINK. Released worldwide in 2001, Gran Turismo 3 a-Spec was designed by Polyphony Digital."
     },
     {
-      "id": 196567,
-      "category": 0,
-      "name": "Tomb Raider"
-    },
-    {
       "id": 131,
       "category": 2,
       "name": "Warcraft II: Beyond the Dark Portal",
@@ -2822,42 +2817,6 @@ module.exports = [
         }
       ],
       "summary": "World of Warcraft is a massively multiplayer online roleplaying game (MMORPG) set in the Warcraft universe. Players assume the roles of Warcraft heroes as they explore, adventure, and quest across a vast world. Being \"Massively Multiplayer,\" World of Warcraft allows thousands of players to interact within the same world. Whether adventuring together or fighting against each other in epic battles, players will form friendships, forge alliances, and compete with enemies for power and glory."
-    },
-    {
-      "id": 163770,
-      "category": 0,
-      "name": "Guardian of Warcraft",
-      "screenshots": [
-        {
-          "id": 583220,
-          "url": "//images.igdb.com/igdb/image/upload/t_thumb/scci0k.jpg"
-        },
-        {
-          "id": 583224,
-          "url": "//images.igdb.com/igdb/image/upload/t_thumb/scci0o.jpg"
-        },
-        {
-          "id": 583228,
-          "url": "//images.igdb.com/igdb/image/upload/t_thumb/scci0s.jpg"
-        },
-        {
-          "id": 583232,
-          "url": "//images.igdb.com/igdb/image/upload/t_thumb/scci0w.jpg"
-        },
-        {
-          "id": 583236,
-          "url": "//images.igdb.com/igdb/image/upload/t_thumb/scci10.jpg"
-        },
-        {
-          "id": 583241,
-          "url": "//images.igdb.com/igdb/image/upload/t_thumb/scci15.jpg"
-        },
-        {
-          "id": 583242,
-          "url": "//images.igdb.com/igdb/image/upload/t_thumb/scci16.jpg"
-        }
-      ],
-      "summary": "This is a summoning tower defense strategy game, with different abilities of monsters and traps, with different effects. the player will continue to upgrade while defending, Become stronger, and summoning more powerful monsters to resist the brave."
     },
     {
       "id": 159296,

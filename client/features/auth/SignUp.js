@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { setCurrentUser } from "../../app/reducers/userSlice";
+// import { useDispatch } from "react-redux";
+// import { setCurrentUser } from "../../app/reducers/userSlice";
 import { Link } from "react-router-dom";
 // import { useDispatch } from 'react-redux';
 // import { setToken } from './signUpSlice';
