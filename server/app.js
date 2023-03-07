@@ -32,9 +32,8 @@ app.use('/api/wishlist', require('./api/wishList'));
 app.use('/api/cart', require('./api/cart'));
 
 
-// app.get("/", (req, res) =>
-// 	res.sendFile(path.join(__dirname, "..", "public", "index.html"))
-// );
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, '..', 'public', 'index.html')));
+
 
 // sends index.html
 app.use('*', (req, res) => {
