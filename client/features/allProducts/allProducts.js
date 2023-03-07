@@ -27,7 +27,7 @@ const AllProducts = () => {
   const products = useSelector(selectAllProducts);
   const search = useSelector(selectSearchState)[0];
   const filter = () => {
-    const filtered = products.filter(product => product.category === category);
+    const filtered = products.filter(product => product.category.includes(category));
     setFiltered(filtered);
   }
   const handleSubmit = async (e) => {
@@ -65,32 +65,27 @@ const AllProducts = () => {
   console.log('category: ', category);
   return (
 		<div>
-			{
-      isAdmin
-      // currUser.isAdmin
-       && editMode ? (
+			{isAdmin &&
+			// currUser.isAdmin
+			editMode ? (
 				<button
 					className="btn btn-warning"
 					type="button"
 					onClick={(e) => setEditMode(!editMode)}>
 					Toggle User Mode
 				</button>
-			) : 
-      isAdmin
-      // currUser.isAdmin
-       ? (
+			) : isAdmin ? (
+				// currUser.isAdmin
 				<button
 					className="btn btn-warning"
 					type="button"
 					onClick={(e) => setEditMode(!editMode)}>
 					Toggle Admin Mode
-				</button> 
-				)
-			 : null}
-			{ 
-      isAdmin
-      // currUser.isAdmin
-       && editMode ? (
+				</button>
+			) : null}
+			{isAdmin &&
+			// currUser.isAdmin
+			editMode ? (
 				<div>
 					<form
 						onSubmit={(e) => {
@@ -132,9 +127,14 @@ const AllProducts = () => {
 						<label>Category</label>
 						<select onChange={(e) => setAddedCategory(e.target.value)}>
 							<option value="">Select Category...</option>
-							<option value="XBOX">Xbox</option>
+							<option value="Xbox">Xbox</option>
 							<option value="Nintendo">Nintendo</option>
-							<option value="PS5">PS5</option>
+							<option value="PlayStation">PlayStation</option>
+							<option value="GameCube">GameCube</option>
+							<option value="PC">PC</option>
+							<option value="Wii">Wii</option>
+							<option value="IOS">IOS</option>
+							<option value="Mac">Mac</option>
 						</select>
 						<button type="submit">Add</button>
 					</form>
@@ -142,20 +142,24 @@ const AllProducts = () => {
 			) : null}
 			<h1>Products</h1>
 			<select defaultValue="" onChange={(e) => setCategory(e.target.value)}>
-				<option value="">All</option>
-				<option value="XBOX">Xbox</option>
+				<option value="">Select Category...</option>
+				<option value="Xbox">Xbox</option>
 				<option value="Nintendo">Nintendo</option>
-				<option value="PS5">PS5</option>
+				<option value="PlayStation">PlayStation</option>
+				<option value="GameCube">GameCube</option>
+				<option value="PC">PC</option>
+				<option value="Wii">Wii</option>
+				<option value="iOS">iOS</option>
+				<option value="Mac">Mac</option>
 			</select>
 			{(filtered[0] && search !== "") || category !== ""
 				? filtered?.map((product) =>
 						product.name.toLowerCase().includes(search) ||
 						product.name.toUpperCase().includes(search) ? (
 							<div>
-								{ 
-                isAdmin
-                // currUser.isAdmin 
-                && editMode ? (
+								{isAdmin &&
+								// currUser.isAdmin
+								editMode ? (
 									<button
 										type="submit"
 										onClick={async (e) => {
@@ -185,10 +189,9 @@ const AllProducts = () => {
 						product.name.toLowerCase().includes(search) ||
 						product.name.toUpperCase().includes(search) ? (
 							<div>
-								{
-                isAdmin
-                // currUser.isAdmin
-                 && editMode ? (
+								{isAdmin &&
+								// currUser.isAdmin
+								editMode ? (
 									<button
 										type="submit"
 										onClick={async (e) => {
@@ -213,12 +216,10 @@ const AllProducts = () => {
 							</div>
 						) : null
 				  )
-				: filtered[0] && search === "" || category !== ""
+				: (filtered[0] && search === "") || category !== ""
 				? filtered?.map((product) => (
 						<div>
-							{
-              isAdmin
-               && editMode ? (
+							{isAdmin && editMode ? (
 								<button
 									type="submit"
 									onClick={async (e) => {
@@ -244,9 +245,7 @@ const AllProducts = () => {
 				  ))
 				: products.map((product) => (
 						<div>
-							{ 
-              isAdmin
-               && editMode ? (
+							{isAdmin && editMode ? (
 								<button
 									type="submit"
 									onClick={async (e) => {

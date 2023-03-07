@@ -8,7 +8,7 @@ import axios from "axios";
 
 export const getAllUsersAsync = createAsyncThunk('get/allUsers', async (isAdmin) => {
     try {
-        const response = await axios.get('/users/allusers', {
+        const response = await axios.get('/api/allusers', {
             params: {
                 isAdmin
             }
