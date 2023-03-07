@@ -1,26 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import axios from "../api/axios";
-import { useDispatch, useSelector } from "react-redux";
-import {
-	fetchSingleProductAsync,
-	selectProduct
-} from "../../app/reducers/singleProductSlice";
-import {
-	addToWishlistAsync
-} from "../../app/reducers/wishListSlice";
-import { addToCartAsync } from "../../app/reducers/cartSlice";
-import { v4 as uuidv4 } from "uuid";
+import React, { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import axios from '../api/axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchSingleProductAsync, selectProduct } from '../../app/reducers/singleProductSlice';
+import { addToWishlistAsync } from '../../app/reducers/wishListSlice';
+import { addToCartAsync } from '../../app/reducers/cartSlice';
+import { v4 as uuidv4 } from 'uuid';
 
 const SingleProduct = () => {
-	const isLoggedIn = sessionStorage.getItem('accessToken') ? true : false
+	const isLoggedIn = sessionStorage.getItem('accessToken') ? true : false;
 	const [editMode, setEditMode] = useState(false);
-	const [error, setError] = useState("");
-	const [newName, setNewName] = useState("");
-	const [newDescription, setNewDescription] = useState("");
+	const [error, setError] = useState('');
+	const [newName, setNewName] = useState('');
+	const [newDescription, setNewDescription] = useState('');
 	const [newPrice, setNewPrice] = useState(0);
-	const [newImageUrl, setNewImageUrl] = useState("");
-	const [newCategory, setNewCategory] = useState("");
+	const [newImageUrl, setNewImageUrl] = useState('');
+	const [newCategory, setNewCategory] = useState('');
 	const [toggleSubmitted, setToggleSubmitted] = useState(false);
 	const [wishlistSuccess, setWishlistSuccess] = useState(false);
 	const [addCartSuccess, setAddCartSuccess] = useState(false);
@@ -31,14 +26,8 @@ const SingleProduct = () => {
 	const product = useSelector(selectProduct);
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		if (
-			newName === "" ||
-			newDescription === "" ||
-			newPrice === "" ||
-			newImageUrl === "" ||
-			newCategory === ""
-		) {
-			setError("Please fill out all fields and assure imageUrl is a valid URL");
+		if (newName === '' || newDescription === '' || newPrice === '' || newImageUrl === '' || newCategory === '') {
+			setError('Please fill out all fields and assure imageUrl is a valid URL');
 			return;
 		}
 		await axios.put(`/api/products/${id}`, {
@@ -98,14 +87,11 @@ const SingleProduct = () => {
 	}, [toggleSubmitted]);
 
 	useEffect(() => {
-		setError("");
+		setError('');
 	}, [newName, newDescription, newPrice, newImageUrl, newCategory]);
 	useEffect(() => {
-		if (
-			!sessionStorage.getItem("accessToken") &&
-			!sessionStorage.getItem("guestId")
-		) {
-			sessionStorage.setItem("guestId", uuidv4());
+		if (!sessionStorage.getItem('accessToken') && !sessionStorage.getItem('guestId')) {
+			sessionStorage.setItem('guestId', uuidv4());
 		}
 	}, []);
 	return (
@@ -116,18 +102,12 @@ const SingleProduct = () => {
 			{isAdmin &&
 			// currentUser.isAdmin
 			editMode ? (
-				<button
-					onClick={(e) => setEditMode(!editMode)}
-					className="btn btn-warning"
-					type="button">
+				<button onClick={(e) => setEditMode(!editMode)} className="btn btn-warning" type="button">
 					Toggle user view mode
 				</button>
 			) : // currentUser.isAdmin
 			isAdmin ? (
-				<button
-					className="btn btn-warning"
-					type="button"
-					onClick={(e) => setEditMode(!editMode)}>
+				<button className="btn btn-warning" type="button" onClick={(e) => setEditMode(!editMode)}>
 					Toggle edit product mode
 				</button>
 			) : null}
@@ -136,14 +116,13 @@ const SingleProduct = () => {
 			editMode ? (
 				<div>
 					<h1>Edit Product</h1>
-					{error !== "" ? (
-						<p style={{ backgroundColor: "red" }}>{error}</p>
-					) : null}
+					{error !== '' ? <p style={{ backgroundColor: 'red' }}>{error}</p> : null}
 					<form
 						onSubmit={(e) => {
 							e.preventDefault();
 							handleSubmit(e);
-						}}>
+						}}
+					>
 						<label htmlFor="name">Name</label>
 						<input
 							placeholder="Game name..."
@@ -203,12 +182,8 @@ const SingleProduct = () => {
 					<option value={9}>9</option>
 					<option value={10}>10</option>
 				</select>
-				{addCartSuccess ? (
-					<h5 style={{ color: "green" }}>Added to cart!</h5>
-				) : null}
-				{wishlistSuccess ? (
-					<h5 style={{ color: "green" }}>Added to wishlist!</h5>
-				) : null}
+				{addCartSuccess ? <h5 style={{ color: 'green' }}>Added to cart!</h5> : null}
+				{wishlistSuccess ? <h5 style={{ color: 'green' }}>Added to wishlist!</h5> : null}
 				<button type="button" className="btn btn-success" onClick={addToCart}>
 					Add to Cart
 				</button>
