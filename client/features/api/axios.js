@@ -1,5 +1,5 @@
 import axios from 'axios';
-const BASE_URL = 'https://localhost:10000';
+const BASE_URL = 'https://gameshare.onrender.com';
 
 export default axios.create({
 	baseURL: BASE_URL
