@@ -8,7 +8,7 @@ import axios from "axios";
 
 export const getAllUsersAsync = createAsyncThunk('get/allUsers', async (isAdmin) => {
     try {
-        const response = await axios.get('/users/allusers', {
+        const response = await axios.get('/api/allusers', {
             params: {
                 isAdmin
             }
@@ -18,6 +18,24 @@ export const getAllUsersAsync = createAsyncThunk('get/allUsers', async (isAdmin)
         console.log()
     }
 });
+
+export const addNewUserAsync = createAsyncThunk(
+	"addNewUser",
+	async ({ fname, lname, email, password, isAdmin }) => {
+		try {
+			const { data } = await axios.post(`/api/users`, {
+				fname,
+                lname,
+				email,
+				password,
+				isAdmin
+			});
+			return data;
+		} catch (e) {
+			console.log(e);
+		}
+	}
+);
 
 const initialState = [];
 
@@ -29,6 +47,9 @@ const usersListSlice = createSlice({
         builder.addCase(getAllUsersAsync.fulfilled, (state, action) => {
             return action.payload;
         })
+        builder.addCase(addNewUsersAsync.fulfilled, (state, action) => {
+			state.push(action.payload);
+		});
     }
 })
 
