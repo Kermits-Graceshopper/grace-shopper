@@ -1,12 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-
+import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 // create async thunk that makes axios get request to retrieve all users
 // protected route - admin only
 
 export const getAllUsersAsync = createAsyncThunk('get/allUsers', async (isAdmin) => {
+
+
     try {
         const response = await axios.get('/api/allusers', {
             params: {
@@ -17,6 +18,7 @@ export const getAllUsersAsync = createAsyncThunk('get/allUsers', async (isAdmin)
     } catch(e){
         console.log()
     }
+
 });
 
 export const addNewUserAsync = createAsyncThunk(
@@ -54,5 +56,6 @@ const usersListSlice = createSlice({
 })
 
 
-export const selectAllUsers = state => state.usersList;
+
+export const selectAllUsers = (state) => state.usersList;
 export default usersListSlice.reducer;
