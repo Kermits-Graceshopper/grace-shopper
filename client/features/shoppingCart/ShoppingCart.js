@@ -1,58 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import axios from '../api/axios';
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import axios from "../api/axios";
 import {
 	fetchAllProductsAsync,
 	selectAllProducts
-
 } from "../../app/reducers/allProductsSlice";
 import { selectUser } from "../../app/reducers/userSlice";
 import { Button } from "react-bootstrap";
 import { v4 as uuidv4 } from "uuid";
 
 const ShoppingCart = () => {
-  let isLoggedIn = sessionStorage.getItem('accessToken') ? true : false;
+	const [deletionSuccess, setDeletionSuccess] = useState(false);
+	let isLoggedIn = sessionStorage.getItem("accessToken") ? true : false;
 	const [cart, setCart] = useState([]);
-	const [pageMessage, setPageMessage] = useState('Loading...');
+	const [pageMessage, setPageMessage] = useState("Loading...");
 	let runningTotal = 0;
-
 	const products = useSelector(selectAllProducts);
-	// const navigate = useNavigate();
-	// const user = useSelector(selectUser);
-	// const isLoggedIn = user.isLoggedIn;
-
 	const dispatch = useDispatch();
 
-	const stripeItems = cart.map((item) => {
-		const product = products.find((product) => product.id === item.productId);
-		const price = parseFloat(product.price);
-		return {
-			id: item.productId,
-			name: product.name,
-			imageUrl: product.imageUrl,
-			price: price,
-			quantity: item.quantity
-		};
-	});
-
 	let userEmail = null;
-	const userToken = sessionStorage.getItem('accessToken');
+	const userToken = sessionStorage.getItem("accessToken");
 	if (userToken) {
-		userEmail = sessionStorage.getItem('email');
+		userEmail = sessionStorage.getItem("email");
 	}
 
 	const handleCheckout = async () => {
 		try {
 			await axios
 				.post(
-					'/api/checkout',
+					"/api/checkout",
 					{
 						cart: stripeItems,
 						email: userEmail
 					},
 					{
 						headers: {
-							'Access-Control-Allow-Origin': '*'
+							"Access-Control-Allow-Origin": "*"
 						}
 					}
 				)
@@ -66,38 +49,42 @@ const ShoppingCart = () => {
 			console.log(e);
 		}
 	};
+	const deleteCartItem = async (id) => {
+    let response;
+		isLoggedIn
+			? response = await axios.delete("/api/cart", {
+        data: {
+					userId: sessionStorage.getItem("userId"),
+					productId: id
+        }
+			  })
+			: response = await axios.delete("/api/cart", {
+        data: {
+					guestId: sessionStorage.getItem("guestId"),
+					productId: id
+        }
+			  });
+        setCart(response.data);
+		setDeletionSuccess(true);
+		setTimeout(() => {
+			setDeletionSuccess(false);
+		}, 3000);
+	};
 	useEffect(() => {
 		setTimeout(() => {
-			setPageMessage('There are no items in your cart!');
+			setPageMessage("There are no items in your cart!");
 		}, 1000);
 		const getCart = async () => {
-			// let ip;
-			// if (!isLoggedIn) {
-			// 	await axios
-			// 		.get("https://api.ipify.org")
-			// 		.then((response) => (ip = response.data));
-			// 	console.log("IP VARIABLE FROM WISHLIST.JS USEEFFECT: ", ip);
-			// }
 			let data;
-			// console.log("user: ", user);
-			console.log("isLoggedIn: ", isLoggedIn);
-      console.log(
-				'sessionStorage.getItem("guestId")',
-				sessionStorage.getItem("guestId")
-			);
-      console.log(
-				'sessionStorage.getItem("userId")',
-				sessionStorage.getItem("userId")
-			);
 			isLoggedIn
-				? (data = await axios.get('/api/cart', {
+				? (data = await axios.get("/api/cart", {
 						params: {
-							userId: sessionStorage.getItem('userId')
+							userId: sessionStorage.getItem("userId")
 						}
 				  }))
-				: (data = await axios.get('/api/cart', {
+				: (data = await axios.get("/api/cart", {
 						params: {
-							guestId: sessionStorage.getItem('guestId')
+							guestId: sessionStorage.getItem("guestId")
 						}
 				  }));
 			setCart(data.data);
@@ -105,18 +92,32 @@ const ShoppingCart = () => {
 		getCart();
 		dispatch(fetchAllProductsAsync());
 	}, []);
-		useEffect(() => {
-			if (
-				!sessionStorage.getItem("accessToken") &&
-				!sessionStorage.getItem("guestId")
-			) {
-				sessionStorage.setItem("guestId", uuidv4());
-			}
-		}, []);
+	const stripeItems = cart.map((item) => {
+		const product = products.find((product) => product.id === item.productId);
+		const price = parseFloat(product.price);
+		return {
+			id: item.productId,
+			name: product.name,
+			imageUrl: product.imageUrl,
+			price: price,
+			quantity: item.quantity
+		};
+	});
+	useEffect(() => {
+		if (
+			!sessionStorage.getItem("accessToken") &&
+			!sessionStorage.getItem("guestId")
+		) {
+			sessionStorage.setItem("guestId", uuidv4());
+		}
+	}, []);
 	console.log("products: ", products);
 	console.log("cart: ", cart);
 	return (
 		<div>
+			{deletionSuccess ? (
+				<h5 style={{ color: "green" }}>Item deleted!</h5>
+			) : null}
 			<h1> Cart</h1>
 			<div className="productContainer">
 				{cart[0] ? (
@@ -135,6 +136,14 @@ const ShoppingCart = () => {
 														runningTotal + product.price * item.quantity)
 												}
 											</p>
+											<button
+												type="button"
+                        className='btn btn-danger'
+												onClick={() => {
+													deleteCartItem(item.productId);
+												}}>
+												Remove Item
+											</button>
 										</div>
 									) : null
 							  )
@@ -159,8 +168,7 @@ const ShoppingCart = () => {
 							className="coButton"
 							variant="primary"
 							size="lg"
-							onClick={handleCheckout}
-						>
+							onClick={handleCheckout}>
 							Proceed to checkout
 						</Button>
 					) : (
