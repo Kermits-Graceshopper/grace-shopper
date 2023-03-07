@@ -45,6 +45,7 @@ app.use(express.static(path.join(__dirname, "..", "public")));
 app.use((req, res, next) => {
 	if (path.extname(req.path).length) {
 		const err = new Error("Not found");
+		console.log(err);
 		err.status = 404;
 		next(err);
 	} else {
