@@ -31,7 +31,15 @@ app.use('/api/orders', require('./api/orders'));
 app.use('/api/wishlist', require('./api/wishList'));
 app.use('/api/cart', require('./api/cart'));
 
+
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, '..', 'public', 'index.html')));
+
+
+// sends index.html
+app.use('*', (req, res) => {
+	res.sendFile(path.join(__dirname, '..', 'public/index.html'));
+});
+
 
 // static file-serving middleware
 app.use(express.static(path.join(__dirname, '..', 'public')));
@@ -48,10 +56,7 @@ app.use((req, res, next) => {
 	}
 });
 
-// sends index.html
-app.use('*', (req, res) => {
-	res.sendFile(path.join(__dirname, '..', 'public/index.html'));
-});
+
 
 // error handling endware
 app.use((err, req, res, next) => {
