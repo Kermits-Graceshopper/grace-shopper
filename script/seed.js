@@ -1,6 +1,12 @@
+<<<<<<< Updated upstream
 'use strict'
 
 const {db } = require('../server/db')
+=======
+"use strict";
+const igdb = require("./igdb.js");
+const { db } = require("../server/db");
+>>>>>>> Stashed changes
 
 
 const users = [
@@ -24,6 +30,7 @@ const users = [
   },
 ];
 
+<<<<<<< Updated upstream
 const products = [
   {
 
@@ -48,6 +55,52 @@ const products = [
     category: 'Nintendo'
   },
 ]
+=======
+const possiblePrices = [39.99, 44.99, 49.99, 59.99, 69.99]
+
+const products = igdb.map((product) => ({
+  name: product.name,
+  description: product.summary || 'no description',
+  price: possiblePrices[Math.floor(Math.random() * possiblePrices.length)],
+  imageUrl: product.screenshots ? `https:${product.screenshots[0].url}` : 'default_image_url',
+  category: product.platforms ? product.platforms.map((platform) => platform.name).join(', ') : '',
+}));
+
+
+
+
+// const products = [
+//   {
+
+//     name: 'Call of Duty',
+//     description: 'This is product 1',
+//     price: 9.99,
+//     imageUrl: 'https://via.placeholder.com/150',
+//     category: 'XBOX'
+//   },
+//   {
+//     name: 'Capstone Game',
+//     description: 'This is product 2',
+//     price: 19.99,
+//     imageUrl: 'https://via.placeholder.com/150',
+//     category: 'PS5'
+//   },
+//   {
+//     name: 'Cap toss',
+//     description: 'This is product 3',
+//     price: 29.99,
+//     imageUrl: 'https://via.placeholder.com/150',
+//     category: 'Nintendo'
+//   },
+//   {
+//     name: 'Random game',
+//     description: 'This is product 4',
+//     price: 14.99,
+//     imageUrl: 'https://via.placeholder.com/150',
+//     category: 'Nintendo'
+//   },
+// ]
+>>>>>>> Stashed changes
 
 const orders = [
   {
