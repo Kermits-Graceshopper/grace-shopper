@@ -20,15 +20,15 @@ router.post('/', async (req, res) => {
 		if (userEmail) {
 			const session = await stripe.checkout.sessions.create({
 				customer_email: userEmail,
-				payment_method_types: ['card'],
-				mode: 'payment',
+				payment_method_types: ["card"],
+				mode: "payment",
 				line_items: lineItems,
 				shipping_address_collection: {
-					allowed_countries: ['US']
+					allowed_countries: ["US"]
 				},
 				//! change to deployed address later
-				success_url: 'http://localhost:8080/success',
-				cancel_url: 'http://localhost:8080/cart'
+				success_url: "https://gameshare.onrender.com/success",
+				cancel_url: "https://gameshare.onrender.com/cancel"
 			});
 			res.json({
 				sessionUrl: session.url
