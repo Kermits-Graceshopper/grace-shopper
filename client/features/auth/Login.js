@@ -51,6 +51,8 @@ const Login = () => {
 			sessionStorage.setItem("firstName", response?.data?.firstName);
 			sessionStorage.setItem("lastName", response?.data?.lastName);
 			sessionStorage.setItem("email", response?.data?.email);
+
+			sessionStorage.removeItem("guestId");
 			setEmail("");
 			setPassword("");
 			// setSuccess(true);

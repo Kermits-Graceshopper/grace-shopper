@@ -84,7 +84,8 @@ const handleLogin = async (req, res) => {
 			}
             await Orders.destroy({
                 where: {
-                    guestId: guestId
+                    guestId: guestId,
+                    isCompleted: false
                 }
             })
 			// Saving refreshToken with current user

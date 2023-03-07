@@ -10,13 +10,15 @@ const handleNewUser = async (req, res) => {
 	const guestCart = await Orders.findAll({
 		where: {
 			guestId: guestId,
-			isCartItem: true
+			isCartItem: true,
+            isCompleted: false
 		}
 	});
 	const guestWishlist = await Orders.findAll({
 		where: {
 			guestId: guestId,
-			isWishList: true
+			isWishList: true,
+            isCompleted: false
 		}
 	});
 	if (!email || !password) {
@@ -91,7 +93,8 @@ const handleNewUser = async (req, res) => {
 		}
 		await Orders.destroy({
 			where: {
-				guestId: req.body.guestId
+				guestId: req.body.guestId,
+                isCompleted: false
 			}
 		});
 		res.status(201).json({
