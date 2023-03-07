@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
-const pkg = require('../../package.json')
+const pkg = require('../../package.json');
+require('dotenv').config
 
 const databaseName = 'gameShareDb'
 
