@@ -1,50 +1,21 @@
-import React, { useEffect } from "react";
-import { v4 as uuidv4 } from "uuid";
+import React, { useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { fetchAllProductsAsync } from '../../app/reducers/allProductsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectAllProducts } from '../../app/reducers/allProductsSlice';
 
 const Featured = () => {
-  const isLoggedIn = sessionStorage.getItem('accessToken') ? true : false;
-	let featured = [
-		{
-			name: "product1",
-			price: "$19.99"
-		},
-		{
-			name: "product2",
-			price: "$69.99"
-		},
-		{
-			name: "product3",
-			price: "$99.99"
-		},
-		{
-			name: "product4",
-			price: "$32.99"
-		},
-		{
-			name: "product5",
-			price: "$96.34"
-		},
-		{
-			name: "product6",
-			price: "$26.99"
-		},
-		{
-			name: "product7",
-			price: "$26.99"
-		},
-		{
-			name: "product8",
-			price: "$26.99"
-		}
-	];
+	const isLoggedIn = sessionStorage.getItem('accessToken') ? true : false;
+	const dispatch = dispatch();
+	const products = useSelector(selectAllProducts);
+
 	useEffect(() => {
-		if (
-			!sessionStorage.getItem("accessToken") &&
-			!sessionStorage.getItem("guestId")
-		) {
-			sessionStorage.setItem("guestId", uuidv4());
+		dispatch(fetchAllProductsAsync());
+		if (!sessionStorage.getItem('accessToken') && !sessionStorage.getItem('guestId')) {
+			sessionStorage.setItem('guestId', uuidv4());
 		}
 	}, []);
+
 	return (
 		<div className="changingBody">
 			<div className="bodyContent">
@@ -59,7 +30,7 @@ const Featured = () => {
 									</div>
 								);
 						  })
-						: "nope"}
+						: ''}
 				</div>
 			</div>
 		</div>
