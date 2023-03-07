@@ -27,7 +27,7 @@ const Featured = () => {
 	const slicedProducts = featuredProducts(products);
 
 	return (
-		<div className="changingBody">
+		<div>
 			<div className="bodyContent">
 				<h1> Featured</h1>
 				<div className="productContainer">
@@ -41,7 +41,6 @@ const Featured = () => {
 										<img className="singleProductImg" src={product.imageUrl} />
 										<h6>{product.price}</h6>
 										<h6>Category: {product.category}</h6>
-										<p className="productDescription">{product.description}</p>
 									</div>
 								);
 						  })
