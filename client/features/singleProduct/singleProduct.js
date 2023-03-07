@@ -243,10 +243,10 @@ const SingleProduct = () => {
 				{wishlistSuccess ? (
 					<h5 style={{ color: "green" }}>Added to wishlist!</h5>
 				) : null}
-				<button type="button" onClick={addToCart}>
+				<button type="button" className='btn btn-success' onClick={addToCart}>
 					Add to Cart
 				</button>
-				<button type="button" onClick={addToWishlist}>
+				<button type="button" className='btn btn-light' onClick={addToWishlist}>
 					Add to Wishlist
 				</button>
 			</div>

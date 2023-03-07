@@ -26,12 +26,6 @@ const AllProducts = () => {
   const dispatch = useDispatch()
   const products = useSelector(selectAllProducts);
   const search = useSelector(selectSearchState)[0];
-  // const currUser = useSelector(selectUser);
-  // const token = window.localStorage.getItem(token);
-  // console.log('token', token);
-  // console.log('window.localStorage.token: ', window.localStorage.token);
-  // window.localStorage.removeItem(token);
-  // console.log('token after window.localStorage.removeItem(token): ', token)
   const filter = () => {
     const filtered = products.filter(product => product.category === category);
     setFiltered(filtered);
