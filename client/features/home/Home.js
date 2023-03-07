@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { selectUser } from "../../app/reducers/userSlice";
+// import { useSelector } from "react-redux";
+// import { selectUser } from "../../app/reducers/userSlice";
 import { v4 as uuidv4 } from "uuid";
 /**
  * COMPONENT

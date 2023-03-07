@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 // import { logout } from '../../app/store';
-import { logout } from "../../app/reducers/userSlice";
+// import { logout } from "../../app/reducers/userSlice";
 import { MDBCol, MDBRow } from "mdbreact";
 import Button from "react-bootstrap/Button";
 import { addSearchQuery } from "../../app/reducers/searchSlice";
-import { selectUser } from "../../app/reducers/userSlice";
+// import { selectUser } from "../../app/reducers/userSlice";
 import { v4 as uuidv4 } from "uuid";
 
 const Navbar = () => {
@@ -14,9 +14,8 @@ const Navbar = () => {
 	const [searchInput, setSearchInput] = useState("");
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	// const isLoggedIn = useSelector(selectUser).isLoggedIn;
 	let isLoggedIn = sessionStorage.getItem("accessToken") ? true : false;
-	// const user = useSelector(selectUser)
+  const isAdmin = sessionStorage.getItem('isAdmin');
 	const logoutAndRedirectHome = () => {
 		sessionStorage.removeItem("accessToken");
 		sessionStorage.removeItem("isAdmin");
@@ -25,18 +24,6 @@ const Navbar = () => {
 		sessionStorage.removeItem("lastName");
 		sessionStorage.removeItem("email");
     setStatus(!status);
-		// dispatch(
-		// 	logout({
-		// 		firstName: sessionStorage.getItem("firstName"),
-		//     lastName: sessionStorage.getItem('lastName'),
-		// 		isAdmin: sessionStorage.getItem("isAdmin"),
-		// 		accessToken: sessionStorage.getItem("accessToken"),
-		// 		userId: sessionStorage.getItem("userId"),
-		//     email: sessionStorage.getItem('email')
-		// 	})
-		// );
-		// console.log('user: ', user);
-		// window.localStorage.removeItem('accessToken');
 		navigate("/login");
 	};
 
@@ -116,6 +103,14 @@ const Navbar = () => {
 									Logout
 								</button>
 							)}
+							{isAdmin ? (
+								<Link
+									style={{ textDecoration: "none", color: "yellow" }}
+									className="link"
+									to="/allusers">
+									All Users
+								</Link>
+							) : null}
 							<Link to="/cart">
 								<img
 									style={{ width: "30px", height: "auto" }}

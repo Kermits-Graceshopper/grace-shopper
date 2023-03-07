@@ -6,10 +6,9 @@ import {
 	fetchSingleProductAsync,
 	selectProduct
 } from "../../app/reducers/singleProductSlice";
-import { selectUser } from "../../app/reducers/userSlice";
+// import { selectUser } from "../../app/reducers/userSlice";
 import {
-	addToWishlistAsync,
-	selectWishlist
+	addToWishlistAsync
 } from "../../app/reducers/wishListSlice";
 import { addToCartAsync } from "../../app/reducers/cartSlice";
 import { v4 as uuidv4 } from "uuid";
@@ -30,8 +29,6 @@ const SingleProduct = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
 	const isAdmin = sessionStorage.getItem('isAdmin');
-	console.log('isAdmin in single product component: ', isAdmin);
-	// const currentUser = useSelector(selectUser);
 	const product = useSelector(selectProduct);
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -56,18 +53,6 @@ const SingleProduct = () => {
 	};
 
 	const addToWishlist = async () => {
-		// let ip;
-		// if (!currentUser.isLoggedIn) {
-		// 	await axios
-		// 		.get("https://api.ipify.org")
-		// 		.then((response) => (ip = response.data));
-		// }
-		// console.log(
-		// 	"ip variable in addToWishlist function in singleProduct.js: ",
-		// 	ip
-		// );
-		// console.log("currentUser: ", currentUser);
-		// currentUser.isLoggedIn
 		isLoggedIn
 			? dispatch(
 					addToWishlistAsync({
@@ -89,18 +74,6 @@ const SingleProduct = () => {
 		}, 3000);
 	};
 	const addToCart = async () => {
-		// let ip;
-		// if (!isLoggedIn) {
-		// 	await axios
-		// 		.get("https://api.ipify.org")
-		// 		.then((response) => (ip = response.data));
-		// }
-		// console.log(
-		// 	"ip variable in addToWishlist function in singleProduct.js: ",
-		// 	ip
-		// );
-		// console.log("currentUser: ", currentUser);
-		// currentUser.isLoggedIn
 		isLoggedIn
 			? dispatch(
 					addToCartAsync({
@@ -121,7 +94,6 @@ const SingleProduct = () => {
 			setAddCartSuccess(false);
 		}, 3000);
 	};
-
 	useEffect(() => {
 		dispatch(fetchSingleProductAsync(id));
 	}, [toggleSubmitted]);
@@ -137,8 +109,6 @@ const SingleProduct = () => {
 			sessionStorage.setItem("guestId", uuidv4());
 		}
 	}, []);
-	console.log('single product component isLoggedIn: ', isLoggedIn)
-	console.log('single product component sessionStorage.getItem("userId"): ', sessionStorage.getItem('userId'));
 	return (
 		<div>
 			<p>

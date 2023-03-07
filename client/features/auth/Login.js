@@ -1,8 +1,8 @@
-import React, { useRef, useState, useEffect, useContext } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "../api/axios";
-import { useDispatch, useSelector } from "react-redux";
-import { selectUser, setCurrentUser } from "../../app/reducers/userSlice";
+// import { useDispatch, useSelector } from "react-redux";
+// import { selectUser, setCurrentUser } from "../../app/reducers/userSlice";
 import { v4 as uuidv4 } from "uuid";
 
 const LOGIN_URL = "/api/login";

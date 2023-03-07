@@ -4,7 +4,6 @@ import {
 	fetchAllProductsAsync,
 	selectAllProducts
 } from "../../app/reducers/allProductsSlice";
-import { selectUser } from "../../app/reducers/userSlice";
 import axios from "../api/axios";
 import { v4 as uuidv4 } from "uuid";
 

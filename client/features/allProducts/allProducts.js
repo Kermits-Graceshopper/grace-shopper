@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllProductsAsync, selectAllProducts } from '../../app/reducers/allProductsSlice';
 import { selectSearchState } from '../../app/reducers/searchSlice';
-import { selectUser } from '../../app/reducers/userSlice';
+// import { selectUser } from '../../app/reducers/userSlice';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from "uuid";
@@ -62,6 +62,7 @@ const AllProducts = () => {
 			sessionStorage.setItem("guestId", uuidv4());
 		}
 	}, []);
+  console.log('category: ', category);
   return (
 		<div>
 			{
@@ -212,12 +213,11 @@ const AllProducts = () => {
 							</div>
 						) : null
 				  )
-				: (filtered[0] && search === "") || category !== ""
+				: filtered[0] && search === "" || category !== ""
 				? filtered?.map((product) => (
 						<div>
 							{
               isAdmin
-              // currUser.isAdmin
                && editMode ? (
 								<button
 									type="submit"
@@ -246,7 +246,6 @@ const AllProducts = () => {
 						<div>
 							{ 
               isAdmin
-              // currUser.isAdmin
                && editMode ? (
 								<button
 									type="submit"

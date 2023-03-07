@@ -5,7 +5,7 @@ import {
 	fetchAllProductsAsync,
 	selectAllProducts
 } from "../../app/reducers/allProductsSlice";
-import { selectUser } from "../../app/reducers/userSlice";
+// import { selectUser } from "../../app/reducers/userSlice";
 import { Button } from "react-bootstrap";
 import { v4 as uuidv4 } from "uuid";
 
