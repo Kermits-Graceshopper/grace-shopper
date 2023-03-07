@@ -174,24 +174,16 @@ form div {
 
 .singleProduct {
   background-color: ivory;
-  margin:10px;
-  width: 30vw;
+  margin:50px;
+  width: 40vw;
+  padding: 50px;
   /* add drop shadow to single product divs here  */
 }
-
-.productDescription {
-  font-size: xx-small;
+.checked {
+  color: orange;
 }
-
-#productsTitle {
-  display: block;
-}
-
-.fixedSuccessMessage {
-  background-color: green;
-  color: white;
-  position: fixed;
-  top: 0;
-  margin-top: 0px;
-  width: 50vw;
+.review{
+  background-color: white;
+  padding: 10px;
+  margin: 10px;
 }
