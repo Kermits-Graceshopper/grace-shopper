@@ -1,46 +1,42 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import axios from "../api/axios";
-import {
-	fetchAllProductsAsync,
-	selectAllProducts
-} from "../../app/reducers/allProductsSlice";
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from '../api/axios';
+import { fetchAllProductsAsync, selectAllProducts } from '../../app/reducers/allProductsSlice';
 // import { selectUser } from "../../app/reducers/userSlice";
-import { Button } from "react-bootstrap";
-import { v4 as uuidv4 } from "uuid";
+import { Button } from 'react-bootstrap';
+import { v4 as uuidv4 } from 'uuid';
 
 const ShoppingCart = () => {
 	const [deletionSuccess, setDeletionSuccess] = useState(false);
-	let isLoggedIn = sessionStorage.getItem("accessToken") ? true : false;
+	let isLoggedIn = sessionStorage.getItem('accessToken') ? true : false;
 	const [cart, setCart] = useState([]);
-	const [pageMessage, setPageMessage] = useState("Loading...");
+	const [pageMessage, setPageMessage] = useState('Loading...');
 	let runningTotal = 0;
 	const products = useSelector(selectAllProducts);
 	const dispatch = useDispatch();
 
 	let userEmail = null;
-	const userToken = sessionStorage.getItem("accessToken");
+	const userToken = sessionStorage.getItem('accessToken');
 	if (userToken) {
-		userEmail = sessionStorage.getItem("email");
+		userEmail = sessionStorage.getItem('email');
 	}
 
 	const handleCheckout = async () => {
 		try {
 			await axios
 				.post(
-					"/api/checkout",
+					'/api/checkout',
 					{
 						cart: stripeItems,
 						email: userEmail
 					},
 					{
 						headers: {
-							"Access-Control-Allow-Origin": "*"
+							'Access-Control-Allow-Origin': '*'
 						}
 					}
 				)
 				.then((response) => {
-					console.log(response);
 					if (response.data.sessionUrl) {
 						window.location.replace(response.data.sessionUrl); // Forwarding user to Stripe
 					}
@@ -50,21 +46,21 @@ const ShoppingCart = () => {
 		}
 	};
 	const deleteCartItem = async (id) => {
-    let response;
+		let response;
 		isLoggedIn
-			? response = await axios.delete("/api/cart", {
-        data: {
-					userId: sessionStorage.getItem("userId"),
-					productId: id
-        }
-			  })
-			: response = await axios.delete("/api/cart", {
-        data: {
-					guestId: sessionStorage.getItem("guestId"),
-					productId: id
-        }
-			  });
-        setCart(response.data);
+			? (response = await axios.delete('/api/cart', {
+					data: {
+						userId: sessionStorage.getItem('userId'),
+						productId: id
+					}
+			  }))
+			: (response = await axios.delete('/api/cart', {
+					data: {
+						guestId: sessionStorage.getItem('guestId'),
+						productId: id
+					}
+			  }));
+		setCart(response.data);
 		setDeletionSuccess(true);
 		setTimeout(() => {
 			setDeletionSuccess(false);
@@ -72,19 +68,19 @@ const ShoppingCart = () => {
 	};
 	useEffect(() => {
 		setTimeout(() => {
-			setPageMessage("There are no items in your cart!");
+			setPageMessage('There are no items in your cart!');
 		}, 1000);
 		const getCart = async () => {
 			let data;
 			isLoggedIn
-				? (data = await axios.get("/api/cart", {
+				? (data = await axios.get('/api/cart', {
 						params: {
-							userId: sessionStorage.getItem("userId")
+							userId: sessionStorage.getItem('userId')
 						}
 				  }))
-				: (data = await axios.get("/api/cart", {
+				: (data = await axios.get('/api/cart', {
 						params: {
-							guestId: sessionStorage.getItem("guestId")
+							guestId: sessionStorage.getItem('guestId')
 						}
 				  }));
 			setCart(data.data);
@@ -104,20 +100,14 @@ const ShoppingCart = () => {
 		};
 	});
 	useEffect(() => {
-		if (
-			!sessionStorage.getItem("accessToken") &&
-			!sessionStorage.getItem("guestId")
-		) {
-			sessionStorage.setItem("guestId", uuidv4());
+		if (!sessionStorage.getItem('accessToken') && !sessionStorage.getItem('guestId')) {
+			sessionStorage.setItem('guestId', uuidv4());
 		}
 	}, []);
-	console.log("products: ", products);
-	console.log("cart: ", cart);
+
 	return (
 		<div>
-			{deletionSuccess ? (
-				<h5 style={{ color: "green" }}>Item deleted!</h5>
-			) : null}
+			{deletionSuccess ? <h5 style={{ color: 'green' }}>Item deleted!</h5> : null}
 			<h1> Cart</h1>
 			<div className="productContainer">
 				{cart[0] ? (
@@ -130,18 +120,14 @@ const ShoppingCart = () => {
 											<img src={product.imageUrl} />
 											<h5>${product.price}</h5>
 											<h5>Quantity: {item.quantity}</h5>
-											<p className="priceCalc">
-												{
-													(runningTotal =
-														runningTotal + product.price * item.quantity)
-												}
-											</p>
+											<p className="priceCalc">{(runningTotal = runningTotal + product.price * item.quantity)}</p>
 											<button
 												type="button"
-                        className='btn btn-danger'
+												className="btn btn-danger"
 												onClick={() => {
 													deleteCartItem(item.productId);
-												}}>
+												}}
+											>
 												Remove Item
 											</button>
 										</div>
@@ -164,11 +150,7 @@ const ShoppingCart = () => {
 					</div>
 					<hr />
 					{cart[0] ? (
-						<Button
-							className="coButton"
-							variant="primary"
-							size="lg"
-							onClick={handleCheckout}>
+						<Button className="coButton" variant="primary" size="lg" onClick={handleCheckout}>
 							Proceed to checkout
 						</Button>
 					) : (

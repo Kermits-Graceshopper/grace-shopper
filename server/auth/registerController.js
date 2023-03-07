@@ -1,28 +1,30 @@
-const { Users, Orders } = require("../db");
-const fsPromises = require("fs").promises;
-const path = require("path");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const axios = require("axios");
+const { Users, Orders } = require('../db');
+const fsPromises = require('fs').promises;
+const path = require('path');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const axios = require('axios');
 
 const handleNewUser = async (req, res) => {
-    const { fullName, first, last, email, password, guestId } = req.body;
+	const { fullName, first, last, email, password, guestId } = req.body;
 	const guestCart = await Orders.findAll({
 		where: {
 			guestId: guestId,
-			isCartItem: true
+			isCartItem: true,
+			isCompleted: false
 		}
 	});
 	const guestWishlist = await Orders.findAll({
 		where: {
 			guestId: guestId,
-			isWishList: true
+			isWishList: true,
+			isCompleted: false
 		}
 	});
 	if (!email || !password) {
 		return res.status(400).json({
-			message: "Username and password are required.",
-			"req.body": req.body
+			message: 'Username and password are required.',
+			'req.body': req.body
 		});
 	}
 	// check for duplicate usernames in the db
@@ -33,15 +35,11 @@ const handleNewUser = async (req, res) => {
 	});
 	if (duplicate) return res.sendStatus(409); //Conflict
 	try {
-		console.log("top of try bracket");
+		console.log('top of try bracket');
 		//encrypt the password
 		const hashedPwd = await bcrypt.hash(password, 10);
-		const refreshToken = jwt.sign(
-			{ email: email },
-			process.env.REFRESH_TOKEN_SECRET,
-			{ expiresIn: "1d" }
-		);
-		console.log("above Users.create()");
+		const refreshToken = jwt.sign({ email: email }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1d' });
+		console.log('above Users.create()');
 		await Users.create({
 			fullName,
 			fname: first,
@@ -50,7 +48,7 @@ const handleNewUser = async (req, res) => {
 			password: hashedPwd,
 			refreshToken
 		});
-		console.log("below Users.create()");
+		console.log('below Users.create()');
 		const userCreated = await Users.findOne({
 			where: {
 				fname: first,
@@ -59,11 +57,7 @@ const handleNewUser = async (req, res) => {
 		});
 		userCreated.isLoggedIn = true;
 		await userCreated.save();
-		const accessToken = jwt.sign(
-			{ email: email },
-			process.env.ACCESS_TOKEN_SECRET,
-			{ expiresIn: "20m" }
-		);
+		const accessToken = jwt.sign({ email: email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '20m' });
 		// localStorage.setItem('accessToken', accessToken);
 		if (guestWishlist) {
 			guestWishlist.map((item) => {
@@ -91,7 +85,8 @@ const handleNewUser = async (req, res) => {
 		}
 		await Orders.destroy({
 			where: {
-				guestId: req.body.guestId
+				guestId: req.body.guestId,
+				isCompleted: false
 			}
 		});
 		res.status(201).json({
@@ -106,7 +101,7 @@ const handleNewUser = async (req, res) => {
 			userId: userCreated.id
 		});
 	} catch (err) {
-		console.log("error in catch");
+		console.log('error in catch');
 		res.status(500).json({ message: err.message });
 	}
 };
