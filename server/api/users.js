@@ -18,12 +18,12 @@ router.get('/', async (req, res, next) => {
 });
 
 //make route with same middleware that can delete a user
-router.delete('/all/:userId', (req, res) => {
-  try{
+// router.delete('/all/:userId', (req, res) => {
+//   try{
     
-  } catch(e){
+//   } catch(e){
 
-  }
-})
+//   }
+// })
 
 module.exports = router

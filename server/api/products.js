@@ -101,10 +101,11 @@ router.post("/", async (req, res) => {
 // });
 
 
-router.use((req, res, next) => {
-	const error = new Error("Not Found");
-	error.status = 404;
-	next(error);
-});
+// router.use((req, res, next) => {
+// 	const error = new Error("Not Found");
+// 	console.log(error)
+// 	error.status = 404;
+// 	next(error);
+// });
 
 module.exports = router;
