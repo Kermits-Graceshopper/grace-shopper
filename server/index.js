@@ -1,4 +1,5 @@
-const PORT = process.env.PORT || 8080;
+require('dotenv').config
+const PORT = process.env.PORT || 10000;
 const app = require("./app");
 const db = require('./db/db')
 const { Users, Products, Orders, Reviews, UserAddresses } = require("./db/models");
