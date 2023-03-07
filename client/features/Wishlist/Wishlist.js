@@ -10,19 +10,32 @@ import { v4 as uuidv4 } from "uuid";
 const Wishlist = () => {
   const isLoggedIn = sessionStorage.getItem("accessToken") ? true : false;
 	const [wishlist, setWishlist] = useState([]);
+	const [deletionSuccess, setDeletionSuccess] = useState(false);
 	// const user = useSelector(selectUser);
 	// const isLoggedIn = user.isLoggedIn;
 	const dispatch = useDispatch();
 	const products = useSelector(selectAllProducts);
-
+  const deleteItem = async (id) => {
+    let response;
+    isLoggedIn
+			? (response = await axios.delete("/api/wishlist", {
+					data: {
+						userId: sessionStorage.getItem("userId"),
+						productId: id
+					}
+			  }))
+			: (response = await axios.delete("/api/wishlist", {
+					data: {
+						guestId: sessionStorage.getItem("guestId"),
+						productId: id
+					}
+			  }))
+        setWishlist(response.data);
+        setDeletionSuccess(true);
+        setTimeout(() => {setDeletionSuccess(false)}, 3000);
+  }
 	useEffect(() => {
 		const getOldWishlist = async () => {
-			// let ip;
-			// if (!isLoggedIn) {
-			// 	await axios
-			// 		.get("https://api.ipify.org")
-			// 		.then((response) => (ip = response.data));
-			// }
 			let data;
 			isLoggedIn
 				? (data = await axios.get("/api/wishlist", {
@@ -51,6 +64,7 @@ const Wishlist = () => {
 	return (
 		<div className="changingBody">
       <h1>Wishlist</h1>
+      {deletionSuccess ? <h6 style={{ color: 'green'}}>Item Removed!</h6> : null}
 			{wishlist ? (
 				wishlist.map((wishListItem) =>
 					products.map((product) =>
@@ -62,6 +76,13 @@ const Wishlist = () => {
 								<h4>{product.category}</h4>
 								<p>{product.description}</p>
 								<h5>Quantity: {wishListItem.quantity}</h5>
+                <button 
+                className='btn btn-danger'
+                type='button'
+                onClick={() => {
+                  deleteItem(product.id)
+                }}
+                >Remove item</button>
 							</div>
 						) : null
 					)
