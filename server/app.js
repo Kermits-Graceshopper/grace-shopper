@@ -21,6 +21,7 @@ app.use((req, res, next) => {
 // auth and api routes
 // app.use('/auth', require('./auth'))
 
+
 app.use("/api/users", require("./api/users"));
 app.use("/api", require("./api/login"));
 app.use("/api", require("./api/signUp"));
@@ -29,7 +30,8 @@ app.use("/api/checkout", require("./api/checkout"));
 app.use("/api/orders", require("./api/orders"));
 app.use("/api/wishlist", require("./api/wishList"));
 app.use('/api/cart', require("./api/cart"));
-app.use('/api/games', require("./api/games"));
+
+
 
 app.get("/", (req, res) =>
 	res.sendFile(path.join(__dirname, "..", "public/index.html"))

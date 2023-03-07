@@ -1,6 +1,10 @@
+
 "use strict";
-const igdbProducts = require("./igdb.js");
+const igdb = require("./igdb.js");
 const { db } = require("../server/db");
+
+
+
 
 
 const users = [
@@ -25,13 +29,20 @@ const users = [
 ];
 
 
-const products = igdbProducts.map((product) => ({
+
+const possiblePrices = [39.99, 44.99, 49.99, 59.99, 69.99]
+
+const products = igdb.map((product) => ({
   name: product.name,
-  description: product.summary,
-  price: 9.99,
-  imageUrl: `https://images.igdb.com/igdb/image/upload/${product.cover}.jpg`,
-  category: product.platforms,
+  description: product.summary || 'no description',
+  price: possiblePrices[Math.floor(Math.random() * possiblePrices.length)],
+  imageUrl: product.screenshots ? `https:${product.screenshots[0].url}` : 'default_image_url',
+  category: product.platforms ? product.platforms.map((platform) => platform.name).join(', ') : '',
 }));
+
+
+
+
 
 // const products = [
 //   {
@@ -64,6 +75,7 @@ const products = igdbProducts.map((product) => ({
 //     category: 'Nintendo'
 //   },
 // ]
+
 
 const orders = [
   {

@@ -11,11 +11,16 @@ import Featured from '../features/Featured/Featured';
 // import ProductsTest from '../features/allProducts/ProductsTest'
 import Login from '../features/auth/Login';
 import AllProducts from '../features/allProducts/allProducts';
+
+
+
+
 import CheckoutSuccess from '../features/checkout/CheckoutSuccess';
 import CheckoutCanceled from '../features/checkout/CheckoutCanceled';
 import { selectUser } from './reducers/userSlice';
 import SingleProduct from '../features/singleProduct/singleProduct';
 import ProductExample from './components/comments/ProductExample';
+
 
 /**
  * COMPONENT
@@ -32,6 +37,46 @@ const AppRoutes = () => {
   return (
     <div>
       {/* // isLoggedIn ?  */}
+
+        <Routes>
+          <Route path="/*" element={<Home />} />
+          <Route to="/home" element={<Home />} />
+        </Routes>
+        <Routes>
+          {/* <Route
+            path="/*"
+            element={<AuthForm name="login" displayName="Login" />}
+          /> */}
+          <Route
+            path="/login"
+            element={<Login />}
+          />
+          <Route
+            path="/signup"
+            element={<SignUp />}
+          />
+          <Route
+            path="/cart"
+            element={<ShoppingCart />}
+          />
+         <Route
+            path="/checkout"
+            element={<CheckoutForm />}
+          />
+          <Route
+            path="/wishlist"
+            element={<Wishlist />}
+          />
+          <Route
+            path="/featured"
+            element={<Featured />}
+          />
+          <Route
+            path="/products"
+            element={<AllProducts />}
+          />
+        </Routes>
+
       <Routes>
         <Route path="/*" element={<Home />} />
         <Route to="/home" element={<Home />} />
@@ -48,6 +93,7 @@ const AppRoutes = () => {
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path='/ProductExample' element={<ProductExample/>}/>
       </Routes>
+
     </div>
   );
 };

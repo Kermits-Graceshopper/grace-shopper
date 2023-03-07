@@ -33,8 +33,10 @@ Orders.belongsTo(Users, {
   foreignKey: 'userId',
   constraints: false
 });
+
 Orders.hasMany(Products);
 // Orders.belongsTo(Products)
+
 
 Reviews.belongsTo(Users);
 Reviews.belongsTo(Products);

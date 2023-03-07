@@ -5,7 +5,7 @@ const db = require('../db');
 const Products = db.define('product', {
   name: {
     type: Sequelize.STRING,
-    unique: true,
+    unique: false,
     allowNull: false,
     validate: {
       notEmpty: true
