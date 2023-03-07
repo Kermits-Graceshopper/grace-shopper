@@ -1,59 +1,118 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllProductsAsync, selectAllProducts } from '../../app/reducers/allProductsSlice';
-import { selectSearchState } from '../../app/reducers/searchSlice';
-// import { selectUser } from '../../app/reducers/userSlice';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+	fetchAllProductsAsync,
+	selectAllProducts
+} from "../../app/reducers/allProductsSlice";
+import { selectSearchState } from "../../app/reducers/searchSlice";
+import { addToWishlistAsync } from "../../app/reducers/wishListSlice";
+import { addToCartAsync } from "../../app/reducers/cartSlice";
+import axios from "axios";
+import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 // TODO: add form for admin to add a product
 
 const AllProducts = () => {
-  const isLoggedIn = sessionStorage.getItem("accessToken") ? true : false;
-  const isAdmin = sessionStorage.getItem('isAdmin');
-  const [editMode, setEditMode] = useState(false);
-  const [category, setCategory] = useState('');
-  const [filtered, setFiltered] = useState([]);
-  const [updatedProducts, setUpdatedProducts] = useState([]);
-  const [addedName, setAddedName] = useState('');
-  const [addedDescription, setAddedDescription] = useState('');
-  const [addedPrice, setAddedPrice] = useState(0);
-  const [addedImageUrl, setAddedImageUrl] = useState('');
-  const [addedCategory, setAddedCategory] = useState('');
-  const [toggleSubmitted, setToggleSubmitted] = useState(false);
-  const [error, setError] = useState('');
-  const dispatch = useDispatch()
-  const products = useSelector(selectAllProducts);
-  const search = useSelector(selectSearchState)[0];
-  const filter = () => {
-    const filtered = products.filter(product => product.category.includes(category));
-    setFiltered(filtered);
-  }
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if(addedName === '' || addedDescription === '' || addedPrice === 0 || addedImageUrl === '' || addedCategory === ''){
-      setError('Please fill out all fields and assure image URL is a valid URL');
-      return;
-    }
-    await axios.post('/api/products', {
-      name: addedName,
-      description: addedDescription,
-      price: addedPrice,
-      imageUrl: addedImageUrl,
-      category: addedCategory,
-    })
-    setToggleSubmitted(!toggleSubmitted)
-  }
-  useEffect(() => {
-    dispatch(fetchAllProductsAsync());
-    console.log('toggleSubmitted: ', toggleSubmitted)
-    console.log('useEffect Ran')
-    filter();
-  }, [updatedProducts, category, toggleSubmitted]);
-  useEffect(() => {
-    setError('');
-  }, [addedName, addedDescription, addedPrice, addedImageUrl, addedCategory]);
+	const isLoggedIn = sessionStorage.getItem("accessToken") ? true : false;
+	const isAdmin = sessionStorage.getItem("isAdmin");
+	const [editMode, setEditMode] = useState(false);
+	const [category, setCategory] = useState("");
+	const [filtered, setFiltered] = useState([]);
+	const [updatedProducts, setUpdatedProducts] = useState([]);
+	const [addedName, setAddedName] = useState("");
+	const [addedDescription, setAddedDescription] = useState("");
+	const [addedPrice, setAddedPrice] = useState(0);
+	const [quantity, setQuantity] = useState(1);
+	const [addedImageUrl, setAddedImageUrl] = useState("");
+	const [addedCategory, setAddedCategory] = useState("");
+	const [toggleSubmitted, setToggleSubmitted] = useState(false);
+	const [wishlistSuccess, setWishlistSuccess] = useState(false);
+	const [addCartSuccess, setAddCartSuccess] = useState(false);
+	const [error, setError] = useState("");
+	const dispatch = useDispatch();
+	const products = useSelector(selectAllProducts);
+	const search = useSelector(selectSearchState)[0];
+	const addToWishlist = (id, quantity) => {
+		isLoggedIn
+			? dispatch(
+					addToWishlistAsync({
+						userId: sessionStorage.getItem("userId"),
+						quantity: quantity,
+						productId: id
+					})
+			  )
+			: dispatch(
+					addToWishlistAsync({
+						guestId: sessionStorage.getItem("guestId"),
+						quantity: quantity,
+						productId: id
+					})
+			  );
+		setWishlistSuccess(true);
+		setTimeout(() => {
+			setWishlistSuccess(false);
+		}, 3000);
+		setQuantity(1);
+	};
+	const addToCart = (id, quantity) => {
+		isLoggedIn
+			? dispatch(
+					addToCartAsync({
+						userId: sessionStorage.getItem("userId"),
+						quantity: quantity,
+						productId: id
+					})
+			  )
+			: dispatch(
+					addToCartAsync({
+						guestId: sessionStorage.getItem("guestId"),
+						quantity: quantity,
+						productId: id
+					})
+			  );
+		setAddCartSuccess(true);
+		setTimeout(() => {
+			setAddCartSuccess(false);
+		}, 3000);
+		setQuantity(1);
+	};
+	const filter = () => {
+		const filtered = products.filter((product) =>
+			product.category.includes(category)
+		);
+		setFiltered(filtered);
+	};
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		if (
+			addedName === "" ||
+			addedDescription === "" ||
+			addedPrice === 0 ||
+			addedImageUrl === "" ||
+			addedCategory === ""
+		) {
+			setError(
+				"Please fill out all fields and assure image URL is a valid URL"
+			);
+			return;
+		}
+		await axios.post("/api/products", {
+			name: addedName,
+			description: addedDescription,
+			price: addedPrice,
+			imageUrl: addedImageUrl,
+			category: addedCategory
+		});
+		setToggleSubmitted(!toggleSubmitted);
+	};
+	useEffect(() => {
+		dispatch(fetchAllProductsAsync());
+		filter();
+	}, [updatedProducts, category, toggleSubmitted]);
+	useEffect(() => {
+		setError("");
+	}, [addedName, addedDescription, addedPrice, addedImageUrl, addedCategory]);
 	useEffect(() => {
 		if (
 			!sessionStorage.getItem("accessToken") &&
@@ -62,12 +121,13 @@ const AllProducts = () => {
 			sessionStorage.setItem("guestId", uuidv4());
 		}
 	}, []);
-  console.log('category: ', category);
-  return (
-		<div>
-			{isAdmin &&
-			// currUser.isAdmin
-			editMode ? (
+	return (
+		<div className="allProductsDiv">
+			{addCartSuccess ? <p className='fixedSuccessMessage'>Added to cart!</p> : null}
+			{wishlistSuccess ? (
+				<p className='fixedSuccessMessage'>Added to wishlist!</p>
+			) : null}
+			{isAdmin && editMode ? (
 				<button
 					className="btn btn-warning"
 					type="button"
@@ -75,7 +135,6 @@ const AllProducts = () => {
 					Toggle User Mode
 				</button>
 			) : isAdmin ? (
-				// currUser.isAdmin
 				<button
 					className="btn btn-warning"
 					type="button"
@@ -83,10 +142,8 @@ const AllProducts = () => {
 					Toggle Admin Mode
 				</button>
 			) : null}
-			{isAdmin &&
-			// currUser.isAdmin
-			editMode ? (
-				<div>
+			{isAdmin && editMode ? (
+				<div className="addProductForm">
 					<form
 						onSubmit={(e) => {
 							e.preventDefault();
@@ -140,7 +197,7 @@ const AllProducts = () => {
 					</form>
 				</div>
 			) : null}
-			<h1>Products</h1>
+			<h1 id="productsTitle">Products</h1>
 			<select defaultValue="" onChange={(e) => setCategory(e.target.value)}>
 				<option value="">Select Category...</option>
 				<option value="Xbox">Xbox</option>
@@ -156,11 +213,10 @@ const AllProducts = () => {
 				? filtered?.map((product) =>
 						product.name.toLowerCase().includes(search) ||
 						product.name.toUpperCase().includes(search) ? (
-							<div>
-								{isAdmin &&
-								// currUser.isAdmin
-								editMode ? (
+							<div className="singleProduct">
+								{isAdmin && editMode ? (
 									<button
+										className="btn btn-danger"
 										type="submit"
 										onClick={async (e) => {
 											e.preventDefault();
@@ -174,13 +230,43 @@ const AllProducts = () => {
 										X
 									</button>
 								) : null}
-								<h1>
+								<h3>
 									<Link to={`/products/${product.id}`}>{product.name}</Link>
-								</h1>
-								<img className="productImage" src={product.imageUrl} />
-								<h3>{product.price}</h3>
-								<h5>Category: {product.category}</h5>
-								<p>{product.description}</p>
+								</h3>
+								<img className="singleProductImg" src={product.imageUrl} />
+								<h6>{product.price}</h6>
+								<h6>Category: {product.category}</h6>
+								<p className="productDescription">{product.description}</p>
+								<select
+									defaultValue={1}
+									onChange={(e) => setQuantity(e.target.value)}>
+									<option value={1}>1</option>
+									<option value={2}>2</option>
+									<option value={3}>3</option>
+									<option value={4}>4</option>
+									<option value={5}>5</option>
+									<option value={6}>6</option>
+									<option value={7}>7</option>
+									<option value={8}>8</option>
+									<option value={9}>9</option>
+									<option value={10}>10</option>
+								</select>
+								<button
+									type="button"
+									className="btn btn-success"
+									onClick={() => {
+										addToCart(product.id, quantity);
+									}}>
+									Add to Cart
+								</button>
+								<button
+									type="button"
+									className="btn btn-light"
+									onClick={() => {
+										addToWishlist(product.id, quantity);
+									}}>
+									Add to Wishlist
+								</button>
 							</div>
 						) : null
 				  )
@@ -188,11 +274,10 @@ const AllProducts = () => {
 				? products?.map((product) =>
 						product.name.toLowerCase().includes(search) ||
 						product.name.toUpperCase().includes(search) ? (
-							<div>
-								{isAdmin &&
-								// currUser.isAdmin
-								editMode ? (
+							<div className="singleProduct">
+								{isAdmin && editMode ? (
 									<button
+										className="btn btn-danger"
 										type="submit"
 										onClick={async (e) => {
 											e.preventDefault();
@@ -206,21 +291,52 @@ const AllProducts = () => {
 										X
 									</button>
 								) : null}
-								<h1>
+								<h3>
 									<Link to={`/products/${product.id}`}>{product.name}</Link>
-								</h1>
-								<img className="productImage" src={product.imageUrl} />
-								<h3>{product.price}</h3>
-								<h5>Category: {product.category}</h5>
-								<p>{product.description}</p>
+								</h3>
+								<img className="singleProductImg" src={product.imageUrl} />
+								<h6>{product.price}</h6>
+								<h6>Category: {product.category}</h6>
+								<p className="productDescription">{product.description}</p>
+								<select
+									defaultValue={1}
+									onChange={(e) => setQuantity(e.target.value)}>
+									<option value={1}>1</option>
+									<option value={2}>2</option>
+									<option value={3}>3</option>
+									<option value={4}>4</option>
+									<option value={5}>5</option>
+									<option value={6}>6</option>
+									<option value={7}>7</option>
+									<option value={8}>8</option>
+									<option value={9}>9</option>
+									<option value={10}>10</option>
+								</select>
+								<button
+									type="button"
+									className="btn btn-success"
+									onClick={() => {
+										addToCart(product.id, quantity);
+									}}>
+									Add to Cart
+								</button>
+								<button
+									type="button"
+									className="btn btn-light"
+									onClick={() => {
+										addToWishlist(product.id, quantity);
+									}}>
+									Add to Wishlist
+								</button>
 							</div>
 						) : null
 				  )
 				: (filtered[0] && search === "") || category !== ""
 				? filtered?.map((product) => (
-						<div>
+						<div className="singleProduct">
 							{isAdmin && editMode ? (
 								<button
+									className="btn btn-danger"
 									type="submit"
 									onClick={async (e) => {
 										e.preventDefault();
@@ -234,19 +350,50 @@ const AllProducts = () => {
 									X
 								</button>
 							) : null}
-							<h1>
+							<h3>
 								<Link to={`/products/${product.id}`}>{product.name}</Link>
-							</h1>
-							<img className="productImage" src={product.imageUrl} />
-							<h3>{product.price}</h3>
-							<h5>Category: {product.category}</h5>
-							<p>{product.description}</p>
+							</h3>
+							<img className="singleProductImg" src={product.imageUrl} />
+							<h6>{product.price}</h6>
+							<h6>Category: {product.category}</h6>
+							<p className="productDescription">{product.description}</p>
+							<select
+								defaultValue={1}
+								onChange={(e) => setQuantity(e.target.value)}>
+								<option value={1}>1</option>
+								<option value={2}>2</option>
+								<option value={3}>3</option>
+								<option value={4}>4</option>
+								<option value={5}>5</option>
+								<option value={6}>6</option>
+								<option value={7}>7</option>
+								<option value={8}>8</option>
+								<option value={9}>9</option>
+								<option value={10}>10</option>
+							</select>
+							<button
+								type="button"
+								className="btn btn-success"
+								onClick={() => {
+									addToCart(product.id, quantity);
+								}}>
+								Add to Cart
+							</button>
+							<button
+								type="button"
+								className="btn btn-light"
+								onClick={() => {
+									addToWishlist(product.id, quantity);
+								}}>
+								Add to Wishlist
+							</button>
 						</div>
 				  ))
 				: products.map((product) => (
-						<div>
+						<div className="singleProduct">
 							{isAdmin && editMode ? (
 								<button
+									className="btn btn-danger"
 									type="submit"
 									onClick={async (e) => {
 										e.preventDefault();
@@ -260,18 +407,47 @@ const AllProducts = () => {
 									X
 								</button>
 							) : null}
-							<h1>
+							<h3>
 								<Link to={`/products/${product.id}`}>{product.name}</Link>
-							</h1>
-							<img className="productImage" src={product.imageUrl} />
-							<h3>{product.price}</h3>
-							<h5>Category: {product.category}</h5>
-							<p>{product.description}</p>
+							</h3>
+							<img className="singleProductImg" src={product.imageUrl} />
+							<h6>{product.price}</h6>
+							<h6>Category: {product.category}</h6>
+							<p className="productDescription">{product.description}</p>
+							<select
+								defaultValue={1}
+								onChange={(e) => setQuantity(e.target.value)}>
+								<option value={1}>1</option>
+								<option value={2}>2</option>
+								<option value={3}>3</option>
+								<option value={4}>4</option>
+								<option value={5}>5</option>
+								<option value={6}>6</option>
+								<option value={7}>7</option>
+								<option value={8}>8</option>
+								<option value={9}>9</option>
+								<option value={10}>10</option>
+							</select>
+							<button
+								type="button"
+								className="btn btn-success"
+								onClick={() => {
+									addToCart(product.id, quantity);
+								}}>
+								Add to Cart
+							</button>
+							<button
+								type="button"
+								className="btn btn-light"
+								onClick={() => {
+									addToWishlist(product.id, quantity);
+								}}>
+								Add to Wishlist
+							</button>
 						</div>
 				  ))}
 		</div>
 	);
-}
-                  
+};
 
-export default AllProducts                    
+export default AllProducts;

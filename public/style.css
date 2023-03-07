@@ -8,6 +8,7 @@ html, body {
   /* fixes issue w white space to the right!!!! */
   overflow-x: hidden;
   background-color: #E9E8E8;
+  position: relative;
 }
 a {
   text-decoration: none;
@@ -106,9 +107,9 @@ form div {
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
 
-.productImage {
+/* .singleProductImage {
   height: 10vh;
-}
+} */
 
 .footer{
   height: 10px;
@@ -142,8 +143,9 @@ form div {
   margin-left: 50px;
 }
 
-.productCard img {
+.singleProduct img {
   height: 150px;
+  width: 70%
 }
 
 .wishlistDiv img {
@@ -160,4 +162,36 @@ form div {
 
 .changingBody{
   padding: 0 0 100px 100px;
+}
+
+.allProductsDiv {
+  background-color: #ffffff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.singleProduct {
+  background-color: ivory;
+  margin:10px;
+  width: 30vw;
+  /* add drop shadow to single product divs here  */
+}
+
+.productDescription {
+  font-size: xx-small;
+}
+
+#productsTitle {
+  display: block;
+}
+
+.fixedSuccessMessage {
+  background-color: green;
+  color: white;
+  position: fixed;
+  top: 0;
+  margin-top: 0px;
+  width: 50vw;
 }

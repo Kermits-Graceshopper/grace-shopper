@@ -6,7 +6,6 @@ import {
 	fetchSingleProductAsync,
 	selectProduct
 } from "../../app/reducers/singleProductSlice";
-// import { selectUser } from "../../app/reducers/userSlice";
 import {
 	addToWishlistAsync
 } from "../../app/reducers/wishListSlice";
@@ -114,19 +113,17 @@ const SingleProduct = () => {
 			<p>
 				Back to <Link to="/products">All Products</Link>
 			</p>
-			{ isAdmin
-			// currentUser.isAdmin 
-			&& editMode ? (
+			{isAdmin &&
+			// currentUser.isAdmin
+			editMode ? (
 				<button
 					onClick={(e) => setEditMode(!editMode)}
 					className="btn btn-warning"
 					type="button">
 					Toggle user view mode
 				</button>
-			) : 
-			// currentUser.isAdmin
-			isAdmin
-			 ? (
+			) : // currentUser.isAdmin
+			isAdmin ? (
 				<button
 					className="btn btn-warning"
 					type="button"
@@ -134,10 +131,9 @@ const SingleProduct = () => {
 					Toggle edit product mode
 				</button>
 			) : null}
-			{
-				isAdmin
+			{isAdmin &&
 			// currentUser.isAdmin
-			 && editMode ? (
+			editMode ? (
 				<div>
 					<h1>Edit Product</h1>
 					{error !== "" ? (
@@ -189,12 +185,12 @@ const SingleProduct = () => {
 					</form>
 				</div>
 			) : null}
-			<div className="productCard">
+			<div className="singleProduct">
 				<h1>{product.name}</h1>
 				<img className="singleProductImg" src={`${product.imageUrl}`} />
 				<h3>Price: {product.price}</h3>
 				<h5>{product.category}</h5>
-				<p>{product.description}</p>
+				<p className="productDescription">{product.description}</p>
 				<select defaultValue={1} onChange={(e) => setQuantity(e.target.value)}>
 					<option value={1}>1</option>
 					<option value={2}>2</option>
@@ -213,10 +209,10 @@ const SingleProduct = () => {
 				{wishlistSuccess ? (
 					<h5 style={{ color: "green" }}>Added to wishlist!</h5>
 				) : null}
-				<button type="button" className='btn btn-success' onClick={addToCart}>
+				<button type="button" className="btn btn-success" onClick={addToCart}>
 					Add to Cart
 				</button>
-				<button type="button" className='btn btn-light' onClick={addToWishlist}>
+				<button type="button" className="btn btn-light" onClick={addToWishlist}>
 					Add to Wishlist
 				</button>
 			</div>
