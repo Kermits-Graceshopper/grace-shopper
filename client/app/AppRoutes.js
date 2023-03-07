@@ -12,24 +12,23 @@ import SingleProduct from '../features/singleProduct/singleProduct';
 import UsersList from '../features/admin/UsersList';
 
 const AppRoutes = () => {
-  return (
-    <div>
-      <Routes>
-        <Route path="/*" element={<Home />} />
-        <Route to="/home" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/cart" element={<ShoppingCart />} />
-        <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/featured" element={<Featured />} />
-        <Route path="/products" element={<AllProducts />} />
-        <Route path="/success" element={<CheckoutSuccess />} />
-        <Route path="/products/:id" element={<SingleProduct />} />
-        <Route path='/allusers' element={<UsersList/>}/>
-      </Routes>
-
-    </div>
-  );
+	return (
+		<div>
+			<Routes>
+				<Route path="/*" element={<Home />} />
+				<Route to="/home" element={<Home />} />
+				<Route path="/login" element={<Login />} />
+				<Route path="/signup" element={<SignUp />} />
+				<Route path="/cart" element={<ShoppingCart />} />
+				<Route path="/wishlist" element={<Wishlist />} />
+				<Route path="/featured" element={<Featured />} />
+				<Route path="/products" element={<AllProducts />} />
+				<Route path="/success" element={<CheckoutSuccess />} />
+				<Route path="/products/:id" element={<SingleProduct />} />
+				<Route path="/allusers" element={<UsersList />} />
+			</Routes>
+		</div>
+	);
 };
 
 export default AppRoutes;
