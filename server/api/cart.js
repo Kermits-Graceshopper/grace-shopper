@@ -76,11 +76,20 @@ router.delete("/", async (req, res) => {
 		if (!item.isCompleted && !item.isWishList) {
 			await item.destroy();
 		}
-		const newCart = await Orders.findAll({
-			where: {
-				isCartItem: true
-			}
-		});
+		let newCart;
+		req.body.userId
+			? (newCart = await Orders.findAll({
+					where: {
+						isCartItem: true,
+						userId: req.body.userId
+					}
+			  }))
+			: (newCart = await Orders.findAll({
+					where: {
+						isCartItem: true,
+						guestId: req.body.guestId
+					}
+			  }));
 		res.send(newCart);
 	} catch (e) {
 		console.log("ERROR IN CATCH OF CART DELETE ROUTE: ", e);

@@ -91,13 +91,13 @@ const Navbar = () => {
 								</div>
 							) : (
 								<button
-									className="Logout"
-									style={{
-										textDecoration: "none",
-										color: "white",
-										border: "none",
-										backgroundColor: "#2B3467"
-									}}
+									className="btn btn-danger"
+									// style={{
+									// 	textDecoration: "none",
+									// 	color: "white",
+									// 	border: "none",
+									// 	backgroundColor: "#2B3467"
+									// }}
 									type="button"
 									onClick={logoutAndRedirectHome}>
 									Logout
