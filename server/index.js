@@ -1,16 +1,16 @@
-require('dotenv').config
-const PORT = process.env.PORT || 10000;
-const app = require("./app");
-const db = require('./db/db')
-const { Users, Products, Orders, Reviews, UserAddresses } = require("./db/models");
+require('dotenv').config;
+const PORT = process.env.PORT || 8080;
+const app = require('./app');
+const db = require('./db/db');
+const { Users, Products, Orders, Reviews, UserAddresses } = require('./db/models');
 const {
 	products,
 	users,
 	// reviews,
 	addresses
-} = require("../script/seed");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+} = require('../script/seed');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const syncDb = async () => {
 	try {
@@ -30,10 +30,7 @@ const syncDb = async () => {
 				lname: user.lname,
 				email: user.email,
 				password: bcrypt.hash(user.password, 10).toString(),
-				refreshToken: jwt.sign(
-					{ email: user.email },
-					process.env.REFRESH_TOKEN_SECRET
-				),
+				refreshToken: jwt.sign({ email: user.email }, process.env.REFRESH_TOKEN_SECRET),
 				isAdmin: user.isAdmin,
 				isLoggedIn: user.isLoggedIn
 			});
@@ -56,9 +53,9 @@ const syncDb = async () => {
 			});
 		});
 
-		console.log("SUCCESS, db has been synced and seeded");
+		console.log('SUCCESS, db has been synced and seeded');
 	} catch (e) {
-		console.log("ERROR IN CATCH OF syncDb FUNCTION: ", e);
+		console.log('ERROR IN CATCH OF syncDb FUNCTION: ', e);
 	}
 };
 syncDb();
