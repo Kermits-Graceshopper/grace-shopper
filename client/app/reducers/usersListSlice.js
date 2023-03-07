@@ -39,6 +39,24 @@ export const addNewUserAsync = createAsyncThunk(
 	}
 );
 
+export const updateExistingUserAsync = createAsyncThunk(
+    "updateExistingUser",
+    async ({ id, fname, lname, email, password, isAdmin }) => {
+      try {
+        const { data } = await axios.put(`/api/allusers/${id}`, {
+          fname,
+          lname,
+          email,
+          password,
+          isAdmin,
+        });
+        return data;
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  );
+
 const initialState = [];
 
 const usersListSlice = createSlice({
