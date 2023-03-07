@@ -50,6 +50,7 @@ const SingleProduct = () => {
     setToggleSubmitted(!toggleSubmitted);
   };
 
+
   const addToWishlist = async () => {
     isLoggedIn
       ? dispatch(
@@ -222,6 +223,7 @@ const SingleProduct = () => {
       </div>
     </div>
   );
+
 };
 
 export default SingleProduct;
