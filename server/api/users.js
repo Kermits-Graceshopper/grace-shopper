@@ -2,18 +2,25 @@ const router = require('express').Router()
 const { Users } = require('../db')
 
 
-
-router.get('/users', async (req, res, next) => {
+// TODO: make auth middle ware that checks if user is an admin, do refresh tokens come into play here??
+router.get('/all', async (req, res, next) => {
   try {
     const users = await Users.findAll({
-      // explicitly select only the id and username fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
-      attributes: ['fullName', 'email']
+      attributes: ['fullName', 'fname', 'lname', 'email', 'isAdmin', 'isLoggedIn']
     })
-    res.json(users)
+    res.send(users)
   } catch (err) {
     next(err)
   }
+});
+
+//make route with same middleware that can delete a user
+router.delete('/all/:userId', (req, res) => {
+  try{
+    
+  } catch(e){
+
+  }
 })
+
 module.exports = router

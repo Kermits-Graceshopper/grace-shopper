@@ -5,9 +5,9 @@ const Users = require('./users');
 
 const Orders = db.define('order', {
   // needs... junction table? for storing multiple products in one order
-  date: {
+  dateCompleted: {
     type: Sequelize.DATE,
-    allowNull: false,
+    allowNull: true,
   },
   quantity: {
     type: Sequelize.INTEGER,
@@ -24,22 +24,15 @@ const Orders = db.define('order', {
     allowNull: false,
     defaultValue: false
   },
-  // productId: {
-  //   type: Sequelize.INTEGER,
-  //   allowNull: false,
-  //   reference: {
-  //     model: Products,
-  //     key: 'id'
-  //   }
-  // },
-  // userId: {
-  //   type: Sequelize.INTEGER,
-  //   allowNull: false,
-  //   reference: {
-  //     model: Users,
-  //     key: 'id'
-  //   }
-  // }
+  isCartItem: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  guestId: {
+    type: Sequelize.STRING,
+    allowNull: true
+  }
 });
 
 

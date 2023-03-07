@@ -1,22 +1,38 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { selectUser } from '../../app/reducers/userSlice';
-
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../app/reducers/userSlice";
+import { v4 as uuidv4 } from "uuid";
 /**
  * COMPONENT
  */
 const Home = () => {
-  // const username = useSelector((state) => state.auth.me.username);
-  const user = useSelector(selectUser);
-  return (
-    <div className="changingBody">
-      {user.firstName ? 
-      <h1>Welcome {user.firstName}!</h1>
-    :
-    <h1>Welcome! Be our guest.</h1>}
-    </div>
-  );
+  const isLoggedIn = sessionStorage.getItem("accessToken") ? true : false;
+	// const username = useSelector((state) => state.auth.me.username);
+	// const user = useSelector(selectUser);
+  let firstName = sessionStorage.getItem('firstName');
+	useEffect(() => {
+		if (
+			!sessionStorage.getItem("accessToken") &&
+			!sessionStorage.getItem("guestId")
+		) {
+			sessionStorage.setItem("guestId", uuidv4());
+		} 
+	}, [isLoggedIn]);
+  console.log('isLoggedIn: ', isLoggedIn);
+  console.log('firstName: ', firstName);
+	return (
+		<div className="welcomeSign">
+			{firstName ? (
+				<h1>Welcome {firstName.split('')[0].toUpperCase() + firstName.split('').slice(1).join('')}!</h1>
+			) : (
+				<h1>Welcome! Login For Special Deals</h1>
+			)}
+			<br />
+			<br />
+			<br />
+			<br />
+		</div>
+	);
 };
 
 export default Home;
-
