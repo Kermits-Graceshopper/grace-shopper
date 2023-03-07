@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   font-family: sans-serif;
   min-height: 100vh;
   display: flex;
@@ -7,7 +8,7 @@ html, body {
   padding: 0;
   /* fixes issue w white space to the right!!!! */
   overflow-x: hidden;
-  background-color: #E9E8E8;
+  background-color: #e9e8e8;
   position: relative;
 }
 a {
@@ -27,7 +28,7 @@ form div {
   display: inline-block;
 }
 
-.navButtons{
+.navButtons {
   position: absolute;
   right: 5px;
   top: 10px;
@@ -35,7 +36,7 @@ form div {
   text-decoration: none;
 }
 
-.navbar{
+.navbar {
   background-color: #000000;
   color: white;
   overflow: hidden;
@@ -44,13 +45,13 @@ form div {
   padding: 0;
 }
 
-.search{
+.search {
   position: relative;
   right: 10px;
   z-index: 1;
 }
 
-.specializedNavbar{
+.specializedNavbar {
   color: white;
   display: flex;
   height: 30px;
@@ -58,17 +59,16 @@ form div {
   background-color: red;
 }
 
-.specItem{
+.specItem {
   color: white;
   text-decoration: none;
 }
-.logo{
+.logo {
   width: 150px;
   height: auto;
 }
 
-
-.cartDiv{
+.cartDiv {
   width: 800px;
   height: 1000px;
   background-color: white;
@@ -77,27 +77,27 @@ form div {
   margin-bottom: 100px;
 }
 
-.cartTitle{
+.cartTitle {
   display: flex;
   justify-content: space-between;
 }
 
-.productCard{
+.productCard {
   background-color: white;
   width: 400px;
   height: 400px;
   margin: 10px;
 }
 
-.productContainer{
+.productContainer {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  align-items:center;
-  justify-content:center;
+  align-items: center;
+  justify-content: center;
 }
 
-.checkoutSidebar{
+.checkoutSidebar {
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -107,45 +107,45 @@ form div {
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
 
-/* .singleProductImage {
-  height: 10vh;
-} */
+.singleProductImage {
+  width: 500px;
+}
 
-.footer{
+.footer {
   height: 10px;
 }
 
-.page-container{
+.page-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   align-items: center;
 }
 
-.content-wrap{
-  flex:1;
+.content-wrap {
+  flex: 1;
 }
 
-.products{
+.products {
   display: flex;
   flex-direction: row;
 }
-.product{
+.product {
   margin: 100px;
 }
 
-.welcomeSign{
+.welcomeSign {
   padding-top: 50px;
   margin-left: 50px;
 }
 
-.bodyContent{
+.bodyContent {
   margin-left: 50px;
 }
 
 .singleProduct img {
   height: 150px;
-  width: 70%
+  width: auto;
 }
 
 .wishlistDiv img {
@@ -160,30 +160,76 @@ form div {
   display: none;
 }
 
-.changingBody{
-  padding: 0 0 100px 100px;
-}
-
 .allProductsDiv {
   background-color: #ffffff;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+/* singleProduct refers to a single product on the allproducts page */
 .singleProduct {
-  background-color: ivory;
-  margin:50px;
-  width: 40vw;
+  background-color: lightgray;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: column;
+  align-items: center;
+  margin: 50px;
+  width: 500px;
   padding: 50px;
   /* add drop shadow to single product divs here  */
 }
+
+/* ------------------------------Single Product Styles ---------------------------- */
+
+.singleProductPage {
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.singleProductPage img {
+  width: 400px;
+}
+
+.productDetails{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 50px;
+}
+
+.backButton{
+  position: absolute;
+  top: 200px;
+  left: 50px;
+}
+/* ------------------------------Single Product Styles END ------------------- */
+
+/* --------------------AllProducts Styles... Some of 'em ------------------- */
+
+.customerButtons{
+  display: flex;
+  justify-content: flex-start;
+}
+
+
+/* --------------------AllProducts Styles... Some of 'em END------------------- */
 .checked {
   color: orange;
 }
-.review{
+.review {
   background-color: white;
   padding: 10px;
   margin: 10px;
+  border: black solid 1px;
+  border-radius: 10px;
+}
+.pageHeader {
+  position: relative;
 }

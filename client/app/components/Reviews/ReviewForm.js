@@ -5,7 +5,7 @@ const ReviewForm = () => {
     <div>
       <textarea
         maxLength="280"
-        placeholder="How was your experience?"
+        placeholder="Write a Review"
         className="commentArea w-100"
       ></textarea>
       <br></br>

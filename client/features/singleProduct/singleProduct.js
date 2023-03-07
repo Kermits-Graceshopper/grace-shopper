@@ -108,8 +108,8 @@ const SingleProduct = () => {
     }
   }, []);
   return (
-    <div>
-      <p>
+    <div className='singleProductPage'>
+      <p className='backButton'>
         Back to <Link to="/products">All Products</Link>
       </p>
       {isAdmin &&
@@ -187,36 +187,19 @@ const SingleProduct = () => {
           </form>
         </div>
       ) : null}
-      <div className="singleProduct">
+      <div className='productDetails'>
         <h1>{product.name}</h1>
+        <br/>
         <img className="singleProductImg" src={`${product.imageUrl}`} />
+        <br/>
         <h3>Price: {product.price}</h3>
         <h5>{product.category}</h5>
         <p className="productDescription">{product.description}</p>
-        <select defaultValue={1} onChange={(e) => setQuantity(e.target.value)}>
-          <option value={1}>1</option>
-          <option value={2}>2</option>
-          <option value={3}>3</option>
-          <option value={4}>4</option>
-          <option value={5}>5</option>
-          <option value={6}>6</option>
-          <option value={7}>7</option>
-          <option value={8}>8</option>
-          <option value={9}>9</option>
-          <option value={10}>10</option>
-        </select>
-        {addCartSuccess ? (
-          <h5 style={{ color: 'green' }}>Added to cart!</h5>
-        ) : null}
-        {wishlistSuccess ? (
-          <h5 style={{ color: 'green' }}>Added to wishlist!</h5>
-        ) : null}
-        <button type="button" className="btn btn-success" onClick={addToCart}>
-          Add to Cart
-        </button>
-        <button type="button" className="btn btn-light" onClick={addToWishlist}>
-          Add to Wishlist
-        </button>
+        <div>
+
+
+        </div>
+        
         <br></br>
         <ReviewSection />
       </div>
