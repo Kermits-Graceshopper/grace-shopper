@@ -14,115 +14,115 @@ import { v4 as uuidv4 } from 'uuid';
 // TODO: add form for admin to add a product
 
 const AllProducts = () => {
-	const isLoggedIn = sessionStorage.getItem("accessToken") ? true : false;
-	const isAdmin = sessionStorage.getItem("isAdmin");
-	const [editMode, setEditMode] = useState(false);
-	const [category, setCategory] = useState("");
-	const [filtered, setFiltered] = useState([]);
-	const [updatedProducts, setUpdatedProducts] = useState([]);
-	const [addedName, setAddedName] = useState("");
-	const [addedDescription, setAddedDescription] = useState("");
-	const [addedPrice, setAddedPrice] = useState(0);
-	const [quantity, setQuantity] = useState(1);
-	const [addedImageUrl, setAddedImageUrl] = useState("");
-	const [addedCategory, setAddedCategory] = useState("");
-	const [toggleSubmitted, setToggleSubmitted] = useState(false);
-	const [wishlistSuccess, setWishlistSuccess] = useState(false);
-	const [addCartSuccess, setAddCartSuccess] = useState(false);
-	const [error, setError] = useState("");
-	const dispatch = useDispatch();
-	const products = useSelector(selectAllProducts);
-	const search = useSelector(selectSearchState)[0];
-	const addToWishlist = (id, quantity) => {
-		isLoggedIn
-			? dispatch(
-					addToWishlistAsync({
-						userId: sessionStorage.getItem("userId"),
-						quantity: quantity,
-						productId: id
-					})
-			  )
-			: dispatch(
-					addToWishlistAsync({
-						guestId: sessionStorage.getItem("guestId"),
-						quantity: quantity,
-						productId: id
-					})
-			  );
-		setWishlistSuccess(true);
-		setTimeout(() => {
-			setWishlistSuccess(false);
-		}, 3000);
-		setQuantity(1);
-	};
-	const addToCart = (id, quantity) => {
-		isLoggedIn
-			? dispatch(
-					addToCartAsync({
-						userId: sessionStorage.getItem("userId"),
-						quantity: quantity,
-						productId: id
-					})
-			  )
-			: dispatch(
-					addToCartAsync({
-						guestId: sessionStorage.getItem("guestId"),
-						quantity: quantity,
-						productId: id
-					})
-			  );
-		setAddCartSuccess(true);
-		setTimeout(() => {
-			setAddCartSuccess(false);
-		}, 3000);
-		setQuantity(1);
-	};
-	const filter = () => {
-		const filtered = products.filter((product) =>
-			product.category.includes(category)
-		);
-		setFiltered(filtered);
-	};
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		if (
-			addedName === "" ||
-			addedDescription === "" ||
-			addedPrice === 0 ||
-			addedImageUrl === "" ||
-			addedCategory === ""
-		) {
-			setError(
-				"Please fill out all fields and assure image URL is a valid URL"
-			);
-			return;
-		}
-		await axios.post("/api/products", {
-			name: addedName,
-			description: addedDescription,
-			price: addedPrice,
-			imageUrl: addedImageUrl,
-			category: addedCategory
-		});
-		setToggleSubmitted(!toggleSubmitted);
-	};
-	
-	useEffect(() => {
-		dispatch(fetchAllProductsAsync());
-		filter();
-	}, [updatedProducts, category, toggleSubmitted]);
-	useEffect(() => {
-		setError("");
-	}, [addedName, addedDescription, addedPrice, addedImageUrl, addedCategory]);
-	useEffect(() => {
-		if (
-			!sessionStorage.getItem("accessToken") &&
-			!sessionStorage.getItem("guestId")
-		) {
-			sessionStorage.setItem("guestId", uuidv4());
-		}
-	}, []);
-	return (
+  const isLoggedIn = sessionStorage.getItem('accessToken') ? true : false;
+  const isAdmin = sessionStorage.getItem('isAdmin');
+  const [editMode, setEditMode] = useState(false);
+  const [category, setCategory] = useState('');
+  const [filtered, setFiltered] = useState([]);
+  const [updatedProducts, setUpdatedProducts] = useState([]);
+  const [addedName, setAddedName] = useState('');
+  const [addedDescription, setAddedDescription] = useState('');
+  const [addedPrice, setAddedPrice] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+  const [addedImageUrl, setAddedImageUrl] = useState('');
+  const [addedCategory, setAddedCategory] = useState('');
+  const [toggleSubmitted, setToggleSubmitted] = useState(false);
+  const [wishlistSuccess, setWishlistSuccess] = useState(false);
+  const [addCartSuccess, setAddCartSuccess] = useState(false);
+  const [error, setError] = useState('');
+  const dispatch = useDispatch();
+  // const products = useSelector(selectAllProducts);
+  const search = useSelector(selectSearchState)[0];
+  const addToWishlist = (id, quantity) => {
+    isLoggedIn
+      ? dispatch(
+          addToWishlistAsync({
+            userId: sessionStorage.getItem('userId'),
+            quantity: quantity,
+            productId: id,
+          })
+        )
+      : dispatch(
+          addToWishlistAsync({
+            guestId: sessionStorage.getItem('guestId'),
+            quantity: quantity,
+            productId: id,
+          })
+        );
+    setWishlistSuccess(true);
+    setTimeout(() => {
+      setWishlistSuccess(false);
+    }, 3000);
+    setQuantity(1);
+  };
+  const addToCart = (id, quantity) => {
+    isLoggedIn
+      ? dispatch(
+          addToCartAsync({
+            userId: sessionStorage.getItem('userId'),
+            quantity: quantity,
+            productId: id,
+          })
+        )
+      : dispatch(
+          addToCartAsync({
+            guestId: sessionStorage.getItem('guestId'),
+            quantity: quantity,
+            productId: id,
+          })
+        );
+    setAddCartSuccess(true);
+    setTimeout(() => {
+      setAddCartSuccess(false);
+    }, 3000);
+    setQuantity(1);
+  };
+  const filter = () => {
+    const filtered = products.filter((product) =>
+      product.category.includes(category)
+    );
+    setFiltered(filtered);
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (
+      addedName === '' ||
+      addedDescription === '' ||
+      addedPrice === 0 ||
+      addedImageUrl === '' ||
+      addedCategory === ''
+    ) {
+      setError(
+        'Please fill out all fields and assure image URL is a valid URL'
+      );
+      return;
+    }
+    await axios.post('/api/products', {
+      name: addedName,
+      description: addedDescription,
+      price: addedPrice,
+      imageUrl: addedImageUrl,
+      category: addedCategory,
+    });
+    setToggleSubmitted(!toggleSubmitted);
+  };
+  useEffect(() => {
+    dispatch(fetchAllProductsAsync());
+    filter();
+  }, [updatedProducts, category, toggleSubmitted]);
+  const products = useSelector(selectAllProducts);
+  useEffect(() => {
+    setError('');
+  }, [addedName, addedDescription, addedPrice, addedImageUrl, addedCategory]);
+  useEffect(() => {
+    if (
+      !sessionStorage.getItem('accessToken') &&
+      !sessionStorage.getItem('guestId')
+    ) {
+      sessionStorage.setItem('guestId', uuidv4());
+    }
+  }, []);
+  return (
     <div className="productContainer productContainerAllProductsEdit">
       {addCartSuccess ? (
         <p className="fixedSuccessMessage">Added to cart!</p>
