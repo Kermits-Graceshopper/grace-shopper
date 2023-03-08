@@ -3,7 +3,7 @@ const { Users } = require('../db')
 
 
 // TODO: make auth middle ware that checks if user is an admin, do refresh tokens come into play here??
-router.get('/', async (req, res, next) => {
+router.get('/', async (req, res) => {
   try {
     let users;
     req.query.isAdmin === true ?
@@ -13,9 +13,29 @@ router.get('/', async (req, res, next) => {
     res.send(users)
   } catch (err) {
     console.log(err);
-    next(err)
   }
 });
+
+router.get('/:userId', async (req, res) => {
+  try {
+    const thisUser = await Users.findOne({
+      where: {
+        id: req.params.userId,
+      }
+    })
+    res.send(thisUser);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.put('/:userId', (req, res) => {
+  try{
+
+  } catch(e){
+    con
+  }
+})
 
 //make route with same middleware that can delete a user
 // router.delete('/all/:userId', (req, res) => {

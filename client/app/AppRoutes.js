@@ -10,6 +10,7 @@ import AllProducts from '../features/allProducts/allProducts';
 import CheckoutSuccess from '../features/checkout/CheckoutSuccess';
 import SingleProduct from '../features/singleProduct/singleProduct';
 import UsersList from '../features/admin/UsersList';
+import UserInfo from '../features/UserInfo/UserInfo';
 
 const AppRoutes = () => {
   return (
@@ -26,6 +27,7 @@ const AppRoutes = () => {
         <Route path="/success" element={<CheckoutSuccess />} />
         <Route path="/products/:id" element={<SingleProduct />} />
         <Route path='/allusers' element={<UsersList/>}/>
+        <Route path='/users:userId' element={<UserInfo/>}/>
       </Routes>
 
     </div>

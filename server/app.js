@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 // app.use('/auth', require('./auth'))
 
 
-app.use("/api/allusers", require("./api/users"));
+app.use("/api/users", require("./api/users"));
 app.use("/api", require("./api/login"));
 app.use("/api", require("./api/signUp"));
 app.use("/api/products", require("./api/products"));
