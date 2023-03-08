@@ -106,10 +106,10 @@ const ShoppingCart = () => {
 	}, []);
 
 	return (
-		<div>
+		<div className="cartContainer">
 			{deletionSuccess ? <h5 style={{ color: 'green' }}>Item deleted!</h5> : null}
-			<h1> Cart</h1>
-			<div className="productContainer">
+			<h1 className='header'> Cart</h1>
+			<div >
 				{cart[0] ? (
 					cart.map((item) =>
 						products
@@ -123,7 +123,7 @@ const ShoppingCart = () => {
 											<p className="priceCalc">{(runningTotal = runningTotal + product.price * item.quantity)}</p>
 											<button
 												type="button"
-												className="btn btn-danger"
+												className="btn btn-danger removeCartItem"
 												onClick={() => {
 													deleteCartItem(item.productId);
 												}}
@@ -139,9 +139,9 @@ const ShoppingCart = () => {
 					<h2>{pageMessage}</h2>
 				)}
 			</div>
-			<div>
-				<div>
-					<div className="cartTitle">
+			
+				<div className='cartBody'>
+					<div className="cartSummary">
 						<h2>
 							Order Summary <br />
 						</h2>
@@ -157,7 +157,7 @@ const ShoppingCart = () => {
 						<></>
 					)}
 				</div>
-			</div>
+			
 		</div>
 	);
 };

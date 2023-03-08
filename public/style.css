@@ -77,10 +77,7 @@ form div {
   margin-bottom: 100px;
 }
 
-.cartTitle{
-  display: flex;
-  justify-content: space-between;
-}
+
 
 .productCard{
   background-color: white;
@@ -152,9 +149,7 @@ form div {
   height: 100px;
 }
 
-.cartItem img {
-  height: 100px;
-}
+
 
 .priceCalc {
   display: none;
@@ -189,7 +184,6 @@ form div {
 .selectCategory{
   width: 200px;
   display: flex;
-   
 }
 .allProductsHeader{
   position: absolute;
@@ -199,4 +193,36 @@ form div {
 
 .productContainerAllProductsEdit{
   margin-top: 100px;
+
 }
+
+/* -----------------------------Cart Styles ---------------------------------*/
+.cartBody{
+  padding: 50px;
+}
+.cartSummary{
+  display: flex;
+  justify-content: space-between;
+}
+.cartContainer{
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+}
+.cartItem img {
+  height: 100px;
+  width: 100px;
+}
+.cartItem{
+  background-color: white;
+  padding: 30px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.removeCartItem{
+  width: 200px;
+}
+/* -----------------------------Cart Styles End----------------------------*/
+

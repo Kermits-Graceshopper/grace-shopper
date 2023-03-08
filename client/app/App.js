@@ -10,8 +10,8 @@ const App = () => {
   return (
     <div className="page-container">
       <div className="content-wrap">
-      <Navbar />
-      <SpecializedNavbar />
+        <Navbar />
+        <SpecializedNavbar />
         <div>
           <AppRoutes />
         </div>
@@ -20,7 +20,6 @@ const App = () => {
         <br />
         <br />
       </div>
-
 
       <Footer />
     </div>

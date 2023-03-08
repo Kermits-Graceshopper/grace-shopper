@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
-	fetchAllProductsAsync,
-	selectAllProducts
-} from "../../app/reducers/allProductsSlice";
-import { selectSearchState } from "../../app/reducers/searchSlice";
-import { addToWishlistAsync } from "../../app/reducers/wishListSlice";
-import { addToCartAsync } from "../../app/reducers/cartSlice";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
+  fetchAllProductsAsync,
+  selectAllProducts,
+} from '../../app/reducers/allProductsSlice';
+import { selectSearchState } from '../../app/reducers/searchSlice';
+import { addToWishlistAsync } from '../../app/reducers/wishListSlice';
+import { addToCartAsync } from '../../app/reducers/cartSlice';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 
 // TODO: add form for admin to add a product
 
@@ -187,7 +187,8 @@ const AllProducts = () => {
               value={addedImageUrl}
               onChange={(e) => setAddedImageUrl(e.target.value)}
             />
-            <label>Categories</label>
+
+            <label>Category</label>
             <select onChange={(e) => setAddedCategory(e.target.value)}>
               <option value="">Select Category...</option>
               <option value="Xbox">Xbox</option>
@@ -205,7 +206,12 @@ const AllProducts = () => {
       ) : null}
       <div className=" allProductsHeader">
         <h1>Products</h1>
-        <select className="selectCategory" defaultValue="" onChange={(e) => setCategory(e.target.value)}>
+
+        <select
+          className="selectCategory"
+          defaultValue=""
+          onChange={(e) => setCategory(e.target.value)}
+        >
           <option value="">Select Category...</option>
           <option value="Xbox">Xbox</option>
           <option value="Nintendo">Nintendo</option>
@@ -245,7 +251,7 @@ const AllProducts = () => {
                 </h3>
                 <img className="singleProductImg" src={product.imageUrl} />
                 <h6>{product.price}</h6>
-                <h6>Categories: {product.category}</h6>
+                <h6>Category: {product.category}</h6>
 
                 <select
                   defaultValue={1}
@@ -310,7 +316,7 @@ const AllProducts = () => {
                 </h3>
                 <img className="singleProductImg" src={product.imageUrl} />
                 <h6>{product.price}</h6>
-                <h6>Categories: {product.category}</h6>
+                <h6>Category: {product.category}</h6>
 
                 <select
                   defaultValue={1}
@@ -373,7 +379,7 @@ const AllProducts = () => {
               </h3>
               <img className="singleProductImg" src={product.imageUrl} />
               <h6>{product.price}</h6>
-              <h6>Categories: {product.category}</h6>
+              <h6>Category: {product.category}</h6>
 
               <select
                 defaultValue={1}
@@ -434,8 +440,8 @@ const AllProducts = () => {
               </h3>
               <img className="singleProductImg" src={product.imageUrl} />
               <h6>{product.price}</h6>
-              <h6>Categories: {product.category}</h6>
 
+              <h6>Category: {product.category}</h6>
               <select
                 defaultValue={1}
                 onChange={(e) => setQuantity(e.target.value)}
