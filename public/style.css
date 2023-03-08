@@ -8,6 +8,7 @@ html, body {
   /* fixes issue w white space to the right!!!! */
   overflow-x: hidden;
   background-color: #A9A9A9;
+
   position: relative;
 }
 a {
@@ -170,6 +171,7 @@ form div {
 }
 .productContainerAllProductsEdit{
   margin-top: 100px;
+
 }
 /* -----------------------------Cart Styles ---------------------------------*/
 .cartSummary{
@@ -197,6 +199,7 @@ form div {
 .removeCartItem{
   width: 200px;
 }
+
 .fixedSuccessMessage {
   background-color: green;
   color: white;
@@ -206,4 +209,6 @@ form div {
   width: 50vw;
   z-index: 1;
 }
+
 /* -----------------------------Cart Styles End----------------------------*/
+
