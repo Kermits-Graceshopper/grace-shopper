@@ -189,7 +189,6 @@ form div {
 .selectCategory{
   width: 200px;
   display: flex;
-
 }
 .allProductsHeader{
   position: absolute;
@@ -199,6 +198,7 @@ form div {
 
 .productContainerAllProductsEdit{
   margin-top: 100px;
+
 }
 
 /* -----------------------------Cart Styles ---------------------------------*/
@@ -228,6 +228,7 @@ form div {
 .removeCartItem{
   width: 200px;
 }
+
 .fixedSuccessMessage {
   background-color: green;
   color: white;
@@ -238,3 +239,4 @@ form div {
   z-index: 1;
 }
 /* -----------------------------Cart Styles End----------------------------*/
+
