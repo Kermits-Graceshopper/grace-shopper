@@ -7,7 +7,8 @@ html, body {
   padding: 0;
   /* fixes issue w white space to the right!!!! */
   overflow-x: hidden;
-  background-color: #a9a9a9;
+  background-color: #A9A9A9;
+
   position: relative;
 }
 a {
@@ -16,17 +17,14 @@ a {
 label {
   display: block;
 }
-
 nav a {
   display: inline-block;
   margin: 1em;
 }
-
 form div {
   margin: 1em;
   display: inline-block;
 }
-
 .navButtons{
   position: absolute;
   right: 5px;
@@ -34,7 +32,6 @@ form div {
   width: 200px;
   text-decoration: none;
 }
-
 .navbar{
   background-color: #000000;
   color: white;
@@ -43,13 +40,11 @@ form div {
   margin: 0;
   padding: 0;
 }
-
 .search{
   position: relative;
   right: 10px;
   z-index: 1;
 }
-
 .specializedNavbar{
   color: white;
   display: flex;
@@ -57,7 +52,6 @@ form div {
   justify-content: space-evenly;
   background-color: red;
 }
-
 .specItem{
   color: white;
   text-decoration: none;
@@ -66,8 +60,6 @@ form div {
   width: 150px;
   height: auto;
 }
-
-
 .cartDiv{
   width: 800px;
   height: 1000px;
@@ -76,16 +68,12 @@ form div {
   padding: 40px;
   margin-bottom: 100px;
 }
-
-
-
 .productCard{
   background-color: white;
   width: 400px;
   height: 400px;
   margin: 10px;
 }
-
 .productContainer{
   display: flex;
   flex-wrap: wrap;
@@ -93,7 +81,6 @@ form div {
   align-items:center;
   justify-content:center;
 }
-
 .checkoutSidebar{
   display: flex;
   flex-direction: column;
@@ -103,26 +90,21 @@ form div {
   height: 224px;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
-
 /* .singleProductImage {
   height: 10vh;
 } */
-
 .footer{
   height: 10px;
 }
-
 .page-container{
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   align-items: center;
 }
-
 .content-wrap{
   flex:1;
 }
-
 .products{
   display: flex;
   flex-direction: row;
@@ -130,31 +112,23 @@ form div {
 .product{
   margin: 100px;
 }
-
 .welcomeSign{
   padding-top: 50px;
   margin-left: 50px;
 }
-
 .bodyContent{
   margin-top: 50px;
 }
-
 .singleProduct img {
   height: 150px;
   width: 70%
 }
-
 .wishlistDiv img {
   height: 100px;
 }
-
-
-
 .priceCalc {
   display: none;
 }
-
 .singleProduct {
   background-color: white;
   margin:50px;
@@ -167,7 +141,7 @@ form div {
   align-items: center;
   text-align: center;
   border-radius: 20px;
-  transition: all .2s ease-in-out; 
+  transition: all .2s ease-in-out;
 }
 .singleProduct:hover{
   transform: scale(1.1);
@@ -195,24 +169,11 @@ form div {
   top: 200px;
   text-align: center;
 }
-
 .productContainerAllProductsEdit{
   margin-top: 100px;
 
 }
-
-.fixedSuccessMessage {
-  background-color: green;
-  color: white;
-  position: fixed;
-  top: 0;
-  margin-top: 0px;
-  width: 50vw;
-  z-index: 3;
-}
-
 /* -----------------------------Cart Styles ---------------------------------*/
-
 .cartSummary{
   display: flex;
   justify-content: space-between;
@@ -248,5 +209,6 @@ form div {
   width: 50vw;
   z-index: 1;
 }
+
 /* -----------------------------Cart Styles End----------------------------*/
 
