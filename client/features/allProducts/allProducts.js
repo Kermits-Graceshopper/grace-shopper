@@ -31,7 +31,7 @@ const AllProducts = () => {
   const [addCartSuccess, setAddCartSuccess] = useState(false);
   const [error, setError] = useState('');
   const dispatch = useDispatch();
-  const products = useSelector(selectAllProducts);
+  // const products = useSelector(selectAllProducts);
   const search = useSelector(selectSearchState)[0];
   const addToWishlist = (id, quantity) => {
     isLoggedIn
@@ -110,6 +110,7 @@ const AllProducts = () => {
     dispatch(fetchAllProductsAsync());
     filter();
   }, [updatedProducts, category, toggleSubmitted]);
+  const products = useSelector(selectAllProducts);
   useEffect(() => {
     setError('');
   }, [addedName, addedDescription, addedPrice, addedImageUrl, addedCategory]);
