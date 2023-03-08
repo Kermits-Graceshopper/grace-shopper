@@ -60,7 +60,7 @@ const Wishlist = () => {
 		}
 	}, []);
 	return (
-		<div className="changingBody">
+		<div>
 			<h1>Wishlist</h1>
 			{deletionSuccess ? <h6 style={{ color: 'green' }}>Item Removed!</h6> : null}
 			{wishlist[0] ? (

@@ -29,7 +29,7 @@ const Featured = () => {
 	return (
 		<div>
 			<div className="bodyContent">
-				<h1> Featured</h1>
+				<h1 className='header'> Featured</h1>
 				<div className="productContainer">
 					{slicedProducts.length
 						? slicedProducts.map((product) => {
