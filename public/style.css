@@ -7,7 +7,7 @@ html, body {
   padding: 0;
   /* fixes issue w white space to the right!!!! */
   overflow-x: hidden;
-  background-color: #E9E8E8;
+  background-color: #a9a9a9;
   position: relative;
 }
 a {
@@ -156,7 +156,7 @@ form div {
 }
 
 .singleProduct {
-  background-color: ivory;
+  background-color: white;
   margin:50px;
   width: 400px;
   height: 500px;
@@ -166,6 +166,11 @@ form div {
   flex-direction: column;
   align-items: center;
   text-align: center;
+  border-radius: 20px;
+  transition: all .2s ease-in-out; 
+}
+.singleProduct:hover{
+  transform: scale(1.1);
 }
 .checked {
   color: orange;
@@ -184,7 +189,6 @@ form div {
 .selectCategory{
   width: 200px;
   display: flex;
-
 }
 .allProductsHeader{
   position: absolute;
@@ -194,6 +198,7 @@ form div {
 
 .productContainerAllProductsEdit{
   margin-top: 100px;
+
 }
 
 .fixedSuccessMessage {
@@ -207,9 +212,7 @@ form div {
 }
 
 /* -----------------------------Cart Styles ---------------------------------*/
-.cartBody{
-  padding: 50px;
-}
+
 .cartSummary{
   display: flex;
   justify-content: space-between;
@@ -230,8 +233,20 @@ form div {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  z-index: 0;
 }
 .removeCartItem{
   width: 200px;
 }
+
+.fixedSuccessMessage {
+  background-color: green;
+  color: white;
+  position: fixed;
+  top: 0;
+  margin-top: 0px;
+  width: 50vw;
+  z-index: 1;
+}
 /* -----------------------------Cart Styles End----------------------------*/
+

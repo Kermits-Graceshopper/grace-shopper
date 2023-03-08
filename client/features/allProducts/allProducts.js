@@ -187,6 +187,7 @@ const AllProducts = () => {
               value={addedImageUrl}
               onChange={(e) => setAddedImageUrl(e.target.value)}
             />
+
             <label>Category</label>
             <select onChange={(e) => setAddedCategory(e.target.value)}>
               <option value="">Select Category...</option>
@@ -205,6 +206,7 @@ const AllProducts = () => {
       ) : null}
       <div className=" allProductsHeader">
         <h1>Products</h1>
+
         <select
           className="selectCategory"
           defaultValue=""
@@ -221,6 +223,7 @@ const AllProducts = () => {
           <option value="Mac">Mac</option>
         </select>
       </div>
+
       {(filtered[0] && search !== '') || category !== ''
         ? filtered?.map((product) =>
             product.name.toLowerCase().includes(search) ||
@@ -437,8 +440,8 @@ const AllProducts = () => {
               </h3>
               <img className="singleProductImg" src={product.imageUrl} />
               <h6>{product.price}</h6>
+
               <h6>Category: {product.category}</h6>
-              
               <select
                 defaultValue={1}
                 onChange={(e) => setQuantity(e.target.value)}
