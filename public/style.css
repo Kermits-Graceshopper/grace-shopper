@@ -184,7 +184,6 @@ form div {
 .selectCategory{
   width: 200px;
   display: flex;
-
 }
 .allProductsHeader{
   position: absolute;
@@ -194,6 +193,7 @@ form div {
 
 .productContainerAllProductsEdit{
   margin-top: 100px;
+
 }
 
 /* -----------------------------Cart Styles ---------------------------------*/
@@ -225,3 +225,4 @@ form div {
   width: 200px;
 }
 /* -----------------------------Cart Styles End----------------------------*/
+
