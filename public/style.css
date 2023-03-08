@@ -160,23 +160,11 @@ form div {
   display: none;
 }
 
-.changingBody{
-  padding: 0 0 100px 100px;
-}
-
-.allProductsDiv {
-  background-color: #ffffff;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-
 .singleProduct {
   background-color: ivory;
   margin:50px;
   width: 400px;
-  height: 400px;
+  height: 500px;
   padding: 50px;
   /* add drop shadow to single product divs here  */
   display: flex;
@@ -191,4 +179,24 @@ form div {
   background-color: white;
   padding: 10px;
   margin: 10px;
+}
+.header{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.selectCategory{
+  width: 200px;
+  display: flex;
+   
+}
+.allProductsHeader{
+  position: absolute;
+  top: 200px;
+  text-align: center;
+}
+
+.productContainerAllProductsEdit{
+  margin-top: 100px;
 }
