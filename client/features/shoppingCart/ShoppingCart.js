@@ -140,7 +140,7 @@ const ShoppingCart = () => {
 				)}
 			</div>
 			
-				<div className='cartBody'>
+				<div>
 					<div className="cartSummary">
 						<h2>
 							Order Summary <br />
